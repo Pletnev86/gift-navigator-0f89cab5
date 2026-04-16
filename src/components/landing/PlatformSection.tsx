@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Monitor, ArrowLeftRight, Wallet, Layers, ArrowRightLeft, Mail } from "lucide-react";
-import placeholderPlatform from "@/assets/placeholder-platform.jpg";
+import platformCatalog from "@/assets/platform-catalog.jpg";
 
 const features = [
   { icon: Monitor, title: "Персональная витрина в вашем стиле", desc: "Брендированный интерфейс, который идеально отображается как на компьютере, так и на смартфоне" },
@@ -30,21 +30,33 @@ const PlatformSection = () => {
           </h2>
         </motion.div>
 
-        {/* Platform screenshot — замените на свой скриншот */}
+        {/* Laptop mockup with platform screenshot */}
         <motion.div
-          className="mb-16 rounded-2xl overflow-hidden shadow-lg"
+          className="mb-16 flex justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
         >
-          <img
-            src={placeholderPlatform}
-            alt="Скриншот платформы ЗА!Подарком — замените на свой креатив"
-            className="w-full h-auto object-cover"
-            loading="lazy"
-            width={800}
-            height={600}
-          />
+          <div className="relative w-full max-w-4xl">
+            {/* Laptop body */}
+            <div className="relative rounded-t-2xl border-[12px] border-[hsl(0,0%,15%)] bg-[hsl(0,0%,15%)] shadow-2xl">
+              {/* Camera notch */}
+              <div className="absolute -top-[7px] left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[hsl(0,0%,25%)] z-10" />
+              {/* Screen */}
+              <div className="relative w-full overflow-hidden rounded-sm bg-white">
+                <img
+                  src={platformCatalog}
+                  alt="Каталог электронных сертификатов платформы ЗА!Подарком"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            {/* Laptop base */}
+            <div className="relative mx-auto h-4 bg-gradient-to-b from-[hsl(0,0%,20%)] to-[hsl(0,0%,28%)] rounded-b-lg" style={{ width: "110%" , marginLeft: "-5%" }}>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-1 bg-[hsl(0,0%,35%)] rounded-b-lg" />
+            </div>
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
