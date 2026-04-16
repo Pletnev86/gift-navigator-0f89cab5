@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import qrCode from "@/assets/qr-code.png";
 
 const floatAnimation = {
   y: [0, -16, 0],
@@ -51,14 +52,27 @@ const HeroSection = () => {
               Мультикарта — корпоративный инструмент мотивации без логистического ада
               и скрытых комиссий. Доставим эмоции тысячам сотрудников за 1&nbsp;минуту.
             </p>
-            <motion.button
-              className="cta-btn"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Оставить заявку
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
+            <div className="flex items-center gap-6">
+              <motion.button
+                className="cta-btn"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Оставить заявку
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+
+              {/* QR with arrow */}
+              <div className="hidden md:flex items-center gap-3">
+                <svg width="40" height="24" viewBox="0 0 40 24" fill="none" className="text-muted-foreground -mr-1">
+                  <path d="M2 12h32m0 0l-8-8m8 8l-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <div className="flex flex-col items-center">
+                  <img src={qrCode} alt="QR-код" className="w-20 h-20 rounded-lg" />
+                  <p className="text-[11px] text-muted-foreground font-heading mt-1">Протестируй</p>
+                </div>
+              </div>
+            </div>
             <p className="mt-6 text-muted-foreground text-sm font-heading">
               За!Подарком | zapodarkom.ru
             </p>
