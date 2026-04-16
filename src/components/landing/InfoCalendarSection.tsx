@@ -33,7 +33,7 @@ const FlipCard = ({ event, i, inView }: { event: typeof events[0]; i: number; in
       if (timerRef.current) clearTimeout(timerRef.current);
     } else {
       setFlipped(true);
-      timerRef.current = setTimeout(() => setFlipped(false), 10000);
+      timerRef.current = setTimeout(() => setFlipped(false), 5000);
     }
   };
 
