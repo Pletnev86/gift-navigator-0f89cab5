@@ -45,7 +45,7 @@ const TradeUnionsSection = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <div className="rounded-2xl overflow-hidden shadow-xl max-w-md">
+            <div className="rounded-2xl overflow-hidden shadow-xl max-w-md scale-[1.3]">
               <img
                 src={plasticCardGift}
                 alt="Пластиковая Мультикарта в подарочной упаковке"
