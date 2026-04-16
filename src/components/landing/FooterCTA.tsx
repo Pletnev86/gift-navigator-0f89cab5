@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import qrFooter from "@/assets/qr-footer.png";
+import girlCard from "@/assets/girl-card.jpg";
 
 const FooterCTA = () => {
   const ref = useRef(null);
@@ -34,31 +36,43 @@ const FooterCTA = () => {
               </li>
             </ul>
 
-            <motion.button
-              className="cta-btn text-xl px-12 py-6"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Оставить заявку
-              <ArrowRight className="w-6 h-6" />
-            </motion.button>
+            <div className="flex items-center gap-6 flex-wrap">
+              <motion.button
+                className="cta-btn text-xl px-12 py-6"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Оставить заявку
+                <ArrowRight className="w-6 h-6" />
+              </motion.button>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <img src={qrFooter} alt="QR-код" className="w-28 h-28 rounded-xl" />
+                <p className="text-xs text-muted-foreground font-heading text-center mt-1">Отсканируй QR</p>
+              </motion.div>
+            </div>
 
             <p className="mt-8 text-muted-foreground font-heading">
               За!Подарком | zapodarkom.ru
             </p>
           </motion.div>
 
-          {/* Right: QR placeholder */}
+          {/* Right: Girl peeking from behind QR */}
           <motion.div
-            className="flex flex-col items-center justify-center"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex justify-center items-end relative"
+            initial={{ opacity: 0, x: 80 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
           >
-            <div className="w-48 h-48 bg-muted rounded-2xl flex items-center justify-center mb-4">
-              <span className="text-muted-foreground text-sm font-heading text-center">QR-код</span>
-            </div>
-            <p className="text-sm text-muted-foreground font-heading">Отсканируй QR</p>
+            <img
+              src={girlCard}
+              alt="Девушка с подарочной картой"
+              className="w-72 md:w-80 object-contain drop-shadow-2xl"
+            />
           </motion.div>
         </div>
 
