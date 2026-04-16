@@ -74,9 +74,7 @@ const HowItWorksSection = () => {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.8 }}
           >
-            <div className="w-32 h-32 bg-muted rounded-2xl flex items-center justify-center mb-3">
-              <span className="text-muted-foreground text-xs font-heading text-center">QR-код</span>
-            </div>
+            <img src={qrCode} alt="QR-код для тестирования платформы" className="w-32 h-32 rounded-2xl" />
             <p className="text-sm text-muted-foreground font-heading text-center">
               Отсканируй QR и<br />протестируй платформу
             </p>
