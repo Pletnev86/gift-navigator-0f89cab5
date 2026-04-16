@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import placeholderCard from "@/assets/placeholder-plastic-card.jpg";
+import plasticCardGift from "@/assets/plastic-card-gift.png";
 
 const TradeUnionsSection = () => {
   const ref = useRef(null);
@@ -47,8 +47,8 @@ const TradeUnionsSection = () => {
           >
             <div className="rounded-2xl overflow-hidden shadow-xl max-w-md">
               <img
-                src={placeholderCard}
-                alt="Пластиковая Мультикарта в подарочной упаковке — замените на свой креатив"
+                src={plasticCardGift}
+                alt="Пластиковая Мультикарта в подарочной упаковке"
                 className="w-full h-auto object-cover"
                 loading="lazy"
                 width={800}
