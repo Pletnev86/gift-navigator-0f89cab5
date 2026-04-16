@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import seasonAnalysis from "@/assets/season-analysis.jpg";
 
 const seasons = [
   { label: "23 февраля", color: "bg-pink-200" },
