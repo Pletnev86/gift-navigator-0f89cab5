@@ -48,7 +48,10 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <span className="badge-tag mb-6 inline-block">Мультикарта ЗА!Подарком</span>
+            <div className="flex items-center gap-3 mb-6 flex-wrap">
+              <span className="badge-tag inline-block">Мультикарта ЗА!Подарком</span>
+              <span className="text-muted-foreground font-heading font-semibold text-sm">Дарить — это легко!</span>
+            </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-4 text-foreground">
               400+ брендов
             </h1>
