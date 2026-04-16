@@ -39,7 +39,7 @@ const CalendarSection = () => {
       <motion.img
         src={industryCards}
         alt="Отраслевые подарочные карты"
-        className="absolute left-4 lg:left-12 top-[30%] max-w-lg w-full rounded-2xl z-0 opacity-90 pointer-events-none"
+        className="absolute left-4 lg:left-12 top-[45%] max-w-lg w-full rounded-2xl z-0 opacity-90 pointer-events-none"
         style={{ maxWidth: "36rem" }}
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 0.9, y: [0, -15, 0] } : {}}
