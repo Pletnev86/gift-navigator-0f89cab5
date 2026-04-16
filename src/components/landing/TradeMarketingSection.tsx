@@ -49,7 +49,7 @@ const TradeMarketingSection = () => {
             <img
               src={seasonAnalysis}
               alt="Периоды высокой активности — анализ сезонности"
-              className="w-full max-w-md rounded-2xl shadow-lg"
+              className="w-full max-w-xl rounded-2xl shadow-lg"
               loading="lazy"
             />
           </motion.div>
