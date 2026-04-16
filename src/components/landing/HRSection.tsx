@@ -69,11 +69,11 @@ const HRSection = () => {
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <div className="rounded-2xl overflow-hidden shadow-lg w-full max-w-md">
+            <div className="relative w-full max-w-md scale-[1.3] origin-center -z-0">
               <img
                 src={hrCertificates}
                 alt="Электронный сертификат и каталог подарков За!Подарком"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover rounded-2xl"
                 loading="lazy"
                 width={800}
                 height={600}
