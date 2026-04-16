@@ -218,7 +218,7 @@ const HeroSection = () => {
               <X className="w-8 h-8" />
             </button>
             <iframe
-              src="https://vk.com/video_ext.php?oid=-227352514&id=456239020&autoplay=1"
+              src="https://vk.com/video_ext.php?oid=-227352514&id=456239020&autoplay=1&muted=0"
               className="w-full h-full rounded-2xl"
               allow="autoplay; encrypted-media; fullscreen"
               allowFullScreen
