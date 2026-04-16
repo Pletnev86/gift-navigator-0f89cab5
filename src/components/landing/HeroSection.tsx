@@ -4,6 +4,13 @@ import { useState } from "react";
 import qrCode from "@/assets/qr-code.png";
 import RequestFormDialog from "./RequestFormDialog";
 
+import ozonLogo from "@/assets/logos/ozon.png";
+import wbLogo from "@/assets/logos/wildberries.png";
+import lamodaLogo from "@/assets/logos/lamoda.png";
+import dnsLogo from "@/assets/logos/dns.png";
+import mvideoLogo from "@/assets/logos/mvideo.png";
+import letoileLogo from "@/assets/logos/letoile-hero.png";
+
 const floatAnimation = {
   y: [0, -16, 0],
   transition: {
@@ -13,13 +20,13 @@ const floatAnimation = {
   },
 };
 
-const brandPositions = [
-  { right: -30, top: 30 },
-  { right: -50, top: 110 },
-  { right: -20, top: 200 },
-  { right: -60, top: 290 },
-  { right: -10, top: 370 },
-  { right: -40, top: 440 },
+const brandLogos = [
+  { src: ozonLogo, alt: "Ozon", right: -30, top: 30 },
+  { src: wbLogo, alt: "Wildberries", right: -50, top: 120 },
+  { src: lamodaLogo, alt: "Lamoda", right: -20, top: 210 },
+  { src: letoileLogo, alt: "Л'Этуаль", right: -60, top: 300 },
+  { src: dnsLogo, alt: "DNS", right: -10, top: 380 },
+  { src: mvideoLogo, alt: "М.Видео", right: -40, top: 450 },
 ];
 
 const HeroSection = () => {
