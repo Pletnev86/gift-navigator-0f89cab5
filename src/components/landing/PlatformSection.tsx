@@ -37,7 +37,7 @@ const PlatformSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
         >
-          <div className="relative w-full max-w-2xl">
+          <div className="relative w-full max-w-sm">
             {/* Laptop body */}
             <div className="relative rounded-t-2xl border-[12px] border-[hsl(0,0%,15%)] bg-[hsl(0,0%,15%)] shadow-2xl">
               {/* Camera notch */}
