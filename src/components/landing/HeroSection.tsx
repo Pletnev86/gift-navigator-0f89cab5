@@ -183,7 +183,7 @@ const HeroSection = () => {
                   y: { duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 },
                 }}
               >
-                <img src={brand.src} alt={brand.alt} className="w-16 h-10 object-contain" />
+                <img src={brand.src} alt={brand.alt} className="w-[74px] h-[46px] object-contain" />
               </motion.div>
             ))}
           </motion.div>
