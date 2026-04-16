@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 import qrFooter from "@/assets/qr-footer.png";
 import girlCard from "@/assets/girl-card.jpg";
+import catChest from "@/assets/cat-chest.png";
 import RequestFormDialog from "./RequestFormDialog";
 
 const FooterCTA = () => {
@@ -100,13 +101,15 @@ const FooterCTA = () => {
 
           {/* Right: Girl video/image */}
           <motion.div
-            className="flex justify-center items-end relative cursor-pointer"
+            className="flex flex-col items-center gap-8"
             initial={{ opacity: 0, x: 80 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            onClick={handleVideoClick}
           >
-            <div className="w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl">
+            <div
+              className="w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl cursor-pointer"
+              onClick={handleVideoClick}
+            >
               {videoFailed ? (
                 <img
                   src={girlCard}
@@ -123,6 +126,27 @@ const FooterCTA = () => {
                   className="w-full h-full object-cover"
                 />
               )}
+            </div>
+
+            {/* Cat with chest + CTA button */}
+            <div className="flex items-center gap-4">
+              <img
+                src={catChest}
+                alt="Кот с сундуком"
+                loading="lazy"
+                width={120}
+                height={120}
+                className="w-24 h-24 md:w-[120px] md:h-[120px] object-contain"
+              />
+              <motion.button
+                className="cta-btn"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => setFormOpen(true)}
+              >
+                Оставить заявку
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
             </div>
           </motion.div>
         </div>
