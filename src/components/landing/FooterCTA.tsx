@@ -144,7 +144,7 @@ const FooterCTA = () => {
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setFormOpen(true)}
               >
-                Оставить заявку
+                Посмотреть сундук
                 <ArrowRight className="w-5 h-5" />
               </motion.button>
             </div>
