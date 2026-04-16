@@ -25,6 +25,17 @@ const events = [
 const FlipCard = ({ event, i, inView }: { event: typeof events[0]; i: number; inView: boolean }) => {
   const [flipped, setFlipped] = useState(false);
   const Icon = event.icon;
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleClick = () => {
+    if (flipped) {
+      setFlipped(false);
+      if (timerRef.current) clearTimeout(timerRef.current);
+    } else {
+      setFlipped(true);
+      timerRef.current = setTimeout(() => setFlipped(false), 10000);
+    }
+  };
 
   return (
     <motion.div
