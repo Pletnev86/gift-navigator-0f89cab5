@@ -9,6 +9,7 @@ import BirthdayExampleSection from "@/components/landing/BirthdayExampleSection"
 import TradeMarketingSection from "@/components/landing/TradeMarketingSection";
 import NewYearExampleSection from "@/components/landing/NewYearExampleSection";
 import SeasonSection from "@/components/landing/SeasonSection";
+import SchoolExampleSection from "@/components/landing/SchoolExampleSection";
 import FooterCTA from "@/components/landing/FooterCTA";
 
 const Index = () => {
@@ -25,6 +26,7 @@ const Index = () => {
       <TradeMarketingSection />
       <NewYearExampleSection />
       <SeasonSection />
+      <SchoolExampleSection />
       <FooterCTA />
     </main>
   );
