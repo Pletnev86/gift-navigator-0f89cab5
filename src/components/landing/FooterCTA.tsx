@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 
 import qrFooter from "@/assets/qr-footer.png";
@@ -12,6 +12,14 @@ const FooterCTA = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [videoFailed, setVideoFailed] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video && inView) {
+      video.volume = 0.85;
+      video.play().catch(() => {});
+    }
+  }, [inView]);
 
   const handleVideoClick = useCallback(() => {
     const video = videoRef.current;
@@ -94,8 +102,7 @@ const FooterCTA = () => {
                 <video
                   ref={videoRef}
                   src="/girl-animation.mp4"
-                  autoPlay
-                  muted={false}
+                  muted
                   playsInline
                   onError={() => setVideoFailed(true)}
                   className="w-full h-full object-cover"
