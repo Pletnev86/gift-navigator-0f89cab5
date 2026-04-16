@@ -34,8 +34,21 @@ const CalendarSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-spacing relative" ref={ref}>
-      <div className="container mx-auto max-w-7xl">
+    <section className="section-spacing relative overflow-visible" ref={ref}>
+      {/* Floating background image */}
+      <motion.img
+        src={industryCards}
+        alt="Отраслевые подарочные карты"
+        className="absolute left-4 lg:left-12 bottom-0 max-w-lg w-full rounded-2xl z-0 opacity-90 pointer-events-none"
+        style={{ maxWidth: "36rem" }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={inView ? { opacity: 0.9, y: [0, -15, 0] } : {}}
+        transition={{
+          opacity: { duration: 0.7 },
+          y: { duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" },
+        }}
+      />
+      <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left */}
           <motion.div
@@ -50,7 +63,6 @@ const CalendarSection = () => {
             <h3 className="text-2xl md:text-3xl font-black text-foreground mb-8">
               Сюжет в каждом подарке
             </h3>
-            <img src={industryCards} alt="Отраслевые подарочные карты" className="rounded-2xl w-full max-w-md" />
           </motion.div>
 
           {/* Right: Industry cards */}
