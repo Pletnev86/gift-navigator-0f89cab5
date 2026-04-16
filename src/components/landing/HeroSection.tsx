@@ -217,6 +217,7 @@ const HeroSection = () => {
         </motion.div>
       )}
     </AnimatePresence>
+    <RequestFormDialog open={formOpen} onOpenChange={setFormOpen} />
     </>
   );
 };
