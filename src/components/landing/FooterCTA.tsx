@@ -158,6 +158,7 @@ const FooterCTA = () => {
         </div>
       </div>
       <RequestFormDialog open={formOpen} onOpenChange={setFormOpen} />
+      <ChestRaffleDialog open={raffleOpen} onOpenChange={setRaffleOpen} />
     </section>
   );
 };
