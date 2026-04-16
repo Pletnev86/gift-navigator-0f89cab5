@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, Package, Palette } from "lucide-react";
-import placeholderHR from "@/assets/placeholder-hr.jpg";
+import hrCertificates from "@/assets/hr-certificates.jpg";
 
 const features = [
   { icon: Mail, text: "Доставка электронного сертификата по Email" },
@@ -71,8 +71,8 @@ const HRSection = () => {
           >
             <div className="rounded-2xl overflow-hidden shadow-lg w-full max-w-md">
               <img
-                src={placeholderHR}
-                alt="HR вручает электронный сертификат — замените на свой креатив"
+                src={hrCertificates}
+                alt="Электронный сертификат и каталог подарков За!Подарком"
                 className="w-full h-auto object-cover"
                 loading="lazy"
                 width={800}
