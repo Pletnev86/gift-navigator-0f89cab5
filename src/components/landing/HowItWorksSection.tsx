@@ -69,7 +69,7 @@ const HowItWorksSection = () => {
           ))}
           {/* QR placeholder */}
           <motion.div
-            className="flex flex-col items-center justify-center"
+            className="hidden md:flex flex-col items-center justify-center"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.8 }}
