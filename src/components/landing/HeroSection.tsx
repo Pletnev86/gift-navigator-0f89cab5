@@ -1,10 +1,32 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
+const floatAnimation = {
+  y: [0, -16, 0],
+  transition: {
+    duration: 4,
+    repeat: Infinity,
+    ease: "easeInOut",
+  },
+};
+
+const brandPositions = [
+  { right: -30, top: 30 },
+  { right: -50, top: 110 },
+  { right: -20, top: 200 },
+  { right: -60, top: 290 },
+  { right: -10, top: 370 },
+  { right: -40, top: 440 },
+];
+
 const HeroSection = () => {
   return (
     <section className="section-spacing min-h-screen flex items-center relative overflow-hidden">
-      <div className="container mx-auto max-w-7xl">
+      {/* Subtle background decoration */}
+      <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-[hsl(var(--lime)/0.08)] blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-20 left-0 w-[400px] h-[400px] rounded-full bg-[hsl(var(--lime)/0.05)] blur-[100px] pointer-events-none" />
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Copy */}
           <motion.div
@@ -42,58 +64,87 @@ const HeroSection = () => {
             </p>
           </motion.div>
 
-          {/* Right: Visual placeholder — card + brand cloud */}
+          {/* Right: Floating phone */}
           <motion.div
             className="relative flex justify-center"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="relative">
-              {/* Phone with card */}
-              <div className="w-80 h-[520px] rounded-[2.5rem] bg-gradient-to-b from-gray-900 to-gray-800 flex items-center justify-center overflow-hidden relative shadow-2xl border-[6px] border-gray-700">
-                {/* Phone notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-gray-900 rounded-b-2xl z-20" />
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
-                <div className="relative z-10 flex flex-col items-center gap-6 px-4">
-                  {/* Card visual */}
-                  <div className="w-64 h-40 rounded-2xl bg-gradient-to-br from-[#3B82F6] to-[#1D4ED8] shadow-2xl p-5 flex flex-col justify-between text-white transform -rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <div>
-                      <p className="font-heading font-black text-xs tracking-widest opacity-80">МУЛЬТИКАРТА</p>
-                      <p className="font-heading font-black text-2xl mt-1">400+ <span className="text-sm font-bold">БРЕНДОВ</span></p>
+            <motion.div className="relative" animate={floatAnimation}>
+              {/* Phone shadow on "ground" */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-6 rounded-full bg-foreground/10 blur-xl" />
+
+              {/* Phone body */}
+              <div className="w-72 md:w-80 h-[500px] md:h-[540px] rounded-[2.5rem] bg-gradient-to-b from-[hsl(0,0%,12%)] to-[hsl(0,0%,8%)] flex items-center justify-center overflow-hidden relative shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)] border-[5px] border-[hsl(0,0%,20%)]">
+                {/* Dynamic Island */}
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-7 bg-[hsl(0,0%,4%)] rounded-full z-20" />
+                
+                {/* Screen glow */}
+                <div className="absolute inset-[5px] rounded-[2rem] bg-gradient-to-br from-[hsl(220,60%,15%)] via-[hsl(260,40%,12%)] to-[hsl(220,50%,10%)]" />
+
+                <div className="relative z-10 flex flex-col items-center gap-5 px-5 w-full">
+                  {/* Gift card */}
+                  <motion.div
+                    className="w-full max-w-[256px] h-40 rounded-2xl shadow-2xl p-5 flex flex-col justify-between text-white relative overflow-hidden"
+                    style={{ background: "linear-gradient(135deg, hsl(220, 80%, 55%), hsl(260, 70%, 50%))" }}
+                    whileHover={{ rotate: 0 }}
+                    initial={{ rotate: -3 }}
+                  >
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-60" />
+                    <div className="relative z-10">
+                      <p className="font-heading font-black text-[10px] tracking-[0.2em] opacity-70">МУЛЬТИКАРТА</p>
+                      <p className="font-heading font-black text-3xl mt-1">400+</p>
+                      <p className="font-heading font-bold text-xs opacity-60">БРЕНДОВ</p>
                     </div>
-                    <div className="flex justify-between items-end">
-                      <p className="font-heading font-bold text-sm opacity-70">За!Подарком</p>
-                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm" />
+                    <div className="flex justify-between items-end relative z-10">
+                      <p className="font-heading font-bold text-xs opacity-50">За!Подарком</p>
+                      <div className="w-8 h-8 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
+                        <div className="w-5 h-5 rounded-full bg-white/20" />
+                      </div>
                     </div>
-                  </div>
-                  {/* App UI hint */}
-                  <div className="flex gap-2">
-                    {["Ozon", "WB", "Lamoda"].map((b) => (
-                      <span key={b} className="bg-white/10 backdrop-blur-sm text-white/80 px-3 py-1 rounded-full text-xs font-heading font-semibold">{b}</span>
+                  </motion.div>
+
+                  {/* Brand chips inside phone */}
+                  <div className="flex flex-wrap justify-center gap-2 px-2">
+                    {["Ozon", "WB", "Lamoda", "DNS"].map((b) => (
+                      <span
+                        key={b}
+                        className="bg-white/8 backdrop-blur-sm text-white/70 px-3 py-1.5 rounded-full text-[11px] font-heading font-semibold border border-white/10"
+                      >
+                        {b}
+                      </span>
                     ))}
                   </div>
-                  <p className="text-white/50 text-xs font-heading">Выбирайте из 400+ брендов</p>
+                  <p className="text-white/30 text-[11px] font-heading tracking-wide">Выбирайте из 400+ брендов</p>
                 </div>
               </div>
+            </motion.div>
 
-              {/* Floating brand pills */}
-              {["Ozon", "WB", "Lamoda", "Л'Этуаль", "DNS", "М.Видео"].map((brand, i) => (
-                <motion.div
-                  key={brand}
-                  className="absolute bg-background shadow-md px-3 py-1.5 rounded-full font-heading font-semibold text-xs text-foreground"
-                  style={{
-                    right: `${-20 + (i % 3) * 40}px`,
-                    top: `${20 + i * 55}px`,
-                  }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.8 + i * 0.15, type: "spring" }}
-                >
-                  {brand}
-                </motion.div>
-              ))}
-            </div>
+            {/* Floating brand pills around phone */}
+            {["Ozon", "Wildberries", "Lamoda", "Л'Этуаль", "DNS", "М.Видео"].map((brand, i) => (
+              <motion.div
+                key={brand}
+                className="absolute bg-background shadow-lg px-4 py-2 rounded-full font-heading font-semibold text-xs text-foreground border border-border"
+                style={{
+                  right: `${brandPositions[i].right}px`,
+                  top: `${brandPositions[i].top}px`,
+                }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  y: [0, -8 + (i % 3) * 4, 0],
+                }}
+                transition={{
+                  opacity: { delay: 0.8 + i * 0.12 },
+                  scale: { delay: 0.8 + i * 0.12, type: "spring" },
+                  y: { duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 },
+                }}
+              >
+                {brand}
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>
