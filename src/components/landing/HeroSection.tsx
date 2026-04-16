@@ -77,19 +77,6 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            {/* Play video button */}
-            <div className="flex items-center gap-3 mt-4">
-              <motion.button
-                onClick={() => setVideoOpen(true)}
-                className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-foreground/20 hover:border-foreground/40 transition-colors"
-                style={{ background: "hsl(var(--lime))" }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Play className="w-6 h-6 text-foreground fill-foreground ml-0.5" />
-              </motion.button>
-              <span className="text-sm text-muted-foreground font-heading">Смотреть видео</span>
-            </div>
 
             <p className="mt-6 text-muted-foreground text-sm font-heading">
               За!Подарком | zapodarkom.ru
