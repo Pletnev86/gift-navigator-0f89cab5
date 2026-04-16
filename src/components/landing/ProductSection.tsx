@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import placeholderBrands from "@/assets/placeholder-brands.jpg";
+import brandsCloud from "@/assets/brands-cloud.png";
 
 const ProductSection = () => {
   const ref = useRef(null);
@@ -38,8 +38,8 @@ const ProductSection = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
           >
             <img
-              src={placeholderBrands}
-              alt="Подарочные карты брендов — замените на свой креатив"
+              src={brandsCloud}
+              alt="Облако брендов — Ozon, Wildberries, Lamoda, М.Видео и другие"
               className="w-full h-auto object-cover rounded-2xl"
               loading="lazy"
               width={800}
