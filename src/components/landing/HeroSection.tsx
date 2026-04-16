@@ -146,8 +146,8 @@ const HeroSection = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl" style={{ background: "hsl(var(--lime))" }}>
-                  <Play className="w-7 h-7 text-foreground fill-foreground ml-0.5" />
+                <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-xl" style={{ background: "hsl(var(--lime))" }}>
+                  <Play className="w-8 h-8 text-foreground fill-foreground ml-0.5" />
                 </div>
               </motion.button>
             </motion.div>
