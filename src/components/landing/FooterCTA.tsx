@@ -92,6 +92,7 @@ const FooterCTA = () => {
                 src="/girl-animation.mp4"
                 autoPlay
                 muted
+                loop
                 playsInline
                 onError={() => setVideoFailed(true)}
                 className="w-80 md:w-96 object-contain drop-shadow-2xl"
