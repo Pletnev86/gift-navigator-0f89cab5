@@ -17,7 +17,7 @@ const SeasonSection = () => {
           >
             <span className="badge-tag mb-6 inline-block">ЛЕТО — ОСЕНЬ</span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 text-foreground">
-              Поддержка, которую почувствуют дома: Дети и Школа.
+              Поддержка, которую почувствуют дома: <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">Дети и Школа.</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
               Покажите сотрудникам, что компании не всё равно. Финансовая поддержка сборов к школе без лишней бюрократии.

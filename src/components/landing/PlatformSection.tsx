@@ -26,7 +26,7 @@ const PlatformSection = () => {
           transition={{ duration: 0.7 }}
         >
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-foreground">
-            Преимущества использования<br />платформы ЗА!Подарком
+            Преимущества использования<br /><span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">платформы ЗА!Подарком</span>
           </h2>
         </motion.div>
 

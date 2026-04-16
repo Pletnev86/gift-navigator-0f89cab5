@@ -25,7 +25,7 @@ const HRSection = () => {
             <span className="badge-tag mb-6 inline-block">ДЛЯ HR</span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 text-foreground">
               Электронная Мультикарта<br />
-              15 000 подарков в 1 клик
+              <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">15 000 подарков в 1 клик</span>
             </h2>
 
             <ul className="space-y-4 mb-10">
