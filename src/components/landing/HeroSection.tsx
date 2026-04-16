@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play, X } from "lucide-react";
 import { useState } from "react";
 import qrCode from "@/assets/qr-code.png";
+import RequestFormDialog from "./RequestFormDialog";
 
 const floatAnimation = {
   y: [0, -16, 0],
@@ -23,6 +24,7 @@ const brandPositions = [
 
 const HeroSection = () => {
   const [videoOpen, setVideoOpen] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
 
   return (
     <>
@@ -61,6 +63,7 @@ const HeroSection = () => {
                 className="cta-btn"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => setFormOpen(true)}
               >
                 Оставить заявку
                 <ArrowRight className="w-5 h-5" />
