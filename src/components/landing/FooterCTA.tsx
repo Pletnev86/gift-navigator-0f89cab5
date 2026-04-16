@@ -6,6 +6,7 @@ import qrFooter from "@/assets/qr-footer.png";
 import girlCard from "@/assets/girl-card.jpg";
 import catChest from "@/assets/cat-chest.png";
 import RequestFormDialog from "./RequestFormDialog";
+import ChestRaffleDialog from "./ChestRaffleDialog";
 
 const FooterCTA = () => {
   const ref = useRef(null);
@@ -13,6 +14,7 @@ const FooterCTA = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [videoFailed, setVideoFailed] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
+  const [raffleOpen, setRaffleOpen] = useState(false);
 
   // Start muted for autoplay, unmute on first user interaction
   useEffect(() => {
