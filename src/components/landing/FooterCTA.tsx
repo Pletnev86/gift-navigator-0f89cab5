@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const FooterCTA = () => {
   const ref = useRef(null);
@@ -8,44 +8,61 @@ const FooterCTA = () => {
 
   return (
     <section className="section-spacing relative" ref={ref}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-15 blur-[150px]" style={{ background: "hsl(210 100% 56%)" }} />
-      </div>
-
-      <div className="container mx-auto max-w-4xl">
-        <motion.div
-          className="glass-panel-strong rounded-3xl p-10 md:p-16 text-center glow-blue relative overflow-hidden"
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <h2 className="text-3xl md:text-5xl font-black leading-tight mb-6">
-            Опередите конкурентов.{" "}
-            <span className="gradient-text">Демо-витрина за наш счёт.</span>
-          </h2>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-neon-green" />
-              <span>Бесплатно соберём витрину в ваших цветах</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-neon-green" />
-              <span>Точный расчёт проекта за 30 минут</span>
-            </div>
-          </div>
-
-          <motion.button
-            className="btn-glow text-primary-foreground flex items-center gap-3 mx-auto text-xl px-12 py-5 animate-pulse-glow"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
+      <div className="container mx-auto max-w-7xl">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
           >
-            Запросить демо-сборку
-            <ArrowRight className="w-6 h-6" />
-          </motion.button>
-        </motion.div>
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-10 text-foreground italic">
+              Дарить подарки легко!
+            </h2>
 
-        <div className="text-center mt-12 text-muted-foreground text-sm font-heading">
+            <ul className="space-y-4 mb-10">
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-foreground flex-shrink-0 mt-2" />
+                <span className="text-foreground text-lg">Оставьте заявку сегодня</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-foreground flex-shrink-0 mt-2" />
+                <span className="text-foreground text-lg">Мы соберём витрину под ваш запрос</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full bg-foreground flex-shrink-0 mt-2" />
+                <span className="text-foreground text-lg">Подготовим прозрачный расчёт проекта за 30 минут</span>
+              </li>
+            </ul>
+
+            <motion.button
+              className="cta-btn text-xl px-12 py-6"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Оставить заявку
+              <ArrowRight className="w-6 h-6" />
+            </motion.button>
+
+            <p className="mt-8 text-muted-foreground font-heading">
+              За!Подарком | zapodarkom.ru
+            </p>
+          </motion.div>
+
+          {/* Right: QR placeholder */}
+          <motion.div
+            className="flex flex-col items-center justify-center"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
+            <div className="w-48 h-48 bg-muted rounded-2xl flex items-center justify-center mb-4">
+              <span className="text-muted-foreground text-sm font-heading text-center">QR-код</span>
+            </div>
+            <p className="text-sm text-muted-foreground font-heading">Отсканируй QR</p>
+          </motion.div>
+        </div>
+
+        <div className="text-center mt-20 text-muted-foreground text-sm font-heading">
           © {new Date().getFullYear()} За!Подарком. Все права защищены.
         </div>
       </div>

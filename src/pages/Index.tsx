@@ -1,22 +1,26 @@
 import HeroSection from "@/components/landing/HeroSection";
 import ProductSection from "@/components/landing/ProductSection";
 import HRSection from "@/components/landing/HRSection";
-import TradeMarketingSection from "@/components/landing/TradeMarketingSection";
 import TradeUnionsSection from "@/components/landing/TradeUnionsSection";
+import PlatformSection from "@/components/landing/PlatformSection";
+import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import CalendarSection from "@/components/landing/CalendarSection";
-import CJMSection from "@/components/landing/CJMSection";
+import TradeMarketingSection from "@/components/landing/TradeMarketingSection";
+import SeasonSection from "@/components/landing/SeasonSection";
 import FooterCTA from "@/components/landing/FooterCTA";
 
 const Index = () => {
   return (
-    <main className="min-h-screen overflow-x-hidden">
+    <main className="min-h-screen overflow-x-hidden bg-background">
       <HeroSection />
       <ProductSection />
       <HRSection />
-      <TradeMarketingSection />
       <TradeUnionsSection />
+      <PlatformSection />
+      <HowItWorksSection />
       <CalendarSection />
-      <CJMSection />
+      <TradeMarketingSection />
+      <SeasonSection />
       <FooterCTA />
     </main>
   );
