@@ -108,26 +108,40 @@ const FooterCTA = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
           >
-            <div
-              className="w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl cursor-pointer"
-              onClick={handleVideoClick}
-            >
-              {videoFailed ? (
-                <img
-                  src={girlCard}
-                  alt="Девушка с подарочной картой"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <video
-                  ref={videoRef}
-                  src="/girl-animation.mp4"
-                  muted
-                  playsInline
-                  onError={() => setVideoFailed(true)}
-                  className="w-full h-full object-cover"
-                />
-              )}
+            <div className="relative">
+              <div
+                className="w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl cursor-pointer"
+                onClick={handleVideoClick}
+              >
+                {videoFailed ? (
+                  <img
+                    src={girlCard}
+                    alt="Девушка с подарочной картой"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <video
+                    ref={videoRef}
+                    src="/girl-animation.mp4"
+                    muted
+                    playsInline
+                    onError={() => setVideoFailed(true)}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+
+              {/* Arrow with "Нажми" label */}
+              <motion.div
+                className="absolute -left-20 top-1/2 -translate-y-1/2 flex flex-col items-center gap-1"
+                animate={{ x: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <span className="text-muted-foreground font-heading font-bold text-sm">Нажми</span>
+                <svg width="48" height="24" viewBox="0 0 48 24" fill="none" className="text-muted-foreground">
+                  <path d="M4 12h36m0 0l-10-8m10 8l-10 8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
             </div>
 
             {/* Cat with chest + CTA button */}
