@@ -13,7 +13,7 @@ import logoMoskva from "@/assets/logos/moskva-kniga.png";
 const logos = [
   { src: logoMybook, alt: "MyBook", top: "3%", right: "12%", floatDelay: 0.2 },
   { src: logoNetologia, alt: "Нетология", top: "12%", right: "-2%", floatDelay: 0.9 },
-  { src: logoLenovo, alt: "Lenovo", top: "5%", right: "-8%", floatDelay: 0.5 },
+  { src: logoLenovo, alt: "Lenovo", top: "-3%", right: "-8%", floatDelay: 0.5 },
   { src: logoSkyeng, alt: "Skyeng", top: "28%", right: "0%", floatDelay: 1.2 },
   { src: logoAikraft, alt: "Айкрафт", top: "42%", right: "5%", floatDelay: 0.7 },
   { src: logoChitaiGorod, alt: "Читай-город", top: "55%", right: "-3%", floatDelay: 1.5 },
