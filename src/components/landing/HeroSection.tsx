@@ -162,14 +162,14 @@ const HeroSection = () => {
               </motion.button>
             </motion.div>
 
-            {/* Floating brand pills around phone */}
-            {["Ozon", "Wildberries", "Lamoda", "Л'Этуаль", "DNS", "М.Видео"].map((brand, i) => (
+            {/* Floating brand logos around phone */}
+            {brandLogos.map((brand, i) => (
               <motion.div
-                key={brand}
-                className="absolute bg-background shadow-lg px-4 py-2 rounded-full font-heading font-semibold text-xs text-foreground border border-border"
+                key={brand.alt}
+                className="absolute bg-background/90 backdrop-blur-sm shadow-lg p-2 rounded-2xl border border-border"
                 style={{
-                  right: `${brandPositions[i].right}px`,
-                  top: `${brandPositions[i].top}px`,
+                  right: `${brand.right}px`,
+                  top: `${brand.top}px`,
                 }}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{
@@ -183,7 +183,7 @@ const HeroSection = () => {
                   y: { duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 },
                 }}
               >
-                {brand}
+                <img src={brand.src} alt={brand.alt} className="w-16 h-10 object-contain" />
               </motion.div>
             ))}
           </motion.div>
