@@ -95,7 +95,7 @@ const FooterCTA = () => {
                   ref={videoRef}
                   src="/girl-animation.mp4"
                   autoPlay
-                  muted
+                  muted={false}
                   playsInline
                   onError={() => setVideoFailed(true)}
                   className="w-full h-full object-cover"
