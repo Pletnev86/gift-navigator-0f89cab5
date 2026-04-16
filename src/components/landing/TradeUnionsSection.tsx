@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { CreditCard } from "lucide-react";
+import placeholderCard from "@/assets/placeholder-plastic-card.jpg";
 
 const TradeUnionsSection = () => {
   const ref = useRef(null);
@@ -38,26 +38,22 @@ const TradeUnionsSection = () => {
             </div>
           </motion.div>
 
-          {/* Right: Card visual */}
+          {/* Right: Card image — замените на свой креатив */}
           <motion.div
             className="flex justify-center"
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <div className="relative">
-              {/* Stacked cards */}
-              <div className="absolute top-4 left-4 w-72 h-44 rounded-2xl rotate-3 bg-amber-100 shadow-sm" />
-              <div className="relative w-72 h-44 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 shadow-xl overflow-hidden p-5 flex flex-col justify-between text-white">
-                <div>
-                  <p className="font-heading font-black text-xs tracking-widest opacity-80">МУЛЬТИКАРТА</p>
-                  <p className="font-heading font-black text-2xl mt-1">&gt;150 <span className="text-sm font-bold">БРЕНДОВ</span></p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CreditCard className="w-5 h-5 opacity-70" />
-                  <span className="font-heading font-bold text-sm opacity-70">За!Подарком</span>
-                </div>
-              </div>
+            <div className="rounded-2xl overflow-hidden shadow-xl max-w-md">
+              <img
+                src={placeholderCard}
+                alt="Пластиковая Мультикарта в подарочной упаковке — замените на свой креатив"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+                width={800}
+                height={600}
+              />
             </div>
           </motion.div>
         </div>

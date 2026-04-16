@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, Package, Palette } from "lucide-react";
+import placeholderHR from "@/assets/placeholder-hr.jpg";
 
 const features = [
   { icon: Mail, text: "Доставка электронного сертификата по Email" },
@@ -61,26 +62,22 @@ const HRSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right visual */}
+          {/* Right visual — замените на свой креатив */}
           <motion.div
             className="flex justify-center"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <div className="light-card w-full max-w-md">
-              <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-2xl p-8 text-center text-white mb-4">
-                <p className="font-heading font-black text-xl">За!Подарком</p>
-                <p className="text-sm mt-2 opacity-80">Универсальный подарочный сертификат</p>
-              </div>
-              <div className="bg-muted rounded-xl p-4">
-                <p className="font-heading font-bold text-sm text-foreground mb-2">Каталог электронных сертификатов</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {["Путешествия", "Детский мир", "Wildberries", "Электроника"].map((cat) => (
-                    <div key={cat} className="bg-background rounded-lg p-2 text-xs text-center font-heading text-muted-foreground">{cat}</div>
-                  ))}
-                </div>
-              </div>
+            <div className="rounded-2xl overflow-hidden shadow-lg w-full max-w-md">
+              <img
+                src={placeholderHR}
+                alt="HR вручает электронный сертификат — замените на свой креатив"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+                width={800}
+                height={600}
+              />
             </div>
           </motion.div>
         </div>

@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import placeholderSchool from "@/assets/placeholder-school.jpg";
 
 const SeasonSection = () => {
   const ref = useRef(null);
@@ -33,18 +34,30 @@ const SeasonSection = () => {
             </div>
           </motion.div>
 
-          {/* Right: Brand pills */}
+          {/* Right: Image — замените на свой креатив */}
           <motion.div
-            className="flex flex-wrap gap-3 justify-center"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
+            className="flex flex-col items-center gap-6"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
           >
-            {["Литрес", "Lenovo", "MyBook", "Нетология", "Skyeng", "Айкрафт", "Читай-город", "Буквоед"].map((brand) => (
-              <div key={brand} className="bg-muted rounded-full px-4 py-2 font-heading font-semibold text-sm text-foreground">
-                {brand}
-              </div>
-            ))}
+            <div className="rounded-2xl overflow-hidden shadow-lg w-full max-w-md">
+              <img
+                src={placeholderSchool}
+                alt="Школьные сборы — замените на свой креатив"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+                width={800}
+                height={600}
+              />
+            </div>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {["Литрес", "Lenovo", "MyBook", "Нетология", "Skyeng", "Айкрафт", "Читай-город", "Буквоед"].map((brand) => (
+                <div key={brand} className="bg-muted rounded-full px-4 py-2 font-heading font-semibold text-sm text-foreground">
+                  {brand}
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>
