@@ -5,6 +5,7 @@ import TradeUnionsSection from "@/components/landing/TradeUnionsSection";
 import PlatformSection from "@/components/landing/PlatformSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import CalendarSection from "@/components/landing/CalendarSection";
+import BirthdayExampleSection from "@/components/landing/BirthdayExampleSection";
 import TradeMarketingSection from "@/components/landing/TradeMarketingSection";
 import SeasonSection from "@/components/landing/SeasonSection";
 import FooterCTA from "@/components/landing/FooterCTA";
@@ -19,6 +20,7 @@ const Index = () => {
       <PlatformSection />
       <HowItWorksSection />
       <CalendarSection />
+      <BirthdayExampleSection />
       <TradeMarketingSection />
       <SeasonSection />
       <FooterCTA />
