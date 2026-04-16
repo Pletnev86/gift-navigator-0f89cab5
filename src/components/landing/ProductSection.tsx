@@ -1,7 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import placeholderBrands from "@/assets/placeholder-brands.jpg";
-import qrCode from "@/assets/qr-code.png";
 
 const ProductSection = () => {
   const ref = useRef(null);
