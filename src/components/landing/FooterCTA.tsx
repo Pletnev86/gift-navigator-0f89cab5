@@ -13,11 +13,26 @@ const FooterCTA = () => {
   const [videoFailed, setVideoFailed] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
 
+  // Start muted for autoplay, unmute on first user interaction
   useEffect(() => {
     const video = videoRef.current;
     if (video && inView) {
+      video.muted = true;
       video.volume = 0.85;
       video.play().catch(() => {});
+
+      const unmute = () => {
+        video.muted = false;
+        document.removeEventListener("click", unmute);
+        document.removeEventListener("touchstart", unmute);
+      };
+      document.addEventListener("click", unmute, { once: true });
+      document.addEventListener("touchstart", unmute, { once: true });
+
+      return () => {
+        document.removeEventListener("click", unmute);
+        document.removeEventListener("touchstart", unmute);
+      };
     }
   }, [inView]);
 
