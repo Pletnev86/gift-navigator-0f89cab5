@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
+import qrCode from "@/assets/qr-code.png";
 
 const steps = [
   { num: "01", desc: "Выбираете формат — Электронный сертификат или Пластик" },
