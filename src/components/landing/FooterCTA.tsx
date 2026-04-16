@@ -87,6 +87,7 @@ const FooterCTA = () => {
               </motion.button>
 
               <motion.div
+                className="hidden md:block"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 }}
