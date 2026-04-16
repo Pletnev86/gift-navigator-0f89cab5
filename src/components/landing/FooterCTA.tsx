@@ -139,7 +139,8 @@ const FooterCTA = () => {
                 className="w-24 h-24 md:w-[120px] md:h-[120px] object-contain"
               />
               <motion.button
-                className="cta-btn"
+                className="inline-flex items-center gap-3 rounded-2xl px-10 py-5 font-heading font-bold text-lg tracking-wide transition-all duration-300 text-foreground"
+                style={{ background: "linear-gradient(135deg, hsl(40, 85%, 55%), hsl(30, 90%, 50%))" }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setFormOpen(true)}
