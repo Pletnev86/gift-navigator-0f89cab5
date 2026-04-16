@@ -29,7 +29,9 @@ const InfoCalendarSection = () => {
           <span className="badge-tag mb-6 inline-block">📅 КАЛЕНДАРЬ</span>
           <h2 className="text-3xl md:text-5xl font-black leading-tight text-foreground">
             Календарь инфоповодов.{" "}
-            <span className="text-[hsl(var(--lime))]">Забота круглый год.</span>
+            <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">
+              Забота круглый год.
+            </span>
           </h2>
         </motion.div>
 
