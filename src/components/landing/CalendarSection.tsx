@@ -1,16 +1,31 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Calendar, Flower2, Sun, Snowflake, Gift, GraduationCap, Heart, Rocket, Star } from "lucide-react";
 
-const holidays = [
-  { title: "День работников культуры", season: "Весна", icon: Star, gradient: "from-pink-500/20 to-purple-500/20", border: "border-pink-500/20" },
-  { title: "День космонавтики", season: "Весна", icon: Rocket, gradient: "from-blue-500/20 to-indigo-500/20", border: "border-blue-500/20" },
-  { title: "День скорой помощи", season: "Весна", icon: Heart, subtitle: "«Сухих рукавов»", gradient: "from-red-500/20 to-orange-500/20", border: "border-red-500/20" },
-  { title: "День защиты детей", season: "Лето", icon: Sun, gradient: "from-yellow-500/20 to-orange-500/20", border: "border-yellow-500/20" },
-  { title: "1 сентября", season: "Осень", icon: GraduationCap, subtitle: "Кейс «Портфель с пятёрками»", gradient: "from-emerald-500/20 to-teal-500/20", border: "border-emerald-500/20" },
-  { title: "Новый Год", season: "Зима-Пик", icon: Snowflake, gradient: "from-cyan-500/20 to-blue-500/20", border: "border-cyan-500/20" },
-  { title: "23 февраля", season: "Зима", icon: Gift, gradient: "from-slate-500/20 to-gray-500/20", border: "border-slate-500/20" },
-  { title: "8 марта", season: "Весна", icon: Flower2, gradient: "from-pink-500/20 to-rose-500/20", border: "border-pink-500/20" },
+const industries = [
+  {
+    title: "День нефтяника",
+    subtitle: "«Энергия ваших достижений»",
+    date: "6 Сентября",
+    desc: "Матовый металл и «золотое» тиснение, подчеркивающее статус лидеров рынка. Подпись на карте: «Энергия недр».",
+  },
+  {
+    title: "День строителя",
+    subtitle: "«Фундамент вашего будущего»",
+    date: "09 Августа",
+    desc: "Фактурная упаковка с элементами чертежей и структурным дизайном. Подпись на карте: «Архитектура успеха».",
+  },
+  {
+    title: "День медицинского работника",
+    subtitle: "«Героям в белых халатах»",
+    date: "21 Июня",
+    desc: "Чистый, минималистичный цифровой дизайн с акцентом на заботу и человечность. Подпись на карте: «Сердце под защитой».",
+  },
+  {
+    title: "Транспорт и логистика",
+    subtitle: "«Верный курс на успех»",
+    date: "25 Октября",
+    desc: "Износостойкий пластик для тех, кто всегда в движении, или цифровой формат с мгновенным доступом. Подпись на карте: «Свобода движения».",
+  },
 ];
 
 const CalendarSection = () => {
@@ -20,48 +35,43 @@ const CalendarSection = () => {
   return (
     <section className="section-spacing relative" ref={ref}>
       <div className="container mx-auto max-w-7xl">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="badge-tag mb-6 inline-block">
-            <Calendar className="w-3 h-3 inline mr-1" />
-            Календарь
-          </span>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight">
-            Календарь инфоповодов.{" "}
-            <span className="gradient-text">Забота круглый год.</span>
-          </h2>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Left */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="badge-tag mb-6 inline-block">КАЛЕНДАРЬ ОТРАСЛЕВЫХ РЕШЕНИЙ</span>
+            <h2 className="text-3xl md:text-5xl font-black leading-tight mb-6 text-foreground">
+              Сильные решения для сильных профи
+            </h2>
+            <h3 className="text-2xl md:text-3xl font-black text-foreground mb-8">
+              Сюжет в каждом подарке
+            </h3>
+          </motion.div>
 
-        {/* Bento masonry grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {holidays.map((h, i) => (
-            <motion.div
-              key={h.title}
-              className={`bento-card bg-gradient-to-br ${h.gradient} ${h.border} ${i === 5 ? 'md:col-span-2 md:row-span-2' : ''}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-            >
-              <h.icon className="w-8 h-8 text-foreground/60 mb-3" />
-              <p className="text-[10px] font-heading uppercase tracking-widest text-muted-foreground mb-1">{h.season}</p>
-              <h3 className="font-heading font-bold text-sm md:text-base">{h.title}</h3>
-              {h.subtitle && <p className="text-xs text-muted-foreground mt-1">{h.subtitle}</p>}
-            </motion.div>
-          ))}
+          {/* Right: Industry cards */}
+          <div className="space-y-4">
+            {industries.map((ind, i) => (
+              <motion.div
+                key={ind.title}
+                className="light-card"
+                initial={{ opacity: 0, x: 20 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.4, delay: i * 0.12 }}
+              >
+                <h4 className="font-heading font-bold text-base text-foreground mb-1">
+                  {ind.title}: {ind.subtitle}
+                </h4>
+                <p className="text-xs text-muted-foreground mb-2">
+                  <strong>Дата:</strong> {ind.date}
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{ind.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-
-        <motion.p
-          className="text-center text-muted-foreground mt-8 font-heading text-sm"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
-        >
-          ⚡ Зафиксируйте бюджет до роста сезонных цен!
-        </motion.p>
       </div>
     </section>
   );

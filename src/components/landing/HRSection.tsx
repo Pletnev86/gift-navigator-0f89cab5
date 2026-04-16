@@ -1,11 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Package, Mail, ShieldCheck, Award } from "lucide-react";
+import { Mail, Package, Palette } from "lucide-react";
 
 const features = [
-  { icon: Package, title: "Больше никаких гор коробок в офисе", desc: "Полностью цифровая доставка без физической логистики." },
-  { icon: Mail, title: "Доставка за 1 мин по SMS/Email", desc: "Моментальная рассылка тысячам получателей одним кликом." },
-  { icon: ShieldCheck, title: "Отключение алкоголя и табака", desc: "В 1 клик. Идеально для детских акций и kids-safe витрин." },
+  { icon: Mail, text: "Доставка электронного сертификата по Email" },
+  { icon: Package, text: "Больше никаких гор коробок в офисе" },
+  { icon: Palette, text: "Создавайте уникальные подборки брендов, идеально подходящие под повод: от профессиональных праздников до «Kids-safe» витрин для детей сотрудников." },
 ];
 
 const HRSection = () => {
@@ -15,57 +15,75 @@ const HRSection = () => {
   return (
     <section className="section-spacing relative" ref={ref}>
       <div className="container mx-auto max-w-7xl">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="badge-tag mb-6 inline-block">Для HR</span>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight max-w-4xl mx-auto">
-            Снимите логистическое проклятие.{" "}
-            <span className="gradient-text">15&nbsp;000 подарков по филиалам в 1&nbsp;клик.</span>
-          </h2>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="badge-tag mb-6 inline-block">ДЛЯ HR</span>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 text-foreground">
+              Электронная Мультикарта<br />
+              15 000 подарков в 1 клик
+            </h2>
 
-        {/* Bento grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {features.map((f, i) => (
+            <ul className="space-y-4 mb-10">
+              {features.map((f, i) => (
+                <motion.li
+                  key={i}
+                  className="flex items-start gap-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.3 + i * 0.15 }}
+                >
+                  <f.icon className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-1" />
+                  <span className="text-foreground leading-relaxed">{f.text}</span>
+                </motion.li>
+              ))}
+            </ul>
+
+            {/* Case */}
             <motion.div
-              key={f.title}
-              className="bento-card"
-              initial={{ opacity: 0, y: 30 }}
+              className="case-card"
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
+              transition={{ delay: 0.6 }}
             >
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: "hsl(82 85% 55% / 0.15)" }}>
-                <f.icon className="w-6 h-6 text-neon-green" />
-              </div>
-              <h3 className="font-heading font-bold text-lg mb-3">{f.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{f.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Case study badge */}
-        <motion.div
-          className="mt-12 glass-panel-strong rounded-2xl p-8 glow-green relative overflow-hidden"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10 blur-[80px]" style={{ background: "hsl(82 85% 55%)" }} />
-          <div className="flex items-start gap-4 relative z-10">
-            <Award className="w-8 h-8 text-neon-green flex-shrink-0 mt-1" />
-            <div>
-              <span className="badge-tag mb-3 inline-block text-[10px]">Кейс</span>
-              <h3 className="font-heading font-bold text-xl mb-2">ПАО «Билайн»</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Менее чем за сутки вручили 15&nbsp;000 карт. Настроена kids-safe витрина. Логистика: <span className="font-bold text-neon-green">0₽</span>.
+              <span className="badge-tag text-[10px] mb-3 inline-block">КЕЙС</span>
+              <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
+                Крупнейший федеральный телеком-оператор
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                15 000 Мультикарт для детей за сутки.<br />
+                Индивидуальная Kids-safe витрина.<br />
+                Логистика: <span className="font-bold text-foreground">0₽</span>.
               </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Right visual */}
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
+            <div className="light-card w-full max-w-md">
+              <div className="bg-gradient-to-br from-green-400 to-green-600 rounded-2xl p-8 text-center text-white mb-4">
+                <p className="font-heading font-black text-xl">За!Подарком</p>
+                <p className="text-sm mt-2 opacity-80">Универсальный подарочный сертификат</p>
+              </div>
+              <div className="bg-muted rounded-xl p-4">
+                <p className="font-heading font-bold text-sm text-foreground mb-2">Каталог электронных сертификатов</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {["Путешествия", "Детский мир", "Wildberries", "Электроника"].map((cat) => (
+                    <div key={cat} className="bg-background rounded-lg p-2 text-xs text-center font-heading text-muted-foreground">{cat}</div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

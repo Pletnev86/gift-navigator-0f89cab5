@@ -1,11 +1,10 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, FileText, Building, ArrowRight } from "lucide-react";
 
-const legalItems = [
-  { icon: Shield, label: "152-ФЗ", tag: "LEGAL SAFE" },
-  { icon: FileText, label: "Договор услуг", tag: "LEGAL SAFE" },
-  { icon: Building, label: "НДФЛ уплачен", tag: "LEGAL SAFE" },
+const seasons = [
+  { label: "23 февраля", color: "bg-pink-200" },
+  { label: "8 марта", color: "bg-yellow-200" },
+  { label: "Новый Год", color: "bg-sky-200" },
 ];
 
 const TradeMarketingSection = () => {
@@ -14,83 +13,64 @@ const TradeMarketingSection = () => {
 
   return (
     <section className="section-spacing relative" ref={ref}>
-      <div className="absolute top-1/2 right-0 w-96 h-96 rounded-full opacity-10 blur-[120px]" style={{ background: "hsl(210 100% 56%)" }} />
-
       <div className="container mx-auto max-w-7xl">
-        <motion.div
-          className="max-w-3xl mb-16"
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="badge-tag mb-6 inline-block">НДФЛ 0%</span>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
-            Ваш легальный налоговый щит.{" "}
-            <span className="gradient-text">Вы проводите промо — мы платим НДФЛ.</span>
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Запускайте B2B и B2C акции без раздувания юридического штата. Мы выступаем
-            налоговым агентом, собираем паспорта и платим 13% НДФЛ за победителей.
-          </p>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="badge-tag mb-6 inline-block">ПИКОВЫЙ СЕЗОН</span>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 text-foreground">
+              Пиковый сезон без паники. Инвестируйте в сроки.
+            </h2>
 
-        {/* Architecture diagram */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-6 mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          {["Пользователь", "Мультикарта", "ФНС"].map((step, i) => (
-            <div key={step} className="relative flex flex-col items-center">
-              <div className="glass-panel-strong rounded-2xl p-8 w-full text-center">
-                <div className="w-14 h-14 rounded-xl mx-auto mb-4 flex items-center justify-center" style={{ background: "hsl(210 100% 56% / 0.15)" }}>
-                  {i === 0 && <Shield className="w-7 h-7 text-neon-blue" />}
-                  {i === 1 && <FileText className="w-7 h-7 text-neon-blue" />}
-                  {i === 2 && <Building className="w-7 h-7 text-neon-blue" />}
+            <div className="space-y-3 mb-8">
+              {seasons.map((s) => (
+                <div key={s.label} className={`${s.color} rounded-xl px-6 py-3 font-heading font-bold text-foreground text-center max-w-xs`}>
+                  {s.label}
                 </div>
-                <p className="font-heading font-bold text-lg">{step}</p>
-              </div>
-              {i < 2 && (
-                <div className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-10">
-                  <ArrowRight className="w-6 h-6 text-muted-foreground" />
-                </div>
-              )}
+              ))}
             </div>
-          ))}
-        </motion.div>
 
-        {/* Legal badges */}
-        <motion.div
-          className="grid md:grid-cols-3 gap-6"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          {legalItems.map((item) => (
-            <div key={item.label} className="bento-card flex items-center gap-4">
-              <item.icon className="w-8 h-8 text-muted-foreground flex-shrink-0" />
-              <div>
-                <span className="badge-tag text-[10px] mb-1 inline-block">{item.tag}</span>
-                <p className="font-heading font-bold">{item.label}</p>
+            <p className="text-muted-foreground leading-relaxed">
+              Закупите Мультикарты сейчас — избежите сезонных наценок и суеты в последние дни декабря.
+            </p>
+          </motion.div>
+
+          {/* Right: Visual placeholder for chart */}
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
+          >
+            <div className="light-card w-full max-w-md p-8">
+              <h4 className="font-heading font-bold text-sm text-foreground mb-4 uppercase tracking-wide">
+                Периоды высокой активности
+              </h4>
+              <div className="flex items-end gap-2 h-40">
+                {[3, 5, 4, 6, 3, 7, 8, 10, 6, 4, 5, 9].map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 rounded-t transition-all"
+                    style={{
+                      height: `${h * 10}%`,
+                      background: i >= 9 ? "hsl(var(--lime))" : "hsl(0 0% 85%)",
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-between mt-2 text-[10px] text-muted-foreground font-heading">
+                <span>Янв</span>
+                <span>Мар</span>
+                <span>Июн</span>
+                <span>Сен</span>
+                <span>Дек</span>
               </div>
             </div>
-          ))}
-        </motion.div>
-
-        {/* Case highlight */}
-        <motion.div
-          className="mt-8 glass-panel-strong rounded-2xl p-6 border-l-4"
-          style={{ borderLeftColor: "hsl(210 100% 56%)" }}
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.7 }}
-        >
-          <p className="text-muted-foreground">
-            <span className="font-heading font-bold text-foreground">Кейс «Макфа» и «Коровка из Кореновки».</span>{" "}
-            Полная юридическая чистота.
-          </p>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
