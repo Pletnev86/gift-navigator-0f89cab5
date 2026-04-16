@@ -161,7 +161,7 @@ const FooterCTA = () => {
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setRaffleOpen(true)}
               >
-                Посмотреть сундук
+                Собрать мою витрину
               </motion.button>
             </div>
           </motion.div>
