@@ -7,7 +7,17 @@ import girlCard from "@/assets/girl-card.jpg";
 
 const FooterCTA = () => {
   const ref = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  const handleVideoClick = useCallback(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      video.play();
+    }
+  }, []);
 
   return (
     <section className="section-spacing relative" ref={ref}>
