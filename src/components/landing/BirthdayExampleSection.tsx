@@ -11,14 +11,14 @@ import logoLetoile from "@/assets/logos/letoile.png";
 import logoCoral from "@/assets/logos/coral-travel.png";
 
 const logos = [
-  { src: logoZolotoe, alt: "Золотое Яблоко" },
-  { src: logoSunlight, alt: "Sunlight" },
-  { src: logoPandora, alt: "Pandora" },
-  { src: logoS7, alt: "S7 Airlines" },
-  { src: logoQuest, alt: "Quest Quest" },
-  { src: logoYves, alt: "Yves Rocher" },
-  { src: logoLetoile, alt: "Л'Этуаль" },
-  { src: logoCoral, alt: "Coral Travel" },
+  { src: logoZolotoe, alt: "Золотое Яблоко", top: "5%", right: "0%", floatDelay: 0 },
+  { src: logoSunlight, alt: "Sunlight", top: "18%", right: "-5%", floatDelay: 0.5 },
+  { src: logoPandora, alt: "Pandora", top: "35%", right: "2%", floatDelay: 1.2 },
+  { src: logoS7, alt: "S7 Airlines", top: "22%", right: "-12%", floatDelay: 0.8 },
+  { src: logoQuest, alt: "Quest Quest", top: "50%", right: "-8%", floatDelay: 1.5 },
+  { src: logoYves, alt: "Yves Rocher", top: "60%", right: "0%", floatDelay: 0.3 },
+  { src: logoLetoile, alt: "Л'Этуаль", top: "72%", right: "-6%", floatDelay: 1.0 },
+  { src: logoCoral, alt: "Coral Travel", top: "82%", right: "2%", floatDelay: 1.8 },
 ];
 
 const BirthdayExampleSection = () => {
@@ -28,46 +28,55 @@ const BirthdayExampleSection = () => {
   return (
     <section className="section-spacing relative" ref={ref}>
       <div className="container mx-auto max-w-7xl">
-        <div className="grid lg:grid-cols-[1fr_auto] gap-12 items-start">
-          {/* Left: badge + title + mockup */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="badge-tag mb-6 inline-block">ПРИМЕР</span>
-            <h2 className="text-3xl md:text-5xl font-black leading-tight mb-10 text-foreground">
-              Поздравления сотрудников с<br />Днем рождения
-            </h2>
-            <motion.img
-              src={birthdayMockup}
-              alt="Пример платформы — поздравление с Днём рождения"
-              className="w-full max-w-2xl rounded-2xl"
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            />
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+        >
+          <span className="badge-tag mb-6 inline-block">ПРИМЕР</span>
+          <h2 className="text-3xl md:text-5xl font-black leading-tight mb-10 text-foreground">
+            Поздравления сотрудников с<br />Днем рождения
+          </h2>
+        </motion.div>
 
-          {/* Right: partner logos */}
-          <motion.div
-            className="flex flex-col gap-6 items-end pt-4"
-            initial={{ opacity: 0, x: 20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            {logos.map((logo, i) => (
-              <motion.img
-                key={logo.alt}
-                src={logo.src}
-                alt={logo.alt}
-                className="h-8 md:h-10 w-auto object-contain"
-                initial={{ opacity: 0, x: 10 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.3, delay: 0.5 + i * 0.08 }}
-              />
-            ))}
-          </motion.div>
+        {/* Mockup + floating logos */}
+        <div className="relative max-w-4xl">
+          <motion.img
+            src={birthdayMockup}
+            alt="Пример платформы — поздравление с Днём рождения"
+            className="w-full max-w-2xl rounded-2xl relative z-10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          />
+
+          {/* Scattered floating logos around right side */}
+          {logos.map((logo, i) => (
+            <motion.img
+              key={logo.alt}
+              src={logo.src}
+              alt={logo.alt}
+              className="absolute h-8 md:h-10 w-auto object-contain z-20 hidden lg:block"
+              style={{ top: logo.top, right: logo.right }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? {
+                opacity: 1,
+                scale: 1,
+                y: [0, -8, 0],
+              } : {}}
+              transition={{
+                opacity: { duration: 0.4, delay: 0.5 + i * 0.1 },
+                scale: { duration: 0.4, delay: 0.5 + i * 0.1 },
+                y: {
+                  duration: 3 + logo.floatDelay,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                  ease: "easeInOut",
+                  delay: logo.floatDelay,
+                },
+              }}
+            />
+          ))}
         </div>
       </div>
     </section>
