@@ -80,23 +80,25 @@ const FooterCTA = () => {
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             onClick={handleVideoClick}
           >
-            {videoFailed ? (
-              <img
-                src={girlCard}
-                alt="Девушка с подарочной картой"
-                className="w-80 md:w-96 object-contain drop-shadow-2xl"
-              />
-            ) : (
-              <video
-                ref={videoRef}
-                src="/girl-animation.mp4"
-                autoPlay
-                muted
-                playsInline
-                onError={() => setVideoFailed(true)}
-                className="w-80 md:w-96 object-contain drop-shadow-2xl"
-              />
-            )}
+            <div className="w-72 h-72 md:w-[22rem] md:h-[22rem] rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl">
+              {videoFailed ? (
+                <img
+                  src={girlCard}
+                  alt="Девушка с подарочной картой"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <video
+                  ref={videoRef}
+                  src="/girl-animation.mp4"
+                  autoPlay
+                  muted
+                  playsInline
+                  onError={() => setVideoFailed(true)}
+                  className="w-full h-full object-cover"
+                />
+              )}
+            </div>
           </motion.div>
         </div>
 
