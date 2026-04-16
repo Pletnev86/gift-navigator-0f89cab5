@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Play, X } from "lucide-react";
+import { useState } from "react";
 import qrCode from "@/assets/qr-code.png";
 
 const floatAnimation = {
@@ -22,10 +22,10 @@ const brandPositions = [
 ];
 
 const HeroSection = () => {
-  const [videoFailed, setVideoFailed] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   return (
+    <>
     <section className="section-spacing min-h-screen flex items-center relative overflow-hidden">
       {/* Subtle background decoration */}
       <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-[hsl(var(--lime)/0.08)] blur-[120px] pointer-events-none" />
@@ -98,61 +98,58 @@ const HeroSection = () => {
               <div className="w-72 md:w-80 h-[500px] md:h-[540px] rounded-[2.5rem] bg-gradient-to-b from-[hsl(0,0%,12%)] to-[hsl(0,0%,8%)] flex items-center justify-center overflow-hidden relative shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)] border-[5px] border-[hsl(0,0%,20%)]">
                 {/* Dynamic Island */}
                 <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-7 bg-[hsl(0,0%,4%)] rounded-full z-20" />
+                
+                {/* Screen glow */}
+                <div className="absolute inset-[5px] rounded-[2rem] bg-gradient-to-br from-[hsl(220,60%,15%)] via-[hsl(260,40%,12%)] to-[hsl(220,50%,10%)]" />
 
-                {/* Video or fallback card */}
-                {!videoFailed ? (
-                  <video
-                    ref={videoRef}
-                    src="/hero-video.mp4"
-                    className="absolute inset-0 w-full h-full object-cover rounded-[2rem]"
-                    autoPlay
-                    muted
-                    playsInline
-                    onError={() => setVideoFailed(true)}
-                  />
-                ) : (
-                  <>
-                    {/* Screen glow */}
-                    <div className="absolute inset-[5px] rounded-[2rem] bg-gradient-to-br from-[hsl(220,60%,15%)] via-[hsl(260,40%,12%)] to-[hsl(220,50%,10%)]" />
-
-                    <div className="relative z-10 flex flex-col items-center gap-5 px-5 w-full">
-                      {/* Gift card */}
-                      <motion.div
-                        className="w-full max-w-[256px] h-40 rounded-2xl shadow-2xl p-5 flex flex-col justify-between text-white relative overflow-hidden"
-                        style={{ background: "linear-gradient(135deg, hsl(220, 80%, 55%), hsl(260, 70%, 50%))" }}
-                        whileHover={{ rotate: 0 }}
-                        initial={{ rotate: -3 }}
-                      >
-                        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-60" />
-                        <div className="relative z-10">
-                          <p className="font-heading font-black text-[10px] tracking-[0.2em] opacity-70">МУЛЬТИКАРТА</p>
-                          <p className="font-heading font-black text-3xl mt-1">400+</p>
-                          <p className="font-heading font-bold text-xs opacity-60">БРЕНДОВ</p>
-                        </div>
-                        <div className="flex justify-between items-end relative z-10">
-                          <p className="font-heading font-bold text-xs opacity-50">За!Подарком</p>
-                          <div className="w-8 h-8 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
-                            <div className="w-5 h-5 rounded-full bg-white/20" />
-                          </div>
-                        </div>
-                      </motion.div>
-
-                      {/* Brand chips inside phone */}
-                      <div className="flex flex-wrap justify-center gap-2 px-2">
-                        {["Ozon", "WB", "Lamoda", "DNS"].map((b) => (
-                          <span
-                            key={b}
-                            className="bg-white/8 backdrop-blur-sm text-white/70 px-3 py-1.5 rounded-full text-[11px] font-heading font-semibold border border-white/10"
-                          >
-                            {b}
-                          </span>
-                        ))}
-                      </div>
-                      <p className="text-white/30 text-[11px] font-heading tracking-wide">Выбирайте из 400+ брендов</p>
+                <div className="relative z-10 flex flex-col items-center gap-5 px-5 w-full">
+                  {/* Gift card */}
+                  <motion.div
+                    className="w-full max-w-[256px] h-40 rounded-2xl shadow-2xl p-5 flex flex-col justify-between text-white relative overflow-hidden"
+                    style={{ background: "linear-gradient(135deg, hsl(220, 80%, 55%), hsl(260, 70%, 50%))" }}
+                    whileHover={{ rotate: 0 }}
+                    initial={{ rotate: -3 }}
+                  >
+                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-60" />
+                    <div className="relative z-10">
+                      <p className="font-heading font-black text-[10px] tracking-[0.2em] opacity-70">МУЛЬТИКАРТА</p>
+                      <p className="font-heading font-black text-3xl mt-1">400+</p>
+                      <p className="font-heading font-bold text-xs opacity-60">БРЕНДОВ</p>
                     </div>
-                  </>
-                )}
+                    <div className="flex justify-between items-end relative z-10">
+                      <p className="font-heading font-bold text-xs opacity-50">За!Подарком</p>
+                      <div className="w-8 h-8 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center">
+                        <div className="w-5 h-5 rounded-full bg-white/20" />
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Brand chips inside phone */}
+                  <div className="flex flex-wrap justify-center gap-2 px-2">
+                    {["Ozon", "WB", "Lamoda", "DNS"].map((b) => (
+                      <span
+                        key={b}
+                        className="bg-white/8 backdrop-blur-sm text-white/70 px-3 py-1.5 rounded-full text-[11px] font-heading font-semibold border border-white/10"
+                      >
+                        {b}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-white/30 text-[11px] font-heading tracking-wide">Выбирайте из 400+ брендов</p>
+                </div>
               </div>
+
+              {/* Play button overlay on phone */}
+              <motion.button
+                onClick={() => setVideoOpen(true)}
+                className="absolute inset-0 z-30 flex items-center justify-center"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="w-20 h-20 rounded-full flex items-center justify-center shadow-xl" style={{ background: "hsl(var(--lime))" }}>
+                  <Play className="w-8 h-8 text-foreground fill-foreground ml-0.5" />
+                </div>
+              </motion.button>
             </motion.div>
 
             {/* Floating brand pills around phone */}
@@ -183,6 +180,41 @@ const HeroSection = () => {
         </div>
       </div>
     </section>
+
+    {/* Video Modal */}
+    <AnimatePresence>
+      {videoOpen && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setVideoOpen(false)}
+        >
+          <motion.div
+            className="relative w-[90vw] max-w-4xl aspect-video"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setVideoOpen(false)}
+              className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <iframe
+              src="https://vk.com/video_ext.php?oid=-227352514&id=456239020&autoplay=1"
+              className="w-full h-full rounded-2xl"
+              allow="autoplay; encrypted-media; fullscreen"
+              allowFullScreen
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 };
 
