@@ -72,18 +72,31 @@ const FooterCTA = () => {
             </p>
           </motion.div>
 
-          {/* Right: Girl peeking from behind QR */}
+          {/* Right: Girl video/image */}
           <motion.div
-            className="flex justify-center items-end relative"
+            className="flex justify-center items-end relative cursor-pointer"
             initial={{ opacity: 0, x: 80 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            onClick={handleVideoClick}
           >
-            <img
-              src={girlCard}
-              alt="Девушка с подарочной картой"
-              className="w-80 md:w-96 object-contain drop-shadow-2xl"
-            />
+            {videoFailed ? (
+              <img
+                src={girlCard}
+                alt="Девушка с подарочной картой"
+                className="w-80 md:w-96 object-contain drop-shadow-2xl"
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                src="/girl-animation.mp4"
+                autoPlay
+                muted
+                playsInline
+                onError={() => setVideoFailed(true)}
+                className="w-80 md:w-96 object-contain drop-shadow-2xl"
+              />
+            )}
           </motion.div>
         </div>
 
