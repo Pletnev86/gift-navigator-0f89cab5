@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useCallback, useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { useCallback, useState } from "react";
+
 import qrFooter from "@/assets/qr-footer.png";
 import girlCard from "@/assets/girl-card.jpg";
 
