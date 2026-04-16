@@ -103,7 +103,6 @@ const FooterCTA = () => {
                   ref={videoRef}
                   src="/girl-animation.mp4"
                   muted
-                  muted={false}
                   playsInline
                   onError={() => setVideoFailed(true)}
                   className="w-full h-full object-cover"
