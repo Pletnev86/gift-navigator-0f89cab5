@@ -23,16 +23,12 @@ const ProductSection = () => {
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 text-foreground">
               400+ брендов
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
               Получатель Мультикарты сам решает, на что потратить номинал:
               от премиальной косметики до оплаты подписок.
               Забудьте о ситуации «подарили не то».
               Единое цифровое решение с покрытием по всей РФ.
             </p>
-            <div className="flex items-center gap-4">
-              <img src={qrCode} alt="QR-код для тестирования платформы" className="w-28 h-28 rounded-xl" />
-              <p className="text-sm text-muted-foreground font-heading">Отсканируй QR и<br />протестируй платформу</p>
-            </div>
           </motion.div>
 
           {/* Brand cards image — замените на свой креатив */}
