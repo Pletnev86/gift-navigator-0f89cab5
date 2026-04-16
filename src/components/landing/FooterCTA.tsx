@@ -1,12 +1,23 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useCallback, useState } from "react";
 import { ArrowRight } from "lucide-react";
+
 import qrFooter from "@/assets/qr-footer.png";
 import girlCard from "@/assets/girl-card.jpg";
 
 const FooterCTA = () => {
   const ref = useRef(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  const handleVideoClick = useCallback(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      video.play();
+    }
+  }, []);
 
   return (
     <section className="section-spacing relative" ref={ref}>
@@ -61,18 +72,31 @@ const FooterCTA = () => {
             </p>
           </motion.div>
 
-          {/* Right: Girl peeking from behind QR */}
+          {/* Right: Girl video/image */}
           <motion.div
-            className="flex justify-center items-end relative"
+            className="flex justify-center items-end relative cursor-pointer"
             initial={{ opacity: 0, x: 80 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            onClick={handleVideoClick}
           >
-            <img
-              src={girlCard}
-              alt="Девушка с подарочной картой"
-              className="w-80 md:w-96 object-contain drop-shadow-2xl"
-            />
+            {videoFailed ? (
+              <img
+                src={girlCard}
+                alt="Девушка с подарочной картой"
+                className="w-80 md:w-96 object-contain drop-shadow-2xl"
+              />
+            ) : (
+              <video
+                ref={videoRef}
+                src="/girl-animation.mp4"
+                autoPlay
+                muted
+                playsInline
+                onError={() => setVideoFailed(true)}
+                className="w-80 md:w-96 object-contain drop-shadow-2xl"
+              />
+            )}
           </motion.div>
         </div>
 
