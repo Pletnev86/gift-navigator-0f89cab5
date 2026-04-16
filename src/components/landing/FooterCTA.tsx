@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 import qrFooter from "@/assets/qr-footer.png";
 import girlCard from "@/assets/girl-card.jpg";
+import catChest from "@/assets/cat-chest.png";
 import RequestFormDialog from "./RequestFormDialog";
 
 const FooterCTA = () => {
