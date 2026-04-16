@@ -145,7 +145,7 @@ const FooterCTA = () => {
                 style={{ background: "linear-gradient(135deg, hsl(40, 85%, 55%), hsl(30, 90%, 50%))" }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => setFormOpen(true)}
+                onClick={() => setRaffleOpen(true)}
               >
                 Посмотреть сундук
               </motion.button>
