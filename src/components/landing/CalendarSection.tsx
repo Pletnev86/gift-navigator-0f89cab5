@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import industryCards from "@/assets/industry-cards.jpg";
 
 const industries = [
   {
@@ -49,6 +50,7 @@ const CalendarSection = () => {
             <h3 className="text-2xl md:text-3xl font-black text-foreground mb-8">
               Сюжет в каждом подарке
             </h3>
+            <img src={industryCards} alt="Отраслевые подарочные карты" className="rounded-2xl w-full max-w-md" />
           </motion.div>
 
           {/* Right: Industry cards */}
