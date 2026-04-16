@@ -1,16 +1,16 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Star, Rocket, Heart, Sun, GraduationCap, Snowflake, Gift, Flower2 } from "lucide-react";
+import { Star, Snowflake, Gift, Flower2, Shield, Flame, Users, GraduationCap, Heart, Medal } from "lucide-react";
 
 const events = [
-  { season: "ВЕСНА", title: "День работников культуры", icon: Star, color: "from-purple-800/80 to-purple-900/80" },
-  { season: "ВЕСНА", title: "День космонавтики", icon: Rocket, color: "from-indigo-800/80 to-indigo-900/80" },
-  { season: "ВЕСНА", title: "День скорой помощи", subtitle: "«Сухих рукавов»", icon: Heart, color: "from-teal-800/80 to-teal-900/80" },
-  { season: "ЛЕТО", title: "День защиты детей", icon: Sun, color: "from-yellow-700/80 to-yellow-800/80" },
+  { season: "ЗИМА", title: "Новый Год", icon: Snowflake, color: "from-blue-800/80 to-blue-900/80" },
+  { season: "ЗИМА", title: "23 февраля", subtitle: "День защитника Отечества", icon: Shield, color: "from-slate-700/80 to-slate-800/80" },
+  { season: "ВЕСНА", title: "8 марта", subtitle: "Международный женский день", icon: Flower2, color: "from-pink-700/80 to-pink-800/80" },
+  { season: "ВЕСНА", title: "9 мая", subtitle: "День Победы", icon: Medal, color: "from-red-800/80 to-red-900/80" },
   { season: "ОСЕНЬ", title: "1 сентября", subtitle: "Кейс «Портфель с пятёрками»", icon: GraduationCap, color: "from-rose-800/80 to-rose-900/80" },
-  { season: "ЗИМА-ПИК", title: "Новый Год", icon: Snowflake, color: "from-blue-800/80 to-blue-900/80" },
-  { season: "ЗИМА", title: "23 февраля", icon: Gift, color: "from-slate-700/80 to-slate-800/80" },
-  { season: "ВЕСНА", title: "8 марта", icon: Flower2, color: "from-pink-700/80 to-pink-800/80" },
+  { season: "ЛЕТО", title: "День нефтяника", subtitle: "6 сентября", icon: Flame, color: "from-amber-800/80 to-amber-900/80" },
+  { season: "ПРОФСОЮЗЫ", title: "День профсоюзов", subtitle: "Забота о коллективе", icon: Users, color: "from-teal-800/80 to-teal-900/80" },
+  { season: "КРУГЛЫЙ ГОД", title: "День рождения", subtitle: "Персональный подарок", icon: Gift, color: "from-purple-800/80 to-purple-900/80" },
 ];
 
 const InfoCalendarSection = () => {
