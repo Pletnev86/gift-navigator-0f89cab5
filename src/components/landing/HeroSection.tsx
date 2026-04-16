@@ -68,7 +68,7 @@ const HeroSection = () => {
                   <path d="M2 12h32m0 0l-8-8m8 8l-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <div className="flex flex-col items-center">
-                  <img src={qrCode} alt="QR-код" className="w-20 h-20 rounded-lg" />
+                  <img src={qrCode} alt="QR-код" className="w-[104px] h-[104px] rounded-lg" />
                   <p className="text-[11px] text-muted-foreground font-heading mt-1">Протестируй</p>
                 </div>
               </div>
