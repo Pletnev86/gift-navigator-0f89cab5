@@ -11,14 +11,14 @@ import logoLetoile from "@/assets/logos/letoile.png";
 import logoCoral from "@/assets/logos/coral-travel.png";
 
 const logos = [
-  { src: logoZolotoe, alt: "Золотое Яблоко", top: "5%", right: "0%", floatDelay: 0 },
-  { src: logoSunlight, alt: "Sunlight", top: "18%", right: "-5%", floatDelay: 0.5 },
-  { src: logoPandora, alt: "Pandora", top: "35%", right: "2%", floatDelay: 1.2 },
-  { src: logoS7, alt: "S7 Airlines", top: "22%", right: "-12%", floatDelay: 0.8 },
-  { src: logoQuest, alt: "Quest Quest", top: "50%", right: "-8%", floatDelay: 1.5 },
-  { src: logoYves, alt: "Yves Rocher", top: "60%", right: "0%", floatDelay: 0.3 },
-  { src: logoLetoile, alt: "Л'Этуаль", top: "72%", right: "-6%", floatDelay: 1.0 },
-  { src: logoCoral, alt: "Coral Travel", top: "82%", right: "2%", floatDelay: 1.8 },
+  { src: logoZolotoe, alt: "Золотое Яблоко", top: "5%", right: "15%", floatDelay: 0 },
+  { src: logoSunlight, alt: "Sunlight", top: "18%", right: "10%", floatDelay: 0.5 },
+  { src: logoPandora, alt: "Pandora", top: "35%", right: "17%", floatDelay: 1.2 },
+  { src: logoS7, alt: "S7 Airlines", top: "22%", right: "3%", floatDelay: 0.8 },
+  { src: logoQuest, alt: "Quest Quest", top: "50%", right: "7%", floatDelay: 1.5 },
+  { src: logoYves, alt: "Yves Rocher", top: "60%", right: "15%", floatDelay: 0.3 },
+  { src: logoLetoile, alt: "Л'Этуаль", top: "72%", right: "9%", floatDelay: 1.0 },
+  { src: logoCoral, alt: "Coral Travel", top: "82%", right: "17%", floatDelay: 1.8 },
 ];
 
 const BirthdayExampleSection = () => {
