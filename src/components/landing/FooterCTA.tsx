@@ -6,6 +6,7 @@ import qrFooter from "@/assets/qr-footer.png";
 import girlCard from "@/assets/girl-card.jpg";
 import catChest from "@/assets/cat-chest.png";
 import RequestFormDialog from "./RequestFormDialog";
+import ChestRaffleDialog from "./ChestRaffleDialog";
 
 const FooterCTA = () => {
   const ref = useRef(null);
@@ -13,6 +14,7 @@ const FooterCTA = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [videoFailed, setVideoFailed] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
+  const [raffleOpen, setRaffleOpen] = useState(false);
 
   // Start muted for autoplay, unmute on first user interaction
   useEffect(() => {
@@ -143,7 +145,7 @@ const FooterCTA = () => {
                 style={{ background: "linear-gradient(135deg, hsl(40, 85%, 55%), hsl(30, 90%, 50%))" }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => setFormOpen(true)}
+                onClick={() => setRaffleOpen(true)}
               >
                 Посмотреть сундук
               </motion.button>
@@ -156,6 +158,7 @@ const FooterCTA = () => {
         </div>
       </div>
       <RequestFormDialog open={formOpen} onOpenChange={setFormOpen} />
+      <ChestRaffleDialog open={raffleOpen} onOpenChange={setRaffleOpen} />
     </section>
   );
 };
