@@ -69,7 +69,7 @@ const HRSection = () => {
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <div className="relative w-full max-w-md scale-[1.3] origin-center -z-0">
+            <div className="relative w-full max-w-md scale-[1.7] origin-center -z-0 -mt-[20%]">
               <img
                 src={hrCertificates}
                 alt="Электронный сертификат и каталог подарков За!Подарком"
