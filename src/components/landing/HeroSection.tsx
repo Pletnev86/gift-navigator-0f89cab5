@@ -52,14 +52,14 @@ const HeroSection = () => {
               <span className="badge-tag inline-block">Мультикарта ЗА!Подарком</span>
               <span className="text-muted-foreground font-heading font-semibold text-sm">Дарить — это легко!</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-4 text-foreground">
-              400+ брендов
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-4">
+              <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">400+ брендов</span>
             </h1>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-4 text-foreground">
               Одна карта
             </h1>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-4 text-foreground">
-              100% попадание
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-4">
+              <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 bg-clip-text text-transparent">100% попадание</span>
             </h1>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black leading-[0.95] tracking-tight mb-8 text-foreground">
               0 рисков
