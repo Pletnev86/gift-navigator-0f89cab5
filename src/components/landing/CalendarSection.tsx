@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import industryCards from "@/assets/industry-cards.jpg";
 
 const industries = [
   {
