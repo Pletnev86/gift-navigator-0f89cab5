@@ -77,19 +77,6 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
-            {/* Play video button */}
-            <div className="flex items-center gap-3 mt-4">
-              <motion.button
-                onClick={() => setVideoOpen(true)}
-                className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-foreground/20 hover:border-foreground/40 transition-colors"
-                style={{ background: "hsl(var(--lime))" }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Play className="w-6 h-6 text-foreground fill-foreground ml-0.5" />
-              </motion.button>
-              <span className="text-sm text-muted-foreground font-heading">Смотреть видео</span>
-            </div>
 
             <p className="mt-6 text-muted-foreground text-sm font-heading">
               За!Подарком | zapodarkom.ru
@@ -151,6 +138,18 @@ const HeroSection = () => {
                   <p className="text-white/30 text-[11px] font-heading tracking-wide">Выбирайте из 400+ брендов</p>
                 </div>
               </div>
+
+              {/* Play button overlay on phone */}
+              <motion.button
+                onClick={() => setVideoOpen(true)}
+                className="absolute inset-0 z-30 flex items-center justify-center"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl" style={{ background: "hsl(var(--lime))" }}>
+                  <Play className="w-7 h-7 text-foreground fill-foreground ml-0.5" />
+                </div>
+              </motion.button>
             </motion.div>
 
             {/* Floating brand pills around phone */}
