@@ -51,7 +51,7 @@ const FooterCTA = () => {
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <img src={qrFooter} alt="QR-код" className="w-28 h-28 rounded-xl" />
+                <img src={qrFooter} alt="QR-код" className="w-32 h-32 rounded-xl" />
                 <p className="text-xs text-muted-foreground font-heading text-center mt-1">Отсканируй QR</p>
               </motion.div>
             </div>
@@ -71,7 +71,7 @@ const FooterCTA = () => {
             <img
               src={girlCard}
               alt="Девушка с подарочной картой"
-              className="w-72 md:w-80 object-contain drop-shadow-2xl"
+              className="w-80 md:w-96 object-contain drop-shadow-2xl"
             />
           </motion.div>
         </div>
