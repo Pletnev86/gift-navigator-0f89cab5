@@ -4,12 +4,14 @@ import { ArrowRight } from "lucide-react";
 
 import qrFooter from "@/assets/qr-footer.png";
 import girlCard from "@/assets/girl-card.jpg";
+import RequestFormDialog from "./RequestFormDialog";
 
 const FooterCTA = () => {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [videoFailed, setVideoFailed] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
 
   const handleVideoClick = useCallback(() => {
     const video = videoRef.current;
@@ -52,6 +54,7 @@ const FooterCTA = () => {
                 className="cta-btn text-xl px-12 py-6"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
+                onClick={() => setFormOpen(true)}
               >
                 Оставить заявку
                 <ArrowRight className="w-6 h-6" />
@@ -106,6 +109,7 @@ const FooterCTA = () => {
           © {new Date().getFullYear()} За!Подарком. Все права защищены.
         </div>
       </div>
+      <RequestFormDialog open={formOpen} onOpenChange={setFormOpen} />
     </section>
   );
 };
