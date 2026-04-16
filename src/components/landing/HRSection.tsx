@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Mail, Package, Palette } from "lucide-react";
-import placeholderHR from "@/assets/placeholder-hr.jpg";
+import hrCertificates from "@/assets/hr-certificates.jpg";
 
 const features = [
   { icon: Mail, text: "Доставка электронного сертификата по Email" },
