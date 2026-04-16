@@ -17,7 +17,7 @@ const logos = [
   { src: logoS7, alt: "S7 Airlines", top: "32%", right: "3%", floatDelay: 0.8 },
   { src: logoQuest, alt: "Quest Quest", top: "50%", right: "7%", floatDelay: 1.5 },
   { src: logoYves, alt: "Yves Rocher", top: "60%", right: "15%", floatDelay: 0.3 },
-  { src: logoLetoile, alt: "Л'Этуаль", top: "72%", right: "-11%", floatDelay: 1.0 },
+  { src: logoLetoile, alt: "Л'Этуаль", top: "72%", right: "-6%", floatDelay: 1.0 },
   { src: logoCoral, alt: "Coral Travel", top: "82%", right: "17%", floatDelay: 1.8 },
 ];
 
