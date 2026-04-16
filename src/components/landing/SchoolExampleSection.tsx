@@ -54,7 +54,7 @@ const SchoolExampleSection = () => {
               key={logo.alt}
               src={logo.src}
               alt={logo.alt}
-className="absolute h-[3.74rem] md:h-[4.68rem] w-auto object-contain z-20 hidden lg:block cursor-pointer transition-transform duration-300 hover:translate-x-4 hover:scale-110"
+              className="absolute h-[3.74rem] md:h-[4.68rem] w-auto object-contain z-20 hidden lg:block cursor-pointer"
               style={{ top: logo.top, right: logo.right }}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? {
@@ -62,6 +62,7 @@ className="absolute h-[3.74rem] md:h-[4.68rem] w-auto object-contain z-20 hidden
                 scale: 1,
                 y: [0, -8, 0],
               } : {}}
+              whileHover={{ x: 20, scale: 1.15 }}
               transition={{
                 opacity: { duration: 0.4, delay: 0.5 + i * 0.1 },
                 scale: { duration: 0.4, delay: 0.5 + i * 0.1 },
