@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Play, X } from "lucide-react";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useState, useRef } from "react";
 import qrCode from "@/assets/qr-code.png";
 
 const floatAnimation = {
