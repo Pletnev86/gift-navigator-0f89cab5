@@ -44,7 +44,7 @@ const FlipCard = ({ event, i, inView }: { event: typeof events[0]; i: number; in
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.4, delay: i * 0.08 }}
-      onClick={() => setFlipped(!flipped)}
+      onClick={handleClick}
     >
       <motion.div
         className="relative min-h-[180px] md:min-h-[200px]"
