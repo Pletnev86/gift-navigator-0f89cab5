@@ -46,30 +46,12 @@ const TradeMarketingSection = () => {
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <div className="light-card w-full max-w-md p-8">
-              <h4 className="font-heading font-bold text-sm text-foreground mb-4 uppercase tracking-wide">
-                Периоды высокой активности
-              </h4>
-              <div className="flex items-end gap-2 h-40">
-                {[3, 5, 4, 6, 3, 7, 8, 10, 6, 4, 5, 9].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-t transition-all"
-                    style={{
-                      height: `${h * 10}%`,
-                      background: i >= 9 ? "hsl(var(--lime))" : "hsl(0 0% 85%)",
-                    }}
-                  />
-                ))}
-              </div>
-              <div className="flex justify-between mt-2 text-[10px] text-muted-foreground font-heading">
-                <span>Янв</span>
-                <span>Мар</span>
-                <span>Июн</span>
-                <span>Сен</span>
-                <span>Дек</span>
-              </div>
-            </div>
+            <img
+              src={seasonAnalysis}
+              alt="Периоды высокой активности — анализ сезонности"
+              className="w-full max-w-md rounded-2xl shadow-lg"
+              loading="lazy"
+            />
           </motion.div>
         </div>
       </div>
