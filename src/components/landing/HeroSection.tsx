@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Play, X } from "lucide-react";
+import { useState } from "react";
 import qrCode from "@/assets/qr-code.png";
 
 const floatAnimation = {
@@ -21,7 +22,10 @@ const brandPositions = [
 ];
 
 const HeroSection = () => {
+  const [videoOpen, setVideoOpen] = useState(false);
+
   return (
+    <>
     <section className="section-spacing min-h-screen flex items-center relative overflow-hidden">
       {/* Subtle background decoration */}
       <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-[hsl(var(--lime)/0.08)] blur-[120px] pointer-events-none" />
@@ -73,6 +77,20 @@ const HeroSection = () => {
                 </div>
               </div>
             </div>
+            {/* Play video button */}
+            <div className="flex items-center gap-3 mt-4">
+              <motion.button
+                onClick={() => setVideoOpen(true)}
+                className="w-14 h-14 rounded-full flex items-center justify-center border-2 border-foreground/20 hover:border-foreground/40 transition-colors"
+                style={{ background: "hsl(var(--lime))" }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Play className="w-6 h-6 text-foreground fill-foreground ml-0.5" />
+              </motion.button>
+              <span className="text-sm text-muted-foreground font-heading">Смотреть видео</span>
+            </div>
+
             <p className="mt-6 text-muted-foreground text-sm font-heading">
               За!Подарком | zapodarkom.ru
             </p>
@@ -163,6 +181,41 @@ const HeroSection = () => {
         </div>
       </div>
     </section>
+
+    {/* Video Modal */}
+    <AnimatePresence>
+      {videoOpen && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setVideoOpen(false)}
+        >
+          <motion.div
+            className="relative w-[90vw] max-w-4xl aspect-video"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setVideoOpen(false)}
+              className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <iframe
+              src="https://vk.com/video_ext.php?oid=-227352514&id=456239020&autoplay=1"
+              className="w-full h-full rounded-2xl"
+              allow="autoplay; encrypted-media; fullscreen"
+              allowFullScreen
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 };
 
