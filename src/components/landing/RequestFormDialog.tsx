@@ -9,9 +9,10 @@ import { Send } from "lucide-react";
 interface RequestFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  sourceId?: string;
 }
 
-const RequestFormDialog = ({ open, onOpenChange }: RequestFormDialogProps) => {
+const RequestFormDialog = ({ open, onOpenChange, sourceId = "unknown" }: RequestFormDialogProps) => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [loading, setLoading] = useState(false);
@@ -25,6 +26,7 @@ const RequestFormDialog = ({ open, onOpenChange }: RequestFormDialogProps) => {
     }
 
     setLoading(true);
+    console.log(`[analytics] form_submit | source: ${sourceId}`, form);
     setTimeout(() => {
       setLoading(false);
       toast({ title: "Заявка отправлена!", description: "Мы свяжемся с вами в ближайшее время." });
@@ -35,7 +37,7 @@ const RequestFormDialog = ({ open, onOpenChange }: RequestFormDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-background border-border">
+      <DialogContent className="sm:max-w-md bg-background border-border" data-form-id={sourceId}>
         <DialogHeader>
           <DialogTitle className="text-2xl font-black text-foreground">Оставить заявку</DialogTitle>
         </DialogHeader>

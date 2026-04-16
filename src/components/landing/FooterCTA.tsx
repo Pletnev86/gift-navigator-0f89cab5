@@ -157,8 +157,8 @@ const FooterCTA = () => {
           © {new Date().getFullYear()} За!Подарком. Все права защищены.
         </div>
       </div>
-      <RequestFormDialog open={formOpen} onOpenChange={setFormOpen} />
-      <ChestRaffleDialog open={raffleOpen} onOpenChange={setRaffleOpen} />
+      <RequestFormDialog open={formOpen} onOpenChange={setFormOpen} sourceId="footer-cta" />
+      <ChestRaffleDialog open={raffleOpen} onOpenChange={setRaffleOpen} sourceId="footer-chest-raffle" />
     </section>
   );
 };

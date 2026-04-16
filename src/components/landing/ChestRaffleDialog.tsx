@@ -10,9 +10,10 @@ import catChest from "@/assets/cat-chest.png";
 interface ChestRaffleDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  sourceId?: string;
 }
 
-const ChestRaffleDialog = ({ open, onOpenChange }: ChestRaffleDialogProps) => {
+const ChestRaffleDialog = ({ open, onOpenChange, sourceId = "chest-raffle" }: ChestRaffleDialogProps) => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,7 @@ const ChestRaffleDialog = ({ open, onOpenChange }: ChestRaffleDialogProps) => {
     }
 
     setLoading(true);
+    console.log(`[analytics] raffle_submit | source: ${sourceId}`, form);
     setTimeout(() => {
       setLoading(false);
       toast({ title: "Вы участвуете в розыгрыше! 🎉", description: "Удачи! Мы сообщим о результатах." });
@@ -36,7 +38,7 @@ const ChestRaffleDialog = ({ open, onOpenChange }: ChestRaffleDialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-background border-border">
+      <DialogContent className="sm:max-w-md bg-background border-border" data-form-id={sourceId}>
         <DialogHeader>
           <div className="flex items-center gap-3">
             <img src={catChest} alt="Кот с сундуком" className="w-16 h-16 object-contain" />
