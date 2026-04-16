@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Star, Snowflake, Gift, Flower2, Shield, Flame, Users, GraduationCap, Heart, Medal } from "lucide-react";
+import { Snowflake, Gift, Flower2, Shield, Flame, Users, GraduationCap, Medal } from "lucide-react";
 
 const events = [
   { season: "ЗИМА", title: "Новый Год", icon: Snowflake, color: "from-blue-800/80 to-blue-900/80" },
