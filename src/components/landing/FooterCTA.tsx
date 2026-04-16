@@ -31,7 +31,7 @@ const FooterCTA = () => {
             transition={{ duration: 0.7 }}
           >
             <h2 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-10 text-foreground italic">
-              Дарить подарки легко!
+              Дарить подарки <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">легко!</span>
             </h2>
 
             <ul className="space-y-4 mb-10">

@@ -58,7 +58,7 @@ const CalendarSection = () => {
           >
             <span className="badge-tag mb-6 inline-block">КАЛЕНДАРЬ ОТРАСЛЕВЫХ РЕШЕНИЙ</span>
             <h2 className="text-3xl md:text-5xl font-black leading-tight mb-6 text-foreground">
-              Сильные решения для сильных профи
+              Сильные решения для <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">сильных профи</span>
             </h2>
             <h3 className="text-2xl md:text-3xl font-black text-foreground mb-8">
               Сюжет в каждом подарке
