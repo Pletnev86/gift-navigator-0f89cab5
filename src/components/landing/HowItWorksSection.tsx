@@ -24,7 +24,7 @@ const HowItWorksSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-foreground inline-block px-6 py-2" style={{ background: "hsl(var(--lime))" }}>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-foreground inline-block px-6 py-2 rounded-2xl" style={{ background: "hsl(var(--lime))" }}>
             Как работает?
           </h2>
         </motion.div>
