@@ -181,6 +181,41 @@ const HeroSection = () => {
         </div>
       </div>
     </section>
+
+    {/* Video Modal */}
+    <AnimatePresence>
+      {videoOpen && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setVideoOpen(false)}
+        >
+          <motion.div
+            className="relative w-[90vw] max-w-4xl aspect-video"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setVideoOpen(false)}
+              className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            <iframe
+              src="https://vk.com/video_ext.php?oid=-227352514&id=456239020&autoplay=1"
+              className="w-full h-full rounded-2xl"
+              allow="autoplay; encrypted-media; fullscreen"
+              allowFullScreen
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 };
 
