@@ -22,7 +22,10 @@ const brandPositions = [
 ];
 
 const HeroSection = () => {
+  const [videoOpen, setVideoOpen] = useState(false);
+
   return (
+    <>
     <section className="section-spacing min-h-screen flex items-center relative overflow-hidden">
       {/* Subtle background decoration */}
       <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-[hsl(var(--lime)/0.08)] blur-[120px] pointer-events-none" />
