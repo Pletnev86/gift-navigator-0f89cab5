@@ -51,18 +51,29 @@ const HeroSection = () => {
           >
             <div className="relative">
               {/* Phone with card */}
-              <div className="w-80 h-[420px] rounded-3xl bg-muted flex items-center justify-center overflow-hidden relative">
+              <div className="w-80 h-[520px] rounded-[2.5rem] bg-gradient-to-b from-gray-900 to-gray-800 flex items-center justify-center overflow-hidden relative shadow-2xl border-[6px] border-gray-700">
+                {/* Phone notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-gray-900 rounded-b-2xl z-20" />
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
-                <div className="relative z-10 flex flex-col items-center gap-4">
+                <div className="relative z-10 flex flex-col items-center gap-6 px-4">
                   {/* Card visual */}
-                  <div className="w-64 h-40 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 shadow-xl p-5 flex flex-col justify-between text-white">
+                  <div className="w-64 h-40 rounded-2xl bg-gradient-to-br from-[#3B82F6] to-[#1D4ED8] shadow-2xl p-5 flex flex-col justify-between text-white transform -rotate-3 hover:rotate-0 transition-transform duration-500">
                     <div>
                       <p className="font-heading font-black text-xs tracking-widest opacity-80">МУЛЬТИКАРТА</p>
-                      <p className="font-heading font-black text-2xl mt-1">&gt;150 <span className="text-sm font-bold">БРЕНДОВ</span></p>
+                      <p className="font-heading font-black text-2xl mt-1">400+ <span className="text-sm font-bold">БРЕНДОВ</span></p>
                     </div>
-                    <p className="font-heading font-bold text-sm opacity-70">За!Подарком</p>
+                    <div className="flex justify-between items-end">
+                      <p className="font-heading font-bold text-sm opacity-70">За!Подарком</p>
+                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm" />
+                    </div>
                   </div>
-                  <p className="text-sm text-muted-foreground font-heading">это просто!</p>
+                  {/* App UI hint */}
+                  <div className="flex gap-2">
+                    {["Ozon", "WB", "Lamoda"].map((b) => (
+                      <span key={b} className="bg-white/10 backdrop-blur-sm text-white/80 px-3 py-1 rounded-full text-xs font-heading font-semibold">{b}</span>
+                    ))}
+                  </div>
+                  <p className="text-white/50 text-xs font-heading">Выбирайте из 400+ брендов</p>
                 </div>
               </div>
 
