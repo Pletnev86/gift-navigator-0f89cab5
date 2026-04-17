@@ -1,7 +1,6 @@
 /**
- * use-utm.ts v2.0
- * Расширенная аналитика источников трафика:
- * channel_group → channel_type → platform → source_detail
+ * use-utm.ts v2.1
+ * Расширенная аналитика: channel_group → channel_type → platform → click_id → search_query
  */
 
 // ─── Типы ────────────────────────────────────────────────────────────────────
@@ -77,6 +76,9 @@ export const CHANNEL_LABEL: Record<ChannelType, string> = {
   unknown:        "Не определён",
 };
 
+/** Тип click_id (идентификатор клика от рекламной системы) */
+export type ClickIdType = "yclid" | "gclid" | "vk_clickid" | "none";
+
 export interface UtmData {
   // UTM (из URL)
   utm_source:   string;
@@ -85,19 +87,26 @@ export interface UtmData {
   utm_content:  string;
   utm_term:     string;
 
+  // Click ID от рекламных систем (добавляется автоматически при клике)
+  click_id:      string;       // сам ID (yclid / gclid / vk_clickid)
+  click_id_type: ClickIdType;  // тип: yclid | gclid | vk_clickid | none
+
+  // Поисковый запрос (если зашли с поиска)
+  search_query: string;        // декодированный запрос из referrer
+
   // Технический контекст
   referrer:   string;
   page_url:   string;
   user_agent: string;
 
   // Расширенная классификация источника
-  channel_group: ChannelGroup;  // online | offline
-  channel_type:  ChannelType;   // детальный тип канала
-  channel_label: string;        // читаемое название для CRM
-  platform:      Platform;      // рекламная платформа / поисковик
+  channel_group: ChannelGroup;
+  channel_type:  ChannelType;
+  channel_label: string;
+  platform:      Platform;
 
   // Устройство
-  device_type: DeviceType;      // desktop | mobile | tablet
+  device_type: DeviceType;
 
   // Битрикс24
   bitrix_lead_source: string;
@@ -125,7 +134,9 @@ function detectPlatform(source: string, referrer: string): Platform {
 function detectChannelType(
   source: string,
   medium: string,
-  referrer: string
+  referrer: string,
+  hasYclid: boolean,
+  hasGclid: boolean,
 ): ChannelType {
   const s = source.toLowerCase();
   const m = medium.toLowerCase();
@@ -143,7 +154,10 @@ function detectChannelType(
   // Email
   if (m === "email" || s === "email")              return "email";
 
-  // Платный поиск
+  // Платный поиск — по click ID (даже если UTM не проставлены)
+  if (hasYclid || hasGclid)                        return "paid_search";
+
+  // Платный поиск — по UTM
   if (m === "cpc" || m === "ppc")                  return "paid_search";
 
   // Платная медийная реклама (соцсети)
@@ -177,6 +191,32 @@ function detectDeviceType(): DeviceType {
   return "desktop";
 }
 
+// ─── Вспомогательные: click ID и search query ────────────────────────────────
+
+function extractClickId(
+  params: URLSearchParams
+): { click_id: string; click_id_type: ClickIdType } {
+  const yclid      = params.get("yclid")      || "";
+  const gclid      = params.get("gclid")      || "";
+  const vk_clickid = params.get("vk_clickid") || "";
+
+  if (yclid)      return { click_id: yclid,      click_id_type: "yclid"      };
+  if (gclid)      return { click_id: gclid,      click_id_type: "gclid"      };
+  if (vk_clickid) return { click_id: vk_clickid, click_id_type: "vk_clickid" };
+  return           { click_id: "",              click_id_type: "none"       };
+}
+
+function extractSearchQuery(referrer: string): string {
+  try {
+    const url    = new URL(referrer);
+    const host   = url.hostname.toLowerCase();
+    // Яндекс: ?text=, Google: ?q=
+    if (host.includes("yandex"))  return decodeURIComponent(url.searchParams.get("text") || "");
+    if (host.includes("google"))  return decodeURIComponent(url.searchParams.get("q")    || "");
+  } catch {}
+  return "";
+}
+
 // ─── Главный хук ─────────────────────────────────────────────────────────────
 
 export function useUtm(): UtmData {
@@ -189,7 +229,14 @@ export function useUtm(): UtmData {
   const utm_content  = params.get("utm_content")  || "";
   const utm_term     = params.get("utm_term")     || "";
 
-  const channel_type  = detectChannelType(utm_source, utm_medium, referrer);
+  const { click_id, click_id_type } = extractClickId(params);
+  const search_query = utm_term || extractSearchQuery(referrer);
+
+  const channel_type  = detectChannelType(
+    utm_source, utm_medium, referrer,
+    click_id_type === "yclid",
+    click_id_type === "gclid"
+  );
   const channel_group = detectChannelGroup(channel_type);
   const channel_label = CHANNEL_LABEL[channel_type];
   const platform      = detectPlatform(utm_source, referrer);
@@ -198,11 +245,10 @@ export function useUtm(): UtmData {
   const bitrix_lead_source = BITRIX_LEAD_SOURCE[channel_type];
   const bitrix_tag = utm_campaign || utm_source || channel_type;
 
-  // Читаемое название канала для поля pipeline Битрикс24
   const bitrix_channel =
     channel_group === "offline" ? "OFFLINE" :
-    channel_type === "paid_search" ? "PAID_SEARCH" :
-    channel_type === "organic_search" ? "ORGANIC_SEARCH" :
+    channel_type  === "paid_search"    ? "PAID_SEARCH"    :
+    channel_type  === "organic_search" ? "ORGANIC_SEARCH" :
     channel_type.toUpperCase();
 
   return {
@@ -211,6 +257,9 @@ export function useUtm(): UtmData {
     utm_campaign,
     utm_content,
     utm_term,
+    click_id,
+    click_id_type,
+    search_query,
     referrer,
     page_url:    window.location.href,
     user_agent:  navigator.userAgent,

@@ -1,6 +1,6 @@
 /**
- * analytics.ts v2.0 — отправка заявок на Yandex Cloud Function.
- * Полный JSON payload: 7 блоков аналитики.
+ * analytics.ts v2.1 — отправка заявок на Yandex Cloud Function (webhook).
+ * Полный JSON payload v2.1: 7 блоков аналитики + click_id + search_query.
  */
 
 import type { UtmData } from "@/hooks/use-utm";
@@ -22,9 +22,9 @@ export interface ContactData {
   email: string;
 }
 
-/** Полный payload JSON v2.0 */
+/** Полный payload JSON v2.1 */
 export interface LeadPayload {
-  _version: "2.0";
+  _version: "2.1";
 
   // Блок 1: Форма
   form_type:    FormType;
@@ -44,16 +44,19 @@ export interface LeadPayload {
   utm_content:  string;
   utm_term:     string;
 
-  // Блок 4: Расширенная классификация источника
+  // Блок 4: Click ID от рекламных систем
+  click_id:      string;   // yclid / gclid / vk_clickid / ""
+  click_id_type: string;   // "yclid" | "gclid" | "vk_clickid" | "none"
+  search_query:  string;   // поисковый запрос (если есть)
+
+  // Блок 5: Расширенная классификация источника
   channel_group: string;   // online | offline
   channel_type:  string;   // paid_search | qr_exhibition | ...
   channel_label: string;   // читаемое название для CRM
   platform:      string;   // yandex | google | vk | none | ...
 
-  // Блок 5: Устройство
-  device_type: string;     // desktop | mobile | tablet
-
-  // Блок 6: Технический контекст
+  // Блок 6: Устройство и техника
+  device_type:  string;    // desktop | mobile | tablet
   referrer:     string;
   page_url:     string;
   user_agent:   string;
@@ -72,7 +75,7 @@ export async function submitLead(
   utm:     UtmData
 ): Promise<{ ok: boolean }> {
   const payload: LeadPayload = {
-    _version: "2.0",
+    _version: "2.1",
 
     form_type:    meta.form_type,
     form_id:      meta.form_id,
@@ -88,6 +91,10 @@ export async function submitLead(
     utm_campaign: utm.utm_campaign,
     utm_content:  utm.utm_content,
     utm_term:     utm.utm_term,
+
+    click_id:      utm.click_id,
+    click_id_type: utm.click_id_type,
+    search_query:  utm.search_query,
 
     channel_group: utm.channel_group,
     channel_type:  utm.channel_type,
