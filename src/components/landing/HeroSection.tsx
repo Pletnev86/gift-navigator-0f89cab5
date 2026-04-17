@@ -227,7 +227,14 @@ const HeroSection = () => {
         </motion.div>
       )}
     </AnimatePresence>
-    <RequestFormDialog open={formOpen} onOpenChange={setFormOpen} sourceId="hero-cta" />
+    <RequestFormDialog
+      open={formOpen}
+      onOpenChange={setFormOpen}
+      sourceId="hero-cta"
+      section="hero"
+      buttonLabel="Оставить заявку"
+      formType="purchase_request"
+    />
     </>
   );
 };

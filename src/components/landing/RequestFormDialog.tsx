@@ -3,21 +3,38 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useUtm } from "@/hooks/use-utm";
+import { submitLead, type FormType } from "@/lib/analytics";
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 
 interface RequestFormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /** Уникальный ID кнопки/раздела — см. карту form_id в документации */
   sourceId?: string;
+  /** Раздел лендинга: hero | footer | hr | trade | calendar */
+  section?: string;
+  /** Текст кнопки, которая открыла форму */
+  buttonLabel?: string;
+  /** Тип заявки */
+  formType?: FormType;
 }
 
-const RequestFormDialog = ({ open, onOpenChange, sourceId = "unknown" }: RequestFormDialogProps) => {
+const RequestFormDialog = ({
+  open,
+  onOpenChange,
+  sourceId      = "unknown",
+  section       = "unknown",
+  buttonLabel   = "Оставить заявку",
+  formType      = "purchase_request",
+}: RequestFormDialogProps) => {
   const { toast } = useToast();
+  const utm = useUtm();
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!form.name.trim() || !form.phone.trim() || !form.email.trim()) {
@@ -26,26 +43,59 @@ const RequestFormDialog = ({ open, onOpenChange, sourceId = "unknown" }: Request
     }
 
     setLoading(true);
-    console.log(`[analytics] form_submit | source: ${sourceId}`, form);
-    setTimeout(() => {
-      setLoading(false);
-      toast({ title: "Заявка отправлена!", description: "Мы свяжемся с вами в ближайшее время." });
+    try {
+      await submitLead(
+        {
+          form_type:    formType,
+          form_id:      sourceId,
+          section,
+          button_label: buttonLabel,
+        },
+        { name: form.name, phone: form.phone, email: form.email },
+        utm
+      );
+      toast({
+        title: "Заявка отправлена! ✅",
+        description: "Мы свяжемся с вами в ближайшее время.",
+      });
       setForm({ name: "", phone: "", email: "" });
       onOpenChange(false);
-    }, 800);
+    } catch (err) {
+      console.error("[analytics] submitLead error:", err);
+      toast({
+        title: "Ошибка отправки",
+        description: "Попробуйте ещё раз или напишите нам напрямую.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-background border-border" data-form-id={sourceId}>
+      <DialogContent
+        className="sm:max-w-md bg-background border-border"
+        data-form-id={sourceId}
+        data-form-type={formType}
+      >
         <DialogHeader>
-          <DialogTitle className="text-2xl font-black text-foreground">Оставить заявку</DialogTitle>
+          <DialogTitle className="text-2xl font-black text-foreground">
+            {formType === "test_access"
+              ? "Получить тестовый сертификат"
+              : "Оставить заявку"}
+          </DialogTitle>
+          {formType === "test_access" && (
+            <p className="text-sm text-muted-foreground mt-1">
+              Заполните форму — мы пришлём тестовый сертификат на вашу почту автоматически.
+            </p>
+          )}
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-5 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-foreground">Имя</Label>
+            <Label htmlFor="req-name" className="text-foreground">Имя</Label>
             <Input
-              id="name"
+              id="req-name"
               placeholder="Ваше имя"
               value={form.name}
               onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
@@ -54,9 +104,9 @@ const RequestFormDialog = ({ open, onOpenChange, sourceId = "unknown" }: Request
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phone" className="text-foreground">Телефон</Label>
+            <Label htmlFor="req-phone" className="text-foreground">Телефон</Label>
             <Input
-              id="phone"
+              id="req-phone"
               type="tel"
               placeholder="+7 (___) ___-__-__"
               value={form.phone}
@@ -66,9 +116,9 @@ const RequestFormDialog = ({ open, onOpenChange, sourceId = "unknown" }: Request
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-foreground">Email</Label>
+            <Label htmlFor="req-email" className="text-foreground">Email</Label>
             <Input
-              id="email"
+              id="req-email"
               type="email"
               placeholder="email@example.com"
               value={form.email}

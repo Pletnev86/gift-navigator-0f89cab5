@@ -3,6 +3,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useUtm } from "@/hooks/use-utm";
+import { submitLead } from "@/lib/analytics";
 import { motion } from "framer-motion";
 import { Gift } from "lucide-react";
 import catChest from "@/assets/cat-chest.png";
@@ -10,15 +12,24 @@ import catChest from "@/assets/cat-chest.png";
 interface ChestRaffleDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /** Уникальный ID кнопки/раздела */
   sourceId?: string;
+  /** Раздел лендинга */
+  section?: string;
 }
 
-const ChestRaffleDialog = ({ open, onOpenChange, sourceId = "chest-raffle" }: ChestRaffleDialogProps) => {
+const ChestRaffleDialog = ({
+  open,
+  onOpenChange,
+  sourceId = "footer-chest-raffle",
+  section  = "footer",
+}: ChestRaffleDialogProps) => {
   const { toast } = useToast();
+  const utm = useUtm();
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!form.name.trim() || !form.phone.trim() || !form.email.trim()) {
@@ -27,27 +38,55 @@ const ChestRaffleDialog = ({ open, onOpenChange, sourceId = "chest-raffle" }: Ch
     }
 
     setLoading(true);
-    console.log(`[analytics] raffle_submit | source: ${sourceId}`, form);
-    setTimeout(() => {
-      setLoading(false);
-      toast({ title: "Вы участвуете в розыгрыше! 🎉", description: "Удачи! Мы сообщим о результатах." });
+    try {
+      await submitLead(
+        {
+          form_type:    "test_access",
+          form_id:      sourceId,
+          section,
+          button_label: "Собрать мою витрину",
+        },
+        { name: form.name, phone: form.phone, email: form.email },
+        utm
+      );
+      toast({
+        title: "🎉 Заявка принята!",
+        description: "Тестовый сертификат придёт на вашу почту автоматически.",
+      });
       setForm({ name: "", phone: "", email: "" });
       onOpenChange(false);
-    }, 800);
+    } catch (err) {
+      console.error("[analytics] ChestRaffle submitLead error:", err);
+      toast({
+        title: "Ошибка отправки",
+        description: "Попробуйте ещё раз или напишите нам напрямую.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-background border-border" data-form-id={sourceId}>
+      <DialogContent
+        className="sm:max-w-md bg-background border-border"
+        data-form-id={sourceId}
+        data-form-type="test_access"
+      >
         <DialogHeader>
           <div className="flex items-center gap-3">
             <img src={catChest} alt="Кот с сундуком" className="w-16 h-16 object-contain" />
-            <DialogTitle className="text-2xl font-black text-foreground">Розыгрыш призов</DialogTitle>
+            <div>
+              <DialogTitle className="text-2xl font-black text-foreground">
+                Тестовый сертификат
+              </DialogTitle>
+              <p className="text-sm text-muted-foreground mt-1">
+                Заполните форму — сертификат придёт на почту автоматически.
+              </p>
+            </div>
           </div>
         </DialogHeader>
-        <p className="text-muted-foreground text-sm">
-          Заполните форму и примите участие в розыгрыше ценных подарков!
-        </p>
         <form onSubmit={handleSubmit} className="space-y-5 mt-2">
           <div className="space-y-2">
             <Label htmlFor="raffle-name" className="text-foreground">Имя</Label>
@@ -92,7 +131,7 @@ const ChestRaffleDialog = ({ open, onOpenChange, sourceId = "chest-raffle" }: Ch
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            {loading ? "Отправка..." : "Принять участие в розыгрыше призов"}
+            {loading ? "Отправка..." : "Получить тестовый сертификат"}
             <Gift className="w-5 h-5" />
           </motion.button>
         </form>

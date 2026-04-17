@@ -172,8 +172,20 @@ const FooterCTA = () => {
           © {new Date().getFullYear()} За!Подарком. Все права защищены.
         </div>
       </div>
-      <RequestFormDialog open={formOpen} onOpenChange={setFormOpen} sourceId="footer-cta" />
-      <ChestRaffleDialog open={raffleOpen} onOpenChange={setRaffleOpen} sourceId="footer-chest-raffle" />
+      <RequestFormDialog
+        open={formOpen}
+        onOpenChange={setFormOpen}
+        sourceId="footer-cta"
+        section="footer"
+        buttonLabel="Оставить заявку"
+        formType="purchase_request"
+      />
+      <ChestRaffleDialog
+        open={raffleOpen}
+        onOpenChange={setRaffleOpen}
+        sourceId="footer-chest-raffle"
+        section="footer"
+      />
     </section>
   );
 };

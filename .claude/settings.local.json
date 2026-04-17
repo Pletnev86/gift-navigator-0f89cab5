@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git clone *)",
+      "Bash(cp -r C:/gift-navigator-temp/. C:/gift-navigator/)",
+      "Bash(rm -rf C:/gift-navigator-temp)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:8080 -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:5173 -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:8080)",
+      "Bash(pkill -f \"vite\")",
+      "Bash(curl -s http://localhost:3000 -o /dev/null -w \"%{http_code}\")",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill //F //IM node.exe)"
+    ]
+  }
+}
