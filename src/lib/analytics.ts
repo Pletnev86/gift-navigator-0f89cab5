@@ -1,6 +1,6 @@
 /**
- * analytics.ts — отправка заявок на Yandex Cloud Function (webhook).
- * Вся аналитика собирается здесь в единый JSON payload версии 1.0.
+ * analytics.ts v2.0 — отправка заявок на Yandex Cloud Function.
+ * Полный JSON payload: 7 блоков аналитики.
  */
 
 import type { UtmData } from "@/hooks/use-utm";
@@ -11,9 +11,9 @@ export type FormType = "purchase_request" | "test_access";
 
 export interface FormMeta {
   form_type:    FormType;
-  form_id:      string;   // уникальный ID кнопки/формы
-  section:      string;   // раздел лендинга: hero | footer | hr | trade | calendar
-  button_label: string;   // текст кнопки (для читаемости в CRM)
+  form_id:      string;
+  section:      string;
+  button_label: string;
 }
 
 export interface ContactData {
@@ -22,11 +22,11 @@ export interface ContactData {
   email: string;
 }
 
-/** Полный payload — JSON v1.0 */
+/** Полный payload JSON v2.0 */
 export interface LeadPayload {
-  _version: "1.0";
+  _version: "2.0";
 
-  // Блок 1: Идентификация формы
+  // Блок 1: Форма
   form_type:    FormType;
   form_id:      string;
   section:      string;
@@ -44,69 +44,71 @@ export interface LeadPayload {
   utm_content:  string;
   utm_term:     string;
 
-  // Блок 4: Расчётный источник трафика
-  traffic_source: string;
+  // Блок 4: Расширенная классификация источника
+  channel_group: string;   // online | offline
+  channel_type:  string;   // paid_search | qr_exhibition | ...
+  channel_label: string;   // читаемое название для CRM
+  platform:      string;   // yandex | google | vk | none | ...
 
-  // Блок 5: Технический контекст
+  // Блок 5: Устройство
+  device_type: string;     // desktop | mobile | tablet
+
+  // Блок 6: Технический контекст
   referrer:     string;
   page_url:     string;
   user_agent:   string;
   submitted_at: string;
 
-  // Блок 6: Битрикс24
+  // Блок 7: Битрикс24
   bitrix_lead_source: string;
+  bitrix_channel:     string;
   bitrix_pipeline:    string;
   bitrix_tag:         string;
 }
 
-/**
- * Собирает payload и отправляет POST на API.
- * Возвращает { ok: true } или бросает ошибку.
- */
 export async function submitLead(
-  meta: FormMeta,
+  meta:    FormMeta,
   contact: ContactData,
-  utm: UtmData
-): Promise<{ ok: boolean; message?: string }> {
+  utm:     UtmData
+): Promise<{ ok: boolean }> {
   const payload: LeadPayload = {
-    _version: "1.0",
+    _version: "2.0",
 
-    // Форма
     form_type:    meta.form_type,
     form_id:      meta.form_id,
     section:      meta.section,
     button_label: meta.button_label,
 
-    // Контакт
     name:  contact.name.trim(),
     phone: contact.phone.trim(),
     email: contact.email.trim(),
 
-    // UTM
     utm_source:   utm.utm_source,
     utm_medium:   utm.utm_medium,
     utm_campaign: utm.utm_campaign,
     utm_content:  utm.utm_content,
     utm_term:     utm.utm_term,
 
-    // Источник
-    traffic_source: utm.traffic_source,
+    channel_group: utm.channel_group,
+    channel_type:  utm.channel_type,
+    channel_label: utm.channel_label,
+    platform:      utm.platform,
 
-    // Техника
+    device_type: utm.device_type,
+
     referrer:     utm.referrer,
     page_url:     utm.page_url,
     user_agent:   utm.user_agent,
     submitted_at: new Date().toISOString(),
 
-    // Битрикс24
     bitrix_lead_source: utm.bitrix_lead_source,
+    bitrix_channel:     utm.bitrix_channel,
     bitrix_pipeline:    utm.bitrix_pipeline,
     bitrix_tag:         utm.bitrix_tag,
   };
 
-  // Логируем в dev-режиме для отладки
   if (import.meta.env.DEV) {
-    console.groupCollapsed(`[analytics] submitLead → ${meta.form_id}`);
+    console.groupCollapsed(`[analytics v2] submitLead → ${meta.form_id}`);
     console.log(JSON.stringify(payload, null, 2));
     console.groupEnd();
   }
