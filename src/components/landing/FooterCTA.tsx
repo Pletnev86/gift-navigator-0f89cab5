@@ -82,7 +82,7 @@ const FooterCTA = () => {
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setFormOpen(true)}
               >
-                Оставить заявку
+                Собрать свою витрину
                 <ArrowRight className="w-6 h-6" />
               </motion.button>
 
@@ -162,7 +162,7 @@ const FooterCTA = () => {
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setRaffleOpen(true)}
               >
-                Собрать мою витрину
+                Открыть сундук
               </motion.button>
             </div>
           </motion.div>
