@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,6 +33,7 @@ const RequestFormDialog = ({
   const utm = useUtm();
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
   const [loading, setLoading] = useState(false);
+  const baseId = useId();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -93,9 +94,9 @@ const RequestFormDialog = ({
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-5 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="req-name" className="text-foreground">Имя</Label>
+            <Label htmlFor={`${baseId}-name`} className="text-foreground">Имя</Label>
             <Input
-              id="req-name"
+              id={`${baseId}-name`}
               placeholder="Ваше имя"
               value={form.name}
               onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
@@ -104,9 +105,9 @@ const RequestFormDialog = ({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="req-phone" className="text-foreground">Телефон</Label>
+            <Label htmlFor={`${baseId}-phone`} className="text-foreground">Телефон</Label>
             <Input
-              id="req-phone"
+              id={`${baseId}-phone`}
               type="tel"
               placeholder="+7 (___) ___-__-__"
               value={form.phone}
@@ -116,9 +117,9 @@ const RequestFormDialog = ({
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="req-email" className="text-foreground">Email</Label>
+            <Label htmlFor={`${baseId}-email`} className="text-foreground">Email</Label>
             <Input
-              id="req-email"
+              id={`${baseId}-email`}
               type="email"
               placeholder="email@example.com"
               value={form.email}
