@@ -5,7 +5,7 @@
 
 import type { UtmData } from "@/hooks/use-utm";
 
-const API_ENDPOINT = "https://functions.yandexcloud.net/d4egoeg3pj9n6tvunkrq";
+const API_ENDPOINT = "/api/lead";
 
 export type FormType = "purchase_request" | "test_access";
 
@@ -122,20 +122,15 @@ export async function submitLead(
     console.groupEnd();
   }
 
-  // Используем no-cors, чтобы обойти CORS-ограничения браузера.
-  // В этом режиме браузер не читает ответ, но запрос доходит до сервера.
-  try {
-    await fetch(API_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body,
-      mode: "no-cors",
-      keepalive: true,
-    });
-  } catch {
-    // Fallback: sendBeacon гарантирует доставку даже при закрытии страницы
-    const blob = new Blob([body], { type: "application/json" });
-    navigator.sendBeacon(API_ENDPOINT, blob);
+  const response = await fetch(API_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body,
+  });
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "no body");
+    throw new Error(`API ${response.status}: ${text}`);
   }
 
   return { ok: true };
