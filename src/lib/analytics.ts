@@ -114,21 +114,28 @@ export async function submitLead(
     bitrix_tag:         utm.bitrix_tag,
   };
 
+  const body = JSON.stringify(payload);
+
   if (import.meta.env.DEV) {
     console.groupCollapsed(`[analytics v2] submitLead → ${meta.form_id}`);
-    console.log(JSON.stringify(payload, null, 2));
+    console.log(body);
     console.groupEnd();
   }
 
-  const response = await fetch(API_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-
-  if (!response.ok) {
-    const text = await response.text().catch(() => "no body");
-    throw new Error(`API ${response.status}: ${text}`);
+  // Используем no-cors, чтобы обойти CORS-ограничения браузера.
+  // В этом режиме браузер не читает ответ, но запрос доходит до сервера.
+  try {
+    await fetch(API_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+      mode: "no-cors",
+      keepalive: true,
+    });
+  } catch {
+    // Fallback: sendBeacon гарантирует доставку даже при закрытии страницы
+    const blob = new Blob([body], { type: "application/json" });
+    navigator.sendBeacon(API_ENDPOINT, blob);
   }
 
   return { ok: true };
