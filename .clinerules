@@ -1,0 +1,45 @@
+# Project Rules & Context (AI Agent Guidelines)
+
+You are an AI assistant helping to build the **Gift Navigator B2B Landing Page**.
+
+## 🎯 Core Project Goal
+Capturing B2B leads and sending them to a Yandex Cloud Function through a Node.js proxy server.
+
+## 🏗 System Architecture
+1. **Frontend**: Vite + React + TypeScript.
+2. **Proxy Backend**: `server.js` (Express). 
+   - **Crucial**: All lead requests MUST go to `/api/lead` on the local/production server.
+   - The proxy injects `X-API-Key` and forwards to `https://functions.yandexcloud.net/d4egoeg3pj9n6tvunkrq`.
+   - **Do NOT** use `http-proxy-middleware`. Use the native `fetch` implementation currently in `server.js` to avoid 204 errors and encoding issues.
+
+## 📊 Analytics Protocol (v2.1)
+The project uses a strict JSON payload structure (v2.1) for leads. See `src/lib/analytics.ts` for the interface. 
+This structure is the "Contract" with the Yandex Cloud Function. DO NOT CHANGE the field names.
+
+### 🧩 Bitrix24 Integration Details
+- **Mapping**: The Yandex Function (created by the tech team/Ananyev) expects specific fields to map leads into Bitrix24 pipelines.
+- **Critical Fields**: 
+  - `bitrix_lead_source`, `bitrix_channel`: Determine the source in CRM.
+  - `bitrix_pipeline`: Set to `b2b_inbound` for this project.
+  - `bitrix_tag`: Used for filtering leads in Bitrix.
+  - `consents`: 3 new boolean fields (`consent_offer`, `consent_privacy`, `consent_marketing`) must be passed to the CRM to comply with Law 152-FZ.
+- **Duplicate Prevention**: CRM logic is handled on the Yandex/Bitrix side, but the frontend must always send clean, trimmed strings.
+
+## 🛠 Tech Guidelines & Critical Nuances
+- **Character Encoding**: Russian characters ("Cyrillic") are critical. `server.js` and `analytics.ts` MUST specify `charset=utf-8` in headers to prevent "???" in CRM.
+- **Proxy Implementation**: 
+  - **DANGER**: In the past, `http-proxy-middleware` caused `204 No Content` errors and blocked POST bodies. 
+  - **RULE**: Use the manual `fetch` proxy in `server.js`. It reads `req.body` and re-builts the request to Yandex.
+- **Environment Variables**: `YANDEX_API_KEY` must be set in the environment (Render). Do not hardcode secrets.
+- **Styling**: Vanilla CSS / Tailwind (if requested). Currently using a mix of CSS modules and custom UI components in `src/components/ui`.
+- **Animations**: Use `framer-motion`.
+- **Icons**: Use `lucide-react`.
+- **SEO**: The site is currently set to `noindex, nofollow` via `index.html` and `robots.txt` to protect the MVP. Do not remove this without explicit user request.
+
+## 📂 Key Files to Always Check
+- `server.js`: API proxy logic.
+- `src/lib/analytics.ts`: Data transmission logic.
+- `README_CONTEXT.md`: High-level summary of the latest progress.
+
+---
+*Any AI agent opening this repo should read this file first to maintain architecture integrity.*
