@@ -5,7 +5,6 @@
  */
 
 import express from "express";
-import { createProxyMiddleware } from "http-proxy-middleware";
 import { fileURLToPath } from "url";
 import path from "path";
 
@@ -13,25 +12,43 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const YANDEX_FUNCTION_URL = "https://functions.yandexcloud.net";
-const YANDEX_FUNCTION_ID  = "d4egoeg3pj9n6tvunkrq";
+const YANDEX_FUNCTION_URL = "https://functions.yandexcloud.net/d4egoeg3pj9n6tvunkrq";
 const API_KEY = process.env.YANDEX_API_KEY || "vhPz31Lg6UqZwOdGgWT9eIPJ9U7C8mScPwY5vLDRcBpsMLv4cojpKxXrWbgHWZUr";
 
-// Прокси /api/lead → Yandex Cloud Function
-app.use(
-  "/api/lead",
-  createProxyMiddleware({
-    target: YANDEX_FUNCTION_URL,
-    changeOrigin: true,
-    pathRewrite: { "^/api/lead": `/${YANDEX_FUNCTION_ID}` },
-    on: {
-      proxyReq: (proxyReq) => {
-        proxyReq.setHeader("X-API-Key", API_KEY);
-        proxyReq.setHeader("Content-Type", "application/json; charset=utf-8");
+// Парсим JSON из body (необходимо для чтения лида)
+app.use(express.json());
+
+// Настраиваем CORS и перехватываем OPTIONS (Preflight запросы браузера)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-API-Key");
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+  next();
+});
+
+// Ручное проксирование POST /api/lead → Yandex Cloud Function
+app.post("/api/lead", async (req, res) => {
+  try {
+    const yandexResponse = await fetch(YANDEX_FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "X-API-Key": API_KEY,
+        "Content-Type": "application/json; charset=utf-8" // Жестко ставим UTF-8 для починки ???
       },
-    },
-  })
-);
+      body: JSON.stringify(req.body),
+    });
+    
+    // Получаем ответ Яндекса и отдаем его браузеру
+    const data = await yandexResponse.text();
+    res.status(yandexResponse.status).send(data);
+  } catch (error) {
+    console.error("Proxy fetch error:", error);
+    res.status(500).json({ error: "Internal Server Error during proxying to Yandex" });
+  }
+});
 
 // Статика из dist/
 app.use(express.static(path.join(__dirname, "dist")));
