@@ -27,7 +27,7 @@ app.use(
     on: {
       proxyReq: (proxyReq) => {
         proxyReq.setHeader("X-API-Key", API_KEY);
-        proxyReq.setHeader("Content-Type", "application/json");
+        proxyReq.setHeader("Content-Type", "application/json; charset=utf-8");
       },
     },
   })

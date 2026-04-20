@@ -124,7 +124,7 @@ export async function submitLead(
 
   const response = await fetch(API_ENDPOINT, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json; charset=utf-8" },
     body,
   });
 
