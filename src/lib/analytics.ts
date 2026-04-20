@@ -20,6 +20,11 @@ export interface ContactData {
   name:  string;
   phone: string;
   email: string;
+  consents: {
+    offer: boolean;
+    privacy: boolean;
+    marketing: boolean;
+  };
 }
 
 /** Полный payload JSON v2.1 */
@@ -67,6 +72,11 @@ export interface LeadPayload {
   bitrix_channel:     string;
   bitrix_pipeline:    string;
   bitrix_tag:         string;
+
+  // Блок 8: Юридические согласия
+  consent_offer:      boolean;
+  consent_privacy:    boolean;
+  consent_marketing:  boolean;
 }
 
 export async function submitLead(
@@ -112,6 +122,10 @@ export async function submitLead(
     bitrix_channel:     utm.bitrix_channel,
     bitrix_pipeline:    utm.bitrix_pipeline,
     bitrix_tag:         utm.bitrix_tag,
+
+    consent_offer:      contact.consents.offer,
+    consent_privacy:    contact.consents.privacy,
+    consent_marketing:  contact.consents.marketing,
   };
 
   const body = JSON.stringify(payload);

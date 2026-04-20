@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { useUtm } from "@/hooks/use-utm";
 import { submitLead } from "@/lib/analytics";
@@ -27,6 +28,11 @@ const ChestRaffleDialog = ({
   const { toast } = useToast();
   const utm = useUtm();
   const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [consents, setConsents] = useState({
+    offer: false,
+    privacy: false,
+    marketing: true,
+  });
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,6 +40,14 @@ const ChestRaffleDialog = ({
 
     if (!form.name.trim() || !form.phone.trim() || !form.email.trim()) {
       toast({ title: "Заполните все поля", variant: "destructive" });
+      return;
+    }
+    if (!consents.offer || !consents.privacy) {
+      toast({ 
+        title: "Необходимо согласие с условиями", 
+        description: "Пожалуйста, примите оферту и политику конфиденциальности", 
+        variant: "destructive" 
+      });
       return;
     }
 
@@ -46,7 +60,12 @@ const ChestRaffleDialog = ({
           section,
           button_label: "Собрать мою витрину",
         },
-        { name: form.name, phone: form.phone, email: form.email },
+        { 
+          name: form.name, 
+          phone: form.phone, 
+          email: form.email,
+          consents: consents
+        },
         utm
       );
       toast({
@@ -122,6 +141,51 @@ const ChestRaffleDialog = ({
               maxLength={255}
               className="bg-muted/50 border-border"
             />
+          </div>
+
+          <div className="space-y-3 pt-1">
+            <div className="flex items-start space-x-3">
+              <Checkbox
+                id="raffle-offer"
+                checked={consents.offer}
+                onCheckedChange={(c) => setConsents((prev) => ({ ...prev, offer: c === true }))}
+                className="mt-1"
+              />
+              <Label htmlFor="raffle-offer" className="text-xs font-normal text-muted-foreground leading-snug cursor-pointer">
+                Я согласен с условиями{" "}
+                <a href="/offer" className="text-primary hover:underline" target="_blank" rel="noreferrer">
+                  Оферты
+                </a>
+              </Label>
+            </div>
+            
+            <div className="flex items-start space-x-3">
+              <Checkbox
+                id="raffle-privacy"
+                checked={consents.privacy}
+                onCheckedChange={(c) => setConsents((prev) => ({ ...prev, privacy: c === true }))}
+                className="mt-1"
+              />
+              <Label htmlFor="raffle-privacy" className="text-xs font-normal text-muted-foreground leading-snug cursor-pointer">
+                Я согласен на обработку моих персональных данных. С{" "}
+                <a href="/privacy" className="text-primary hover:underline" target="_blank" rel="noreferrer">
+                  Политикой
+                </a>{" "}
+                ознакомлен.
+              </Label>
+            </div>
+
+            <div className="flex items-start space-x-3">
+              <Checkbox
+                id="raffle-marketing"
+                checked={consents.marketing}
+                onCheckedChange={(c) => setConsents((prev) => ({ ...prev, marketing: c === true }))}
+                className="mt-1"
+              />
+              <Label htmlFor="raffle-marketing" className="text-xs font-normal text-muted-foreground leading-snug cursor-pointer">
+                Я согласен на получение рекламных рассылок
+              </Label>
+            </div>
           </div>
           <motion.button
             type="submit"
