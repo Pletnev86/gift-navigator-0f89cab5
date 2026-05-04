@@ -12,6 +12,7 @@ import NewYearExampleSection from "@/components/landing/NewYearExampleSection";
 import SeasonSection from "@/components/landing/SeasonSection";
 import SchoolExampleSection from "@/components/landing/SchoolExampleSection";
 import FooterCTA from "@/components/landing/FooterCTA";
+import PromoPopup from "@/components/landing/promo/PromoPopup";
 
 const Index = () => {
   return (
@@ -30,6 +31,7 @@ const Index = () => {
       <SeasonSection />
       <SchoolExampleSection />
       <FooterCTA />
+      <PromoPopup />
     </main>
   );
 };

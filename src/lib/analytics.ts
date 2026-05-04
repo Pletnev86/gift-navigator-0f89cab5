@@ -149,3 +149,39 @@ export async function submitLead(
 
   return { ok: true };
 }
+
+// ─── Промо-события (pop-up акции) ───────────────────────────────────────────
+// Не лид: просто маячок в Я.Метрику / GA / dataLayer + dev-лог.
+
+export type PromoEventName =
+  | "promo_shown"
+  | "promo_closed"
+  | "promo_cta_click";
+
+export interface PromoEventPayload {
+  event: PromoEventName;
+  promo_id: string;
+  /** Сколько мс окно было видно до взаимодействия (для closed/cta_click). */
+  visible_ms?: number;
+  /** Любые UTM-поля прокинуть сюда — необязательно. */
+  utm?: Partial<UtmData>;
+}
+
+export function trackPromoEvent(p: PromoEventPayload): void {
+  if (import.meta.env.DEV) {
+    console.log("[analytics] promo:", p);
+  }
+
+  // Yandex.Metrika
+  const ym = (window as unknown as { ym?: (id: number, m: string, n: string, params?: object) => void }).ym;
+  const ymId = (window as unknown as { __YM_ID__?: number }).__YM_ID__;
+  if (typeof ym === "function" && ymId) {
+    ym(ymId, "reachGoal", p.event, { promo_id: p.promo_id, visible_ms: p.visible_ms });
+  }
+
+  // dataLayer (GA4 / GTM)
+  const dl = (window as unknown as { dataLayer?: object[] }).dataLayer;
+  if (Array.isArray(dl)) {
+    dl.push({ ...p });
+  }
+}
