@@ -91,7 +91,7 @@ const FooterCTA = () => {
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <img src="/qr-test.svg" alt="QR-код" className="w-32 h-32 rounded-xl" />
+                <img src="/qr-code2.gif" alt="QR-код" className="w-32 h-32 rounded-xl" />
                 <p className="text-xs text-muted-foreground font-heading text-center mt-1">Отсканируй QR</p>
               </motion.div>
             </div>

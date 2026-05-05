@@ -73,7 +73,7 @@ const HowItWorksSection = () => {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.8 }}
           >
-            <img src="/qr-test.svg" alt="QR-код для тестирования платформы" className="w-32 h-32 rounded-2xl" />
+            <img src="/qr-code2.gif" alt="QR-код для тестирования платформы" className="w-32 h-32 rounded-2xl" />
             <p className="text-sm text-muted-foreground font-heading text-center">
               Отсканируй QR и<br />протестируй платформу
             </p>
