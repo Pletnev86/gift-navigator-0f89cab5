@@ -23,9 +23,9 @@ const Index = () => {
     <SiteHeader />
     <main className="min-h-screen overflow-x-hidden bg-background pt-14">
       <HeroSection />
+      <ProductSection />
       <HolidayShowcaseSection />
       <InfoCalendarSection />
-      <ProductSection />
       <HRSection />
       <TradeUnionsSection />
       <UpsellSection />
