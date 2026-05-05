@@ -29,9 +29,9 @@ const Index = () => {
       <HRSection />
       <TradeUnionsSection />
       <UpsellSection />
-      <CalendarSection />
       <PlatformSection />
       <HowItWorksSection />
+      <CalendarSection />
       <TradeMarketingSection />
       <BirthdayExampleSection />
       <NewYearExampleSection />
