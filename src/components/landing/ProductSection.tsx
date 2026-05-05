@@ -7,7 +7,7 @@ const ProductSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-spacing relative" ref={ref}>
+    <section className="pt-7 pb-14 md:pt-10 md:pb-20 lg:pt-12 lg:pb-24 px-4 md:px-8 relative" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div

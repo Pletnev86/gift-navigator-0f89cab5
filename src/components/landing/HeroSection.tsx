@@ -35,7 +35,7 @@ const HeroSection = () => {
 
   return (
     <>
-    <section className="section-spacing min-h-screen flex items-center relative overflow-hidden">
+    <section className="pt-14 pb-7 md:pt-20 md:pb-10 lg:pt-24 lg:pb-12 px-4 md:px-8 min-h-screen flex items-center relative overflow-hidden">
       {/* Subtle background decoration */}
       <div className="absolute top-20 right-0 w-[500px] h-[500px] rounded-full bg-[hsl(var(--lime)/0.08)] blur-[120px] pointer-events-none" />
       <div className="absolute bottom-20 left-0 w-[400px] h-[400px] rounded-full bg-[hsl(var(--lime)/0.05)] blur-[100px] pointer-events-none" />
