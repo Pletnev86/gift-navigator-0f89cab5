@@ -54,7 +54,7 @@ export const PROMO_CONFIG: PromoConfig = {
   enabled: true,
   id: "promo-2026-exhibition-1",
   delayMs: 15_000,
-  exhibitionDelayMs: 3_000,
+  exhibitionDelayMs: 0,
 
   content: {
     badge: "Спецпредложение от компании",
