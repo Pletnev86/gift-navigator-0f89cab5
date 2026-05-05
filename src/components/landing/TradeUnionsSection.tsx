@@ -7,7 +7,7 @@ const TradeUnionsSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-spacing relative" ref={ref}>
+    <section className="section-spacing relative mt-[30%] lg:mt-0" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left: Copy */}
