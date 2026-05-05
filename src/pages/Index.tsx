@@ -14,6 +14,7 @@ import SchoolExampleSection from "@/components/landing/SchoolExampleSection";
 import FooterCTA from "@/components/landing/FooterCTA";
 import PromoPopup from "@/components/landing/promo/PromoPopup";
 import SiteHeader from "@/components/landing/SiteHeader";
+import UpsellSection from "@/components/landing/UpsellSection";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <ProductSection />
       <HRSection />
       <TradeUnionsSection />
+      <UpsellSection />
       <PlatformSection />
       <HowItWorksSection />
       <CalendarSection />
