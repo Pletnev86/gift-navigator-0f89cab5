@@ -8,6 +8,17 @@ import { useUtm } from "@/hooks/use-utm";
 import RequestFormDialog from "../RequestFormDialog";
 
 const STORAGE_PREFIX = "promo_seen_";
+const STORAGE_EXHIBITION_PREFIX = "promo_seen_exhibition_";
+
+/** Возвращает true, если utm_campaign содержит "exhibition" */
+function isExhibitionVisitor(): boolean {
+  try {
+    const p = new URLSearchParams(window.location.search);
+    return (p.get("utm_campaign") ?? "").toLowerCase().includes("exhibition");
+  } catch {
+    return false;
+  }
+}
 
 const PromoPopup = () => {
   const cfg = PROMO_CONFIG;
@@ -22,11 +33,19 @@ const PromoPopup = () => {
     if (!cfg.enabled) return;
     if (typeof window === "undefined") return;
 
-    const key = STORAGE_PREFIX + cfg.id;
+    const exhibition = isExhibitionVisitor();
+
+    // Для выставочных ссылок используем отдельный ключ localStorage,
+    // чтобы popup показался даже если обычный уже был показан ранее.
+    const key = exhibition
+      ? STORAGE_EXHIBITION_PREFIX + cfg.id
+      : STORAGE_PREFIX + cfg.id;
+    const delay = exhibition ? cfg.exhibitionDelayMs : cfg.delayMs;
+
     try {
-      if (localStorage.getItem(key)) return; // уже видел
+      if (localStorage.getItem(key)) return; // уже видел (в этом контексте)
     } catch {
-      // localStorage может быть недоступен (приватный режим) — всё равно покажем 1 раз за сессию
+      // localStorage недоступен (приватный режим) — показываем один раз за сессию
     }
 
     const t = setTimeout(() => {
@@ -34,7 +53,7 @@ const PromoPopup = () => {
       shownAt.current = Date.now();
       try { localStorage.setItem(key, String(Date.now())); } catch { /* noop */ }
       trackPromoEvent({ event: "promo_shown", promo_id: cfg.id, utm });
-    }, cfg.delayMs);
+    }, delay);
 
     return () => clearTimeout(t);
   }, [cfg, utm]);
