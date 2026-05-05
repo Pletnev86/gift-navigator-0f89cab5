@@ -15,6 +15,7 @@ import FooterCTA from "@/components/landing/FooterCTA";
 import PromoPopup from "@/components/landing/promo/PromoPopup";
 import SiteHeader from "@/components/landing/SiteHeader";
 import UpsellSection from "@/components/landing/UpsellSection";
+import HolidayShowcaseSection from "@/components/landing/HolidayShowcaseSection";
 
 const Index = () => {
   return (
@@ -22,13 +23,14 @@ const Index = () => {
     <SiteHeader />
     <main className="min-h-screen overflow-x-hidden bg-background pt-14">
       <HeroSection />
+      <CalendarSection />
+      <HolidayShowcaseSection />
       <ProductSection />
       <HRSection />
       <TradeUnionsSection />
       <UpsellSection />
       <PlatformSection />
       <HowItWorksSection />
-      <CalendarSection />
       <InfoCalendarSection />
       <BirthdayExampleSection />
       <TradeMarketingSection />
