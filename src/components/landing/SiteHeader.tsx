@@ -19,7 +19,7 @@ const SiteHeader = () => {
             </span>
           ) : (
             <img
-              src="/zapodarkom-logo.png"
+              src="/zapodarkom-logo.svg"
               alt="За!Подарком"
               className="h-8 w-auto"
               loading="eager"

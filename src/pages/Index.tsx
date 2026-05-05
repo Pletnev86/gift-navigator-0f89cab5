@@ -24,14 +24,14 @@ const Index = () => {
     <main className="min-h-screen overflow-x-hidden bg-background pt-14">
       <HeroSection />
       <HolidayShowcaseSection />
-      <UpsellSection />
+      <InfoCalendarSection />
       <ProductSection />
       <HRSection />
       <TradeUnionsSection />
+      <UpsellSection />
       <CalendarSection />
       <PlatformSection />
       <HowItWorksSection />
-      <InfoCalendarSection />
       <BirthdayExampleSection />
       <TradeMarketingSection />
       <NewYearExampleSection />
