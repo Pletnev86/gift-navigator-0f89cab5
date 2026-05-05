@@ -50,20 +50,19 @@ const PromoPopup = () => {
   const [open, setOpen] = useState(false);
   const shownAt = useRef<number>(0);
   const interactedRef = useRef(false);
+  // Захватываем popup=force ДО первого рендера — consumeForceShow удаляет параметр из URL
+  const forceShow = useRef(consumeForceShow());
 
-  // Запуск таймера показа
+  // Запуск таймера показа (deps=[] — запускается ровно один раз при монтировании)
   useEffect(() => {
     if (!cfg.enabled) return;
     if (typeof window === "undefined") return;
 
     const exhibition = isExhibitionVisitor();
-    const forceShow  = consumeForceShow(); // читаем и сразу удаляем popup=force из URL
-
-    // Для выставочных ссылок — отдельный ключ, показывается даже если обычный уже был показан.
     const key   = exhibition ? STORAGE_KEY_EXHIBITION : STORAGE_KEY_REGULAR + cfg.id;
     const delay = exhibition ? cfg.exhibitionDelayMs  : cfg.delayMs;
 
-    if (!forceShow) {
+    if (!forceShow.current) {
       // Обычный режим: пропускаем если пользователь уже видел
       try {
         if (localStorage.getItem(key)) return;
@@ -79,10 +78,11 @@ const PromoPopup = () => {
       // Всегда ставим флаг — после принудительного показа автотаймер тоже не сработает
       try { localStorage.setItem(key, String(Date.now())); } catch { /* noop */ }
       trackPromoEvent({ event: "promo_shown", promo_id: cfg.id, utm });
-    }, forceShow ? 0 : delay);
+    }, forceShow.current ? 0 : delay);
 
     return () => clearTimeout(t);
-  }, [cfg, utm]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClose = () => {
     if (!interactedRef.current) {

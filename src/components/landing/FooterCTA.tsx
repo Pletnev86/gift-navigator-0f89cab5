@@ -2,7 +2,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useCallback, useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 
-import qrFooter from "@/assets/qr-footer.png";
 import girlCard from "@/assets/girl-card.jpg";
 import catChest from "@/assets/cat-chest.png";
 import RequestFormDialog from "./RequestFormDialog";
@@ -92,7 +91,7 @@ const FooterCTA = () => {
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <img src={qrFooter} alt="QR-код" className="w-32 h-32 rounded-xl" />
+                <img src="/qr-test.svg" alt="QR-код" className="w-32 h-32 rounded-xl" />
                 <p className="text-xs text-muted-foreground font-heading text-center mt-1">Отсканируй QR</p>
               </motion.div>
             </div>

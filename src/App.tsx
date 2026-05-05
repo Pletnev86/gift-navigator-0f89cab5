@@ -24,10 +24,11 @@ function FormUrlHandler() {
   const { openForm } = useFormContext();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const formParam = params.get("form");
+    function tryOpen() {
+      const params = new URLSearchParams(window.location.search);
+      const formParam = params.get("form");
+      if (formParam !== "open" && formParam !== "test") return;
 
-    if (formParam === "open" || formParam === "test") {
       params.delete("form");
       const newSearch = params.toString();
       const cleanUrl =
@@ -38,10 +39,17 @@ function FormUrlHandler() {
 
       const type: FormType =
         formParam === "test" ? "test_access" : "purchase_request";
-
-      setTimeout(() => openForm(type), 300);
+      setTimeout(() => openForm(type), 600);
     }
-  }, [openForm]);
+
+    tryOpen();
+
+    // Для iOS bfcache: страница восстанавливается из кэша без перезагрузки
+    const onPageShow = (e: PageTransitionEvent) => { if (e.persisted) tryOpen(); };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return null;
 }

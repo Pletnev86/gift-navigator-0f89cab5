@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play, X } from "lucide-react";
 import { useState } from "react";
-import qrCode from "@/assets/qr-code.png";
 import RequestFormDialog from "./RequestFormDialog";
 
 import ozonLogo from "@/assets/logos/ozon.png";
@@ -85,7 +84,7 @@ const HeroSection = () => {
                   <path d="M2 12h32m0 0l-8-8m8 8l-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <div className="flex flex-col items-center">
-                  <img src={qrCode} alt="QR-код" className="w-[104px] h-[104px] rounded-lg" />
+                  <img src="/qr-request.svg" alt="QR-код" className="w-[104px] h-[104px] rounded-lg" />
                   <p className="text-[11px] text-muted-foreground font-heading mt-1">Протестируй</p>
                 </div>
               </div>
@@ -137,18 +136,18 @@ const HeroSection = () => {
                     </div>
                   </motion.div>
 
-                  {/* Brand chips inside phone */}
+                  {/* Holiday chips inside phone */}
                   <div className="flex flex-wrap justify-center gap-2 px-2">
-                    {["Ozon", "WB", "Lamoda", "DNS"].map((b) => (
+                    {["🎄 Новый год", "🌷 8 марта", "💪 23 февраля", "🎂 День рождения"].map((h) => (
                       <span
-                        key={b}
+                        key={h}
                         className="bg-white/8 backdrop-blur-sm text-white/70 px-3 py-1.5 rounded-full text-[11px] font-heading font-semibold border border-white/10"
                       >
-                        {b}
+                        {h}
                       </span>
                     ))}
                   </div>
-                  <p className="text-white/30 text-[11px] font-heading tracking-wide">Выбирайте из 400+ брендов</p>
+                  <p className="text-white/30 text-[11px] font-heading tracking-wide">Подарок под каждый праздник</p>
                 </div>
               </div>
 
