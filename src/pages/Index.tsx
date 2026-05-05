@@ -13,10 +13,13 @@ import SeasonSection from "@/components/landing/SeasonSection";
 import SchoolExampleSection from "@/components/landing/SchoolExampleSection";
 import FooterCTA from "@/components/landing/FooterCTA";
 import PromoPopup from "@/components/landing/promo/PromoPopup";
+import SiteHeader from "@/components/landing/SiteHeader";
 
 const Index = () => {
   return (
-    <main className="min-h-screen overflow-x-hidden bg-background">
+    <>
+    <SiteHeader />
+    <main className="min-h-screen overflow-x-hidden bg-background pt-14">
       <HeroSection />
       <ProductSection />
       <HRSection />
@@ -33,6 +36,7 @@ const Index = () => {
       <FooterCTA />
       <PromoPopup />
     </main>
+    </>
   );
 };
 

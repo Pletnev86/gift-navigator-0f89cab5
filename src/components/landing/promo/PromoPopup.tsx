@@ -5,10 +5,10 @@ import { X, Check, ArrowRight } from "lucide-react";
 import { PROMO_CONFIG } from "@/config/promo";
 import { trackPromoEvent } from "@/lib/analytics";
 import { useUtm } from "@/hooks/use-utm";
-import RequestFormDialog from "../RequestFormDialog";
+import { useFormContext } from "@/context/FormContext";
 
-const STORAGE_PREFIX = "promo_seen_";
-const STORAGE_EXHIBITION_PREFIX = "promo_seen_exhibition_";
+const STORAGE_KEY_REGULAR    = "promo_seen_";
+const STORAGE_KEY_EXHIBITION = "exhibition_offer_seen";
 
 /** Возвращает true, если utm_campaign содержит "exhibition" */
 function isExhibitionVisitor(): boolean {
@@ -23,8 +23,8 @@ function isExhibitionVisitor(): boolean {
 const PromoPopup = () => {
   const cfg = PROMO_CONFIG;
   const utm = useUtm();
+  const { openForm } = useFormContext();
   const [open, setOpen] = useState(false);
-  const [formOpen, setFormOpen] = useState(false);
   const shownAt = useRef<number>(0);
   const interactedRef = useRef(false);
 
@@ -35,12 +35,9 @@ const PromoPopup = () => {
 
     const exhibition = isExhibitionVisitor();
 
-    // Для выставочных ссылок используем отдельный ключ localStorage,
-    // чтобы popup показался даже если обычный уже был показан ранее.
-    const key = exhibition
-      ? STORAGE_EXHIBITION_PREFIX + cfg.id
-      : STORAGE_PREFIX + cfg.id;
-    const delay = exhibition ? cfg.exhibitionDelayMs : cfg.delayMs;
+    // Для выставочных ссылок — отдельный ключ, показывается даже если обычный уже был показан.
+    const key   = exhibition ? STORAGE_KEY_EXHIBITION : STORAGE_KEY_REGULAR + cfg.id;
+    const delay = exhibition ? cfg.exhibitionDelayMs  : cfg.delayMs;
 
     try {
       if (localStorage.getItem(key)) return; // уже видел (в этом контексте)
@@ -80,7 +77,15 @@ const PromoPopup = () => {
     });
     interactedRef.current = true;
     setOpen(false);
-    setFormOpen(true);
+
+    // Скролл к основной форме на странице
+    const formSection = document.getElementById("footer-cta-section");
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Открыть глобальную форму заявки
+    openForm("purchase_request");
   };
 
   if (!cfg.enabled) return null;
@@ -172,14 +177,6 @@ const PromoPopup = () => {
         )}
       </AnimatePresence>
 
-      <RequestFormDialog
-        open={formOpen}
-        onOpenChange={setFormOpen}
-        sourceId={cfg.id}
-        section={cfg.analytics.section}
-        buttonLabel={cfg.analytics.buttonLabel}
-        formType="purchase_request"
-      />
     </>
   );
 };

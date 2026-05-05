@@ -48,7 +48,7 @@ const FooterCTA = () => {
   }, []);
 
   return (
-    <section className="section-spacing relative" ref={ref}>
+    <section id="footer-cta-section" className="section-spacing relative" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
