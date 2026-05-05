@@ -82,7 +82,7 @@
   }
 
   .section-spacing {
-    @apply py-20 md:py-28 lg:py-36 px-4 md:px-8;
+    @apply py-14 md:py-20 lg:py-24 px-4 md:px-8;
   }
 
   .olive-number {

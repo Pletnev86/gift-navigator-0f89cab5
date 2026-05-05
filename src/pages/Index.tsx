@@ -32,8 +32,8 @@ const Index = () => {
       <CalendarSection />
       <PlatformSection />
       <HowItWorksSection />
-      <BirthdayExampleSection />
       <TradeMarketingSection />
+      <BirthdayExampleSection />
       <NewYearExampleSection />
       <SeasonSection />
       <SchoolExampleSection />
