@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Building2 } from "lucide-react";
 
@@ -5,17 +6,26 @@ const PRESENTCARD_URL =
   "https://presentcard.ru/?utm_source=promo_zapodarkom&utm_medium=site_referral&utm_campaign=header_nav&utm_content=btn_dlya_biznesa";
 
 const SiteHeader = () => {
+  const [logoErr, setLogoErr] = useState(false);
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="container mx-auto max-w-7xl flex items-center justify-between h-14 px-4">
         {/* Логотип */}
         <Link to="/" className="hover:opacity-80 transition-opacity flex items-center">
-          <img
-            src="/zapodarkom-logo.png"
-            alt="За!Подарком"
-            className="h-8 w-auto"
-            loading="eager"
-          />
+          {logoErr ? (
+            <span className="font-heading font-black text-lg tracking-tight text-foreground">
+              За!Подарком
+            </span>
+          ) : (
+            <img
+              src="/zapodarkom-logo.png"
+              alt="За!Подарком"
+              className="h-8 w-auto"
+              loading="eager"
+              onError={() => setLogoErr(true)}
+            />
+          )}
         </Link>
 
         {/* Кнопка «Для бизнеса» → presentcard.ru */}
