@@ -26,7 +26,6 @@ const SETS = [
     name: "Сладкий набор + Карта",
     items: ["Шоколад, конфеты, сладости", "Мультикарта в кардхолдере"],
     desc: "Базовый формат: корпоративный сладкий набор дополняется физической картой с номиналом. Никаких изменений в логистике.",
-    margin: "+15%",
   },
   {
     id: "postcard",
@@ -35,7 +34,6 @@ const SETS = [
     name: "Набор + Карта + Открытка",
     items: ["Шоколад, конфеты, сладости", "Мультикарта в кардхолдере", "Праздничная открытка-инструкция"],
     desc: "Открытка с 4 шагами активации и QR-кодом. Дизайн открытки и карты меняется под выбранный праздник.",
-    margin: "+20%",
   },
   {
     id: "premium",
@@ -44,7 +42,6 @@ const SETS = [
     name: "Фирменная коробка + Карта + Открытка",
     items: ["Фирменная коробка с логотипом", "Мультикарта с праздничным дизайном", "Именная открытка с QR-кодом", "Кардхолдер с подписью"],
     desc: "Полный фирменный комплект с праздничным дизайном. Подходит для ключевых клиентов и крупных тендеров.",
-    margin: "+30%",
   },
   {
     id: "digital",
@@ -53,14 +50,13 @@ const SETS = [
     name: "Цифровая карта + Email-открытка",
     items: ["Цифровой код на email за 1 минуту", "Брендированная посадочная страница", "Email-открытка с праздничным дизайном"],
     desc: "Мгновенная доставка на email. Подходит для удалённых сотрудников и больших географически распределённых команд.",
-    margin: "+25%",
   },
 ];
 
 const benefits = [
-  "Увеличение суммы контракта без затрат на закупку, хранение и сборку",
-  "Ребёнок получает конфеты + возможность выбрать подарок в 400+ брендах",
-  "100% попадание в ожидания каждого получателя",
+  "Одно решение для всего коллектива — без подбора и согласований",
+  "Сотрудник получает сладости + выбирает подарок в 400+ брендах сам",
+  "100% попадание в ожидания — каждый получатель доволен",
   "Физический пластик в фирменном кардхолдере — премиальный вид",
 ];
 
@@ -118,7 +114,7 @@ function SetMockup({ setId, sweetId }: { setId: string; sweetId: string }) {
           </div>
           <div className="relative z-10 flex items-end justify-between">
             <p className="text-white/40 text-[10px] font-mono tracking-wider">•••• •••• •••• 7742</p>
-            <p className="font-heading font-bold text-sm text-emerald-300">500–5 000 ₽</p>
+            <p className="font-heading font-bold text-sm text-emerald-300">300–100 000 ₽</p>
           </div>
         </div>
 
@@ -235,18 +231,9 @@ const UpsellSection = () => {
                 borderColor: `${THEME.from}25`,
               }}
             >
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <p className="font-heading font-black text-base text-foreground">{set.name}</p>
-                  <p className="text-sm text-muted-foreground mt-0.5">{set.desc}</p>
-                </div>
-                <div
-                  className="ml-4 shrink-0 rounded-xl px-3 py-2 text-center min-w-[64px]"
-                  style={{ background: "hsl(var(--lime))" }}
-                >
-                  <p className="font-heading font-black text-lg text-foreground leading-none">{set.margin}</p>
-                  <p className="text-[9px] text-foreground/60 font-heading font-bold leading-tight">к марже</p>
-                </div>
+              <div className="mb-4">
+                <p className="font-heading font-black text-base text-foreground">{set.name}</p>
+                <p className="text-sm text-muted-foreground mt-0.5">{set.desc}</p>
               </div>
 
               <ul className="space-y-1.5 mb-5">
@@ -290,20 +277,20 @@ const UpsellSection = () => {
             </div>
 
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-foreground">
-              «Сладости +{" "}
+              Подарок,{" "}
               <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">
-                Свобода выбора»
+                который выбирает каждый
               </span>
             </h2>
 
             <p className="font-heading font-bold text-lg mt-2 text-emerald-500">
-              Увеличение среднего чека
+              Сладкий набор + свобода выбора для каждого сотрудника
             </p>
 
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed mt-4">
-              Повысьте ценность вашего базового набора, вложив в него физическую
-              Мультикарту (номиналом от 500 до 5 000 ₽). Никаких затрат на
-              закупку дополнительных физических игрушек.
+              Дополните корпоративный сладкий набор физической Мультикартой
+              с номиналом от 300 до 100 000 ₽. Сотрудник получает угощение
+              и сам выбирает подарок из 400+ брендов — без лишних согласований с HR.
             </p>
 
             <ul className="mt-8 space-y-4">
@@ -318,7 +305,7 @@ const UpsellSection = () => {
             <div className="mt-10 grid grid-cols-2 gap-4">
               <div className="light-card text-center">
                 <div className="text-4xl font-black font-heading text-emerald-500">+20%</div>
-                <div className="text-sm text-muted-foreground font-heading mt-1">к маржинальности контракта</div>
+                <div className="text-sm text-muted-foreground font-heading mt-1">к ценности подарка</div>
               </div>
               <div className="light-card text-center">
                 <div className="text-4xl font-black font-heading text-emerald-500">400+</div>
@@ -332,7 +319,7 @@ const UpsellSection = () => {
               whileTap={{ scale: 0.97 }}
               onClick={() => openForm("purchase_request")}
             >
-              Обсудить интеграцию
+              Оставить заявку
               <ArrowRight className="w-5 h-5" />
             </motion.button>
           </motion.div>

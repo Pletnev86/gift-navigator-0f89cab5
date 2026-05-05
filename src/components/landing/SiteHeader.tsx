@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Building2 } from "lucide-react";
 
-const PRESENTCARD_URL =
-  "https://presentcard.ru/?utm_source=promo_zapodarkom&utm_medium=site_referral&utm_campaign=header_nav&utm_content=btn_dlya_biznesa";
+const VITRINA_URL =
+  "https://zapodarkom.ru/?utm_source=promo_zapodarkom&utm_medium=site_referral&utm_campaign=header_nav&utm_content=btn_vitrina";
 
 const SiteHeader = () => {
   const [logoErr, setLogoErr] = useState(false);
@@ -30,13 +30,13 @@ const SiteHeader = () => {
 
         {/* Кнопка «Для бизнеса» → presentcard.ru */}
         <a
-          href={PRESENTCARD_URL}
+          href={VITRINA_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/40 px-4 py-1.5 text-sm font-heading font-semibold text-emerald-600 hover:bg-emerald-500/10 transition-colors"
         >
           <Building2 className="w-4 h-4" />
-          Для бизнеса
+          Витрина подарков
         </a>
       </div>
     </header>
