@@ -20,6 +20,29 @@ function isExhibitionVisitor(): boolean {
   }
 }
 
+/**
+ * Возвращает true, если в URL есть ?popup=force.
+ * Одновременно удаляет этот параметр из адресной строки (UTM-метки сохраняются),
+ * чтобы при обновлении страницы принудительный показ не срабатывал повторно.
+ */
+function consumeForceShow(): boolean {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("popup") !== "force") return false;
+
+    params.delete("popup");
+    const newSearch = params.toString();
+    window.history.replaceState(
+      {},
+      "",
+      window.location.pathname + (newSearch ? `?${newSearch}` : "") + window.location.hash
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 const PromoPopup = () => {
   const cfg = PROMO_CONFIG;
   const utm = useUtm();
@@ -34,23 +57,29 @@ const PromoPopup = () => {
     if (typeof window === "undefined") return;
 
     const exhibition = isExhibitionVisitor();
+    const forceShow  = consumeForceShow(); // читаем и сразу удаляем popup=force из URL
 
     // Для выставочных ссылок — отдельный ключ, показывается даже если обычный уже был показан.
     const key   = exhibition ? STORAGE_KEY_EXHIBITION : STORAGE_KEY_REGULAR + cfg.id;
     const delay = exhibition ? cfg.exhibitionDelayMs  : cfg.delayMs;
 
-    try {
-      if (localStorage.getItem(key)) return; // уже видел (в этом контексте)
-    } catch {
-      // localStorage недоступен (приватный режим) — показываем один раз за сессию
+    if (!forceShow) {
+      // Обычный режим: пропускаем если пользователь уже видел
+      try {
+        if (localStorage.getItem(key)) return;
+      } catch {
+        // localStorage недоступен (приватный режим) — показываем один раз за сессию
+      }
     }
 
+    // forceShow = 0ms, обычный = delay из конфига
     const t = setTimeout(() => {
       setOpen(true);
       shownAt.current = Date.now();
+      // Всегда ставим флаг — после принудительного показа автотаймер тоже не сработает
       try { localStorage.setItem(key, String(Date.now())); } catch { /* noop */ }
       trackPromoEvent({ event: "promo_shown", promo_id: cfg.id, utm });
-    }, delay);
+    }, forceShow ? 0 : delay);
 
     return () => clearTimeout(t);
   }, [cfg, utm]);
