@@ -16,7 +16,7 @@ const TradeUnionsSection = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7 }}
           >
-            <span className="badge-tag mb-6 inline-block">ДЛЯ ПРОФСОЮЗОВ</span>
+            <span className="badge-tag mb-6 inline-block">ДЛЯ ТЕХ, КТО ДАРИТ ПОДАРКИ</span>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-6 text-foreground">
               Пластиковая Мультикарта
             </h2>

@@ -35,7 +35,7 @@ const TradeMarketingSection = () => {
             </div>
 
             <p className="text-muted-foreground leading-relaxed">
-              Закупите Мультикарты сейчас — избежите сезонных наценок и суеты в последние дни декабря.
+              Закупите Мультикарты сейчас — избежите сезонных наценок и суеты перед праздниками.
             </p>
           </motion.div>
 

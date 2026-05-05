@@ -26,7 +26,7 @@ const PlatformSection = () => {
           transition={{ duration: 0.7 }}
         >
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-foreground">
-            Преимущества использования<br /><span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">платформы ЗА!Подарком</span>
+            Преимущества использования<br /><span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">платформы За!Подарком</span>
           </h2>
         </motion.div>
 
@@ -46,7 +46,7 @@ const PlatformSection = () => {
               <div className="relative w-full overflow-hidden rounded-sm bg-white">
                 <img
                   src={platformCatalog}
-                  alt="Каталог электронных сертификатов платформы ЗА!Подарком"
+                  alt="Каталог электронных сертификатов платформы За!Подарком"
                   className="w-full h-auto object-cover"
                   loading="lazy"
                 />
