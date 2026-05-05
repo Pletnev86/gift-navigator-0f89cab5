@@ -24,19 +24,16 @@ function FormUrlHandler() {
   const { openForm } = useFormContext();
 
   useEffect(() => {
+    /**
+     * Читаем form= из URL и открываем форму.
+     * URL НЕ очищается — это позволяет форме открываться:
+     *  • при каждой свежей навигации по QR-ссылке
+     *  • при восстановлении страницы из bfcache (iOS Safari)
+     */
     function tryOpen() {
       const params = new URLSearchParams(window.location.search);
       const formParam = params.get("form");
       if (formParam !== "open" && formParam !== "test") return;
-
-      params.delete("form");
-      const newSearch = params.toString();
-      const cleanUrl =
-        window.location.pathname +
-        (newSearch ? `?${newSearch}` : "") +
-        window.location.hash;
-      window.history.replaceState({}, "", cleanUrl);
-
       const type: FormType =
         formParam === "test" ? "test_access" : "purchase_request";
       setTimeout(() => openForm(type), 600);
@@ -44,7 +41,6 @@ function FormUrlHandler() {
 
     tryOpen();
 
-    // Для iOS bfcache: страница восстанавливается из кэша без перезагрузки
     const onPageShow = (e: PageTransitionEvent) => { if (e.persisted) tryOpen(); };
     window.addEventListener("pageshow", onPageShow);
     return () => window.removeEventListener("pageshow", onPageShow);
