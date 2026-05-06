@@ -10,31 +10,7 @@ const SeasonSection = () => {
     <section className="section-spacing relative" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
-          >
-            <span className="badge-tag mb-6 inline-block">ЛЕТО — ОСЕНЬ</span>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 text-foreground">
-              Поддержка, которую почувствуют дома: <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">Дети и Школа.</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              Покажите сотрудникам, что компании не всё равно. Финансовая поддержка сборов к школе без лишней бюрократии.
-            </p>
-
-            <div className="case-card">
-              <span className="badge-tag text-[10px] mb-3 inline-block">КЕЙС</span>
-              <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
-                «Портфель с пятёрками»
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Компенсация школьных расходов к 1 сентября через Мультикарты с детской витриной.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Right: Image — замените на свой креатив */}
+          {/* Left: Image */}
           <motion.div
             className="flex flex-col items-center gap-6"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -57,6 +33,31 @@ const SeasonSection = () => {
                   {brand}
                 </div>
               ))}
+            </div>
+          </motion.div>
+
+          {/* Right: Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="badge-tag mb-6 inline-block">ЛЕТО — ОСЕНЬ</span>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-8 text-foreground">
+              Поддержка, которую почувствуют дома: <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 bg-clip-text text-transparent">Дети и Школа.</span>
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              Покажите сотрудникам, что компании не всё равно. Финансовая поддержка сборов к школе без лишней бюрократии.
+            </p>
+
+            <div className="case-card">
+              <span className="badge-tag text-[10px] mb-3 inline-block">КЕЙС</span>
+              <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
+                «Портфель с пятёрками»
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Компенсация школьных расходов к 1 сентября через Мультикарты с детской витриной.
+              </p>
             </div>
           </motion.div>
         </div>
