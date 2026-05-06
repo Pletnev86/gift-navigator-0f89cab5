@@ -1,91 +1,16 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { Snowflake, Gift, Flower2, Shield, Flame, HardHat, Heart, Truck } from "lucide-react";
-
-import oilDayImg from "@/assets/cards/oil-day.jpg";
-import builderDayImg from "@/assets/cards/builder-day.png";
-import medicDayImg from "@/assets/cards/medic-day.jpg";
-import transportDayImg from "@/assets/cards/transport-day.jpg";
-import birthdayImg from "@/assets/cards/birthday.jpg";
-import feb23Img from "@/assets/cards/feb23.jpg";
-import march8Img from "@/assets/cards/march8.jpg";
-import newyearImg from "@/assets/cards/newyear.jpg";
+import { useRef } from "react";
 
 const events = [
-  { season: "СЕНТЯБРЬ", title: "День нефтяника", subtitle: "«Энергия ваших достижений»", icon: Flame, color: "from-amber-800/80 to-amber-900/80", cardImg: oilDayImg },
-  { season: "АВГУСТ", title: "День строителя", subtitle: "«Фундамент вашего будущего»", icon: HardHat, color: "from-orange-800/80 to-orange-900/80", cardImg: builderDayImg },
-  { season: "ИЮНЬ", title: "День медработника", subtitle: "«Героям в белых халатах»", icon: Heart, color: "from-teal-800/80 to-teal-900/80", cardImg: medicDayImg },
-  { season: "ОКТЯБРЬ", title: "Транспорт и логистика", subtitle: "«Верный курс на успех»", icon: Truck, color: "from-slate-700/80 to-slate-800/80", cardImg: transportDayImg },
-  { season: "КРУГЛЫЙ ГОД", title: "День рождения", subtitle: "Персональный подарок", icon: Gift, color: "from-purple-800/80 to-purple-900/80", cardImg: birthdayImg },
-  { season: "ЗИМА", title: "23 февраля", subtitle: "День защитника Отечества", icon: Shield, color: "from-indigo-800/80 to-indigo-900/80", cardImg: feb23Img },
-  { season: "ВЕСНА", title: "8 марта", subtitle: "Международный женский день", icon: Flower2, color: "from-pink-700/80 to-pink-800/80", cardImg: march8Img },
-  { season: "ЗИМА", title: "Новый Год", subtitle: "Главный праздник года", icon: Snowflake, color: "from-blue-800/80 to-blue-900/80", cardImg: newyearImg },
+  { emoji: "⛽",  title: "День нефтяника",       subtitle: "«Энергия ваших достижений»",   date: "6 сент.",     sign: "«Энергия недр»",         desc: "Матовый металл и «золотое» тиснение, подчёркивающее статус лидеров рынка.",      color: "from-amber-50 to-orange-50",  border: "border-amber-200" },
+  { emoji: "🏗️", title: "День строителя",        subtitle: "«Фундамент вашего будущего»",  date: "9 авг.",      sign: "«Архитектура успеха»",     desc: "Фактурная упаковка с элементами чертежей и структурным дизайном.",            color: "from-orange-50 to-red-50",    border: "border-orange-200" },
+  { emoji: "🏥",  title: "День медработника",     subtitle: "«Героям в белых халатах»",     date: "21 июн.",     sign: "«Сердце под защитой»",    desc: "Чистый, минималистичный дизайн с акцентом на заботу и человечность.",         color: "from-teal-50 to-emerald-50",  border: "border-teal-200" },
+  { emoji: "🚛",  title: "Транспорт и логистика", subtitle: "«Верный курс на успех»",       date: "25 окт.",     sign: "«Свобода движения»",      desc: "Износостойкий пластик или цифровой формат с мгновенным доступом.",            color: "from-slate-50 to-gray-100",   border: "border-slate-200" },
+  { emoji: "🎖️", title: "23 февраля",             subtitle: "День защитника Отечества",    date: "23 фев.",     sign: "«Сила и честь»",          desc: "Строгий мужской дизайн с патриотическими акцентами.",                        color: "from-blue-50 to-indigo-50",   border: "border-blue-200" },
+  { emoji: "🌸",  title: "8 марта",               subtitle: "Международный женский день",  date: "8 мар.",      sign: "«С заботой о вас»",       desc: "Нежный цветочный дизайн с весенними цветами.",                               color: "from-pink-50 to-rose-50",     border: "border-pink-200" },
+  { emoji: "🎂",  title: "День рождения",         subtitle: "Персональный подарок",        date: "Круглый год", sign: "«Твой особенный день»",   desc: "Яркий праздничный дизайн с именными вариантами оформления.",                 color: "from-purple-50 to-violet-50", border: "border-purple-200" },
+  { emoji: "🎄",  title: "Новый Год",             subtitle: "Главный праздник года",       date: "31 дек.",     sign: "«Пусть мечты сбываются»", desc: "Зимний новогодний дизайн с анимацией снежинок.",                             color: "from-sky-50 to-blue-50",      border: "border-sky-200" },
 ];
-
-const FlipCard = ({ event, i, inView }: { event: typeof events[0]; i: number; inView: boolean }) => {
-  const [flipped, setFlipped] = useState(false);
-  const Icon = event.icon;
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleClick = () => {
-    if (flipped) {
-      setFlipped(false);
-      if (timerRef.current) clearTimeout(timerRef.current);
-    } else {
-      setFlipped(true);
-      timerRef.current = setTimeout(() => setFlipped(false), 5000);
-    }
-  };
-
-  return (
-    <motion.div
-      className="cursor-pointer"
-      style={{ perspective: 800 }}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, delay: i * 0.08 }}
-      onClick={handleClick}
-    >
-      <motion.div
-        className="relative min-h-[180px] md:min-h-[200px]"
-        style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: flipped ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
-      >
-        {/* Front */}
-        <div
-          className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${event.color} p-5 flex flex-col justify-between border border-white/5`}
-          style={{ backfaceVisibility: "hidden" }}
-        >
-          <Icon className="w-7 h-7 text-white/60 mb-4" />
-          <div>
-            <p className="text-[10px] font-heading font-bold tracking-[0.15em] text-white/50 mb-1">
-              {event.season}
-            </p>
-            <p className="font-heading font-bold text-sm text-white">{event.title}</p>
-            {event.subtitle && (
-              <p className="text-[11px] text-white/40 mt-0.5">{event.subtitle}</p>
-            )}
-          </div>
-          <p className="text-[9px] text-white/30 mt-2 font-heading">👆 нажмите</p>
-        </div>
-
-        {/* Back */}
-        <div
-          className="absolute inset-0 rounded-2xl overflow-hidden border border-white/10"
-          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-        >
-          <img
-            src={event.cardImg}
-            alt={event.title}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </motion.div>
-    </motion.div>
-  );
-};
 
 const InfoCalendarSection = () => {
   const ref = useRef(null);
@@ -109,9 +34,34 @@ const InfoCalendarSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {events.map((event, i) => (
-            <FlipCard key={event.title} event={event} i={i} inView={inView} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {events.map((ev, i) => (
+            <motion.div
+              key={ev.title}
+              className={`rounded-2xl border p-5 flex flex-col gap-3 bg-gradient-to-br ${ev.color} ${ev.border}`}
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.35, delay: i * 0.06 }}
+            >
+              {/* Top row */}
+              <div className="flex items-start justify-between gap-2">
+                <span className="text-2xl leading-none">{ev.emoji}</span>
+                <span className="text-[10px] font-heading font-bold uppercase tracking-widest text-gray-400 bg-white/60 rounded-full px-2 py-0.5 whitespace-nowrap">
+                  {ev.date}
+                </span>
+              </div>
+              {/* Title */}
+              <div>
+                <p className="font-heading font-black text-sm leading-tight text-gray-900">{ev.title}</p>
+                <p className="text-xs text-gray-500 mt-0.5 italic">{ev.subtitle}</p>
+              </div>
+              {/* Description */}
+              <p className="text-xs text-gray-500 leading-relaxed flex-1">{ev.desc}</p>
+              {/* Signature */}
+              <div className="text-[11px] font-heading font-bold text-gray-400 border-t border-gray-200/60 pt-2 mt-auto">
+                Подпись: <span className="text-gray-900">{ev.sign}</span>
+              </div>
+            </motion.div>
           ))}
         </div>
 
