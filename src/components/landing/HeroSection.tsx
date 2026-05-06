@@ -3,6 +3,7 @@ import { ArrowRight, Play, X } from "lucide-react";
 import { useState } from "react";
 import RequestFormDialog from "./RequestFormDialog";
 
+import cardBgHero from "@/assets/card-bg-hero.png";
 import ozonLogo from "@/assets/logos/ozon.png";
 import wbLogo from "@/assets/logos/wildberries.png";
 import letoileLogo from "@/assets/logos/letoile-hero.png";
@@ -122,7 +123,7 @@ const HeroSection = () => {
                     whileHover={{ rotate: 0 }}
                     initial={{ rotate: -3 }}
                   >
-                    <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-60" />
+                    <img src={cardBgHero} alt="" aria-hidden loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-overlay" />
                     <div className="relative z-10">
                       <p className="font-heading font-black text-[10px] tracking-[0.2em] opacity-70">МУЛЬТИКАРТА</p>
                       <p className="font-heading font-black text-3xl mt-1">400+</p>

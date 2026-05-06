@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import placeholderSchool from "@/assets/placeholder-school.jpg";
+import placeholderSchool from "@/assets/placeholder-school-new.png";
 
 const SeasonSection = () => {
   const ref = useRef(null);
