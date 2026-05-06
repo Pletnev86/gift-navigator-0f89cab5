@@ -10,7 +10,26 @@ const TradeUnionsSection = () => {
     <section className="section-spacing relative mt-[30%] lg:mt-0" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left: Copy */}
+          {/* Left: Card image */}
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, x: -40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            <div className="rounded-2xl overflow-hidden shadow-xl max-w-md scale-[1.3]">
+              <img
+                src={plasticCardGift}
+                alt="Пластиковая Мультикарта в подарочной упаковке"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+                width={800}
+                height={600}
+              />
+            </div>
+          </motion.div>
+
+          {/* Right: Copy */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -35,25 +54,6 @@ const TradeUnionsSection = () => {
                 Контракты на 6–8 млн руб.<br />
                 Безукоризненная полиграфия.
               </p>
-            </div>
-          </motion.div>
-
-          {/* Right: Card image — замените на свой креатив */}
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            <div className="rounded-2xl overflow-hidden shadow-xl max-w-md scale-[1.3]">
-              <img
-                src={plasticCardGift}
-                alt="Пластиковая Мультикарта в подарочной упаковке"
-                className="w-full h-auto object-cover"
-                loading="lazy"
-                width={800}
-                height={600}
-              />
             </div>
           </motion.div>
         </div>
