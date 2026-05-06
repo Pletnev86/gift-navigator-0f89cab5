@@ -123,7 +123,7 @@ const HeroSection = () => {
                     whileHover={{ rotate: 0 }}
                     initial={{ rotate: -3 }}
                   >
-                    <img src={cardBgHero} alt="" aria-hidden loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-[55%] mix-blend-overlay" />
+                    <img src={cardBgHero} alt="" aria-hidden loading="lazy" className="absolute inset-0 w-full h-full object-cover opacity-[0.55] mix-blend-overlay" />
                     <div className="relative z-10">
                       <p className="font-heading font-black text-[10px] tracking-[0.2em] opacity-70">МУЛЬТИКАРТА</p>
                       <p className="font-heading font-black text-3xl mt-1">400+</p>
