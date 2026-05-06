@@ -31,8 +31,8 @@ const NewYearExampleSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <span className="badge-tag mb-6 inline-block">ПРИМЕР</span>
-          <h2 className="text-3xl md:text-5xl font-black leading-tight mb-10 text-foreground">
+          <span className="badge-tag mb-6 block text-right">ПРИМЕР</span>
+          <h2 className="text-3xl md:text-5xl font-black leading-tight mb-10 text-foreground text-right">
             Новогодние подарки
           </h2>
         </motion.div>
