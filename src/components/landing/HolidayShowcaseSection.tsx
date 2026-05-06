@@ -1,5 +1,15 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import artNewyear from "@/assets/cardart-newyear.jpg";
+import artValentine from "@/assets/cardart-valentine.jpg";
+import artMarch8 from "@/assets/cardart-march8.jpg";
+import artFeb23 from "@/assets/cardart-feb23.jpg";
+import artBirthday from "@/assets/cardart-birthday.jpg";
+import artOilday from "@/assets/cardart-oilday.jpg";
+import artBuilderday from "@/assets/cardart-builderday.jpg";
+import artMedicday from "@/assets/cardart-medicday.jpg";
+import artTransport from "@/assets/cardart-transport.jpg";
+import artDefault from "@/assets/cardart-default.jpg";
 
 // ─── Данные праздников (локальная копия из multicard-partner-landing) ────────
 
@@ -12,109 +22,20 @@ interface HolidayConfig {
   to: string;
   accent: string;
   heroTagline: string;
+  art: string;
 }
 
 const HOLIDAYS: HolidayConfig[] = [
-  {
-    key: "newyear",
-    label: "Новый Год",
-    emoji: "🎄",
-    from: "#1e3a5f",
-    via: "#2d1b69",
-    to: "#0f172a",
-    accent: "#c9a84c",
-    heroTagline: "Главный праздник года — подарок который точно понравится",
-  },
-  {
-    key: "valentine",
-    label: "День Валентина",
-    emoji: "💝",
-    from: "#be123c",
-    via: "#e11d48",
-    to: "#9f1239",
-    accent: "#fda4af",
-    heroTagline: "14 февраля — подарок от всего сердца",
-  },
-  {
-    key: "march8",
-    label: "8 марта",
-    emoji: "🌸",
-    from: "#ec4899",
-    via: "#f43f5e",
-    to: "#db2777",
-    accent: "#f9a8d4",
-    heroTagline: "Международный женский день — забота в каждом подарке",
-  },
-  {
-    key: "feb23",
-    label: "23 февраля",
-    emoji: "🎖️",
-    from: "#1e40af",
-    via: "#1e3a5f",
-    to: "#334155",
-    accent: "#60a5fa",
-    heroTagline: "День защитника Отечества — сильный подарок для сильных людей",
-  },
-  {
-    key: "birthday",
-    label: "День рождения",
-    emoji: "🎂",
-    from: "#7c3aed",
-    via: "#9333ea",
-    to: "#6d28d9",
-    accent: "#c084fc",
-    heroTagline: "Персональное поздравление — подарок который выбирают сами",
-  },
-  {
-    key: "oilday",
-    label: "День нефтяника",
-    emoji: "⛽",
-    from: "#92400e",
-    via: "#b45309",
-    to: "#78350f",
-    accent: "#fbbf24",
-    heroTagline: "6 сентября — «Энергия ваших достижений»",
-  },
-  {
-    key: "builderday",
-    label: "День строителя",
-    emoji: "🏗️",
-    from: "#9a3412",
-    via: "#c2410c",
-    to: "#7c2d12",
-    accent: "#fb923c",
-    heroTagline: "9 августа — «Фундамент вашего будущего»",
-  },
-  {
-    key: "medicday",
-    label: "День медработника",
-    emoji: "🏥",
-    from: "#0f766e",
-    via: "#0d9488",
-    to: "#134e4a",
-    accent: "#2dd4bf",
-    heroTagline: "21 июня — «Героям в белых халатах»",
-  },
-  {
-    key: "transport",
-    label: "Транспорт и логистика",
-    emoji: "🚛",
-    from: "#1e293b",
-    via: "#334155",
-    to: "#0f172a",
-    accent: "#94a3b8",
-    heroTagline: "25 октября — «Верный курс на успех»",
-  },
-  {
-    key: "default",
-    label: "Универсальный",
-    emoji: "🎁",
-    from: "#10b981",
-    via: "#14b8a6",
-    to: "#0ea5e9",
-    accent: "#10b981",
-    heroTagline: "400+ брендов — подарок который выбирает получатель",
-  },
+  { key: "newyear",    label: "Новый Год",             emoji: "🎄",  from: "#1e3a5f", via: "#2d1b69", to: "#0f172a", accent: "#c9a84c", art: artNewyear,    heroTagline: "Главный праздник года — подарок который точно понравится" },
+  { key: "valentine",  label: "День Валентина",        emoji: "💝",  from: "#be123c", via: "#e11d48", to: "#9f1239", accent: "#fda4af", art: artValentine,  heroTagline: "14 февраля — подарок от всего сердца" },
+  { key: "march8",     label: "8 марта",               emoji: "🌸",  from: "#ec4899", via: "#f43f5e", to: "#db2777", accent: "#f9a8d4", art: artMarch8,     heroTagline: "Международный женский день — забота в каждом подарке" },
+  { key: "feb23",      label: "23 февраля",            emoji: "🎖️", from: "#1e40af", via: "#1e3a5f", to: "#334155", accent: "#60a5fa", art: artFeb23,      heroTagline: "День защитника Отечества — сильный подарок для сильных людей" },
+  { key: "birthday",   label: "День рождения",         emoji: "🎂",  from: "#7c3aed", via: "#9333ea", to: "#6d28d9", accent: "#c084fc", art: artBirthday,   heroTagline: "Персональное поздравление — подарок который выбирают сами" },
+  { key: "oilday",     label: "День нефтяника",        emoji: "⛽",  from: "#92400e", via: "#b45309", to: "#78350f", accent: "#fbbf24", art: artOilday,     heroTagline: "6 сентября — «Энергия ваших достижений»" },
+  { key: "builderday", label: "День строителя",        emoji: "🏗️", from: "#9a3412", via: "#c2410c", to: "#7c2d12", accent: "#fb923c", art: artBuilderday, heroTagline: "9 августа — «Фундамент вашего будущего»" },
+  { key: "medicday",   label: "День медработника",     emoji: "🏥",  from: "#0f766e", via: "#0d9488", to: "#134e4a", accent: "#2dd4bf", art: artMedicday,   heroTagline: "21 июня — «Героям в белых халатах»" },
+  { key: "transport",  label: "Транспорт и логистика", emoji: "🚛",  from: "#1e293b", via: "#334155", to: "#0f172a", accent: "#94a3b8", art: artTransport,  heroTagline: "25 октября — «Верный курс на успех»" },
+  { key: "default",    label: "Универсальный",         emoji: "🎁",  from: "#10b981", via: "#14b8a6", to: "#0ea5e9", accent: "#10b981", art: artDefault,    heroTagline: "400+ брендов — подарок который выбирает получатель" },
 ];
 
 // ─── Card Mockup ─────────────────────────────────────────────────────────────
@@ -125,16 +46,8 @@ function CardMockup({ cfg }: { cfg: HolidayConfig }) {
       className="relative w-full max-w-[340px] aspect-[1.586/1] rounded-2xl shadow-2xl overflow-hidden select-none"
       style={{ background: `linear-gradient(135deg, ${cfg.from}, ${cfg.via}, ${cfg.to})` }}
     >
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          background:
-            "repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px)",
-        }}
-      />
-      <div className="absolute inset-0 flex items-center justify-center opacity-10 text-white text-[120px]">
-        {cfg.emoji}
-      </div>
+      <img src={cfg.art} alt={cfg.label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.65) 100%)" }} />
       <div className="absolute top-5 left-5">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-black">
@@ -170,11 +83,18 @@ function PostcardMockup({ cfg }: { cfg: HolidayConfig }) {
 
   return (
     <div
-      className="relative w-full max-w-[440px] rounded-2xl shadow-2xl overflow-hidden p-6 select-none"
-      style={{ background: `linear-gradient(135deg, ${cfg.from}ee, ${cfg.via}cc, ${cfg.to}ee)` }}
+      className="relative w-full max-w-[440px] rounded-2xl shadow-2xl overflow-hidden select-none"
+      style={{ background: `linear-gradient(135deg, ${cfg.from}, ${cfg.via}, ${cfg.to})` }}
     >
-      <div className="absolute top-2 right-8 text-white/20 text-4xl">{cfg.emoji}</div>
-      <div className="absolute bottom-2 left-6 text-white/10 text-5xl">{cfg.emoji}</div>
+      {/* Top art strip */}
+      <div className="relative w-full h-32 overflow-hidden">
+        <img src={cfg.art} alt={cfg.label} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, rgba(0,0,0,0.0) 40%, ${cfg.from}ee 100%)` }} />
+        <div className="absolute bottom-2 left-6 z-10">
+          <p className="text-white/80 text-[10px] font-heading font-bold uppercase tracking-widest">{cfg.label}</p>
+        </div>
+      </div>
+      <div className="p-6 pt-5 relative">
       <h3
         className="font-heading font-black text-white text-lg mb-5 relative z-10"
         style={{ textShadow: "0 1px 4px rgba(0,0,0,0.4)" }}
@@ -210,6 +130,7 @@ function PostcardMockup({ cfg }: { cfg: HolidayConfig }) {
           zapodarkom.ru
         </p>
       </div>
+      </div>
     </div>
   );
 }
@@ -222,10 +143,9 @@ function LandingMockup({ cfg }: { cfg: HolidayConfig }) {
       <div className="relative">
         <div className="bg-gray-800 rounded-xl p-2 shadow-2xl">
           <div className="bg-gray-900 rounded-lg overflow-hidden" style={{ aspectRatio: "16/10" }}>
-            <div
-              className="w-full h-full flex flex-col"
-              style={{ background: `linear-gradient(160deg, ${cfg.from}, ${cfg.via}88, ${cfg.to}44)` }}
-            >
+            <div className="relative w-full h-full flex flex-col">
+              <img src={cfg.art} alt="" aria-hidden loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0" style={{ background: `linear-gradient(110deg, ${cfg.from}f2 0%, ${cfg.via}99 45%, ${cfg.to}33 100%)` }} />
               <div className="flex items-center justify-between px-3 py-1.5 bg-black/20">
                 <div className="flex items-center gap-1">
                   <div className="w-3 h-3 rounded-full bg-white/20 flex items-center justify-center text-white text-[6px] font-black">
@@ -260,22 +180,22 @@ function LandingMockup({ cfg }: { cfg: HolidayConfig }) {
         style={{ width: "72px" }}
       >
         <div className="rounded-xl overflow-hidden" style={{ aspectRatio: "9/19" }}>
-          <div
-            className="w-full h-full flex flex-col items-center justify-center p-1.5 text-center"
-            style={{ background: `linear-gradient(160deg, ${cfg.from}, ${cfg.to})` }}
-          >
-            <div className="text-lg mb-1">{cfg.emoji}</div>
-            <p className="text-white font-heading font-black text-[5px] leading-tight mb-2">
-              {cfg.label.toUpperCase()}
-            </p>
-            <div className="bg-white/20 rounded w-full px-1 py-0.5 mb-1">
-              <p className="text-white/60 text-[4px]">Номер карты</p>
-            </div>
-            <div
-              className="rounded w-full py-0.5 text-[4px] font-heading font-bold text-white"
-              style={{ background: cfg.accent }}
-            >
-              ВОЙТИ
+          <div className="relative w-full h-full flex flex-col">
+            <img src={cfg.art} alt="" aria-hidden loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${cfg.from}f0 0%, ${cfg.via}80 50%, ${cfg.to}e0 100%)` }} />
+            <div className="relative z-10 flex flex-col items-center justify-end h-full p-1.5 text-center pb-2">
+              <p className="text-white font-heading font-black text-[6px] leading-tight mb-1.5">
+                {cfg.heroTagline}
+              </p>
+              <div className="bg-white/20 rounded w-full px-1 py-0.5 mb-1">
+                <p className="text-white/60 text-[4px]">Номер карты</p>
+              </div>
+              <div
+                className="rounded w-full py-0.5 text-[4px] font-heading font-bold text-white"
+                style={{ background: cfg.accent }}
+              >
+                ВОЙТИ
+              </div>
             </div>
           </div>
         </div>

@@ -2,6 +2,13 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { TrendingUp, CircleCheckBig, ArrowRight } from "lucide-react";
 import { useFormContext } from "@/context/FormContext";
+import basketChocolate from "@/assets/sweet-basket-chocolate.png";
+import basketCandies from "@/assets/sweet-basket-candies.png";
+import basketJelly from "@/assets/sweet-basket-jelly.png";
+import basketMix from "@/assets/sweet-basket-mix.png";
+import boxPremium from "@/assets/sweet-box-premium.png";
+import digitalEmail from "@/assets/sweet-digital-email.png";
+import artDefault from "@/assets/cardart-default.jpg";
 
 // Статическая тема (в gift-navigator нет HolidayThemeContext)
 const THEME = {
@@ -12,10 +19,10 @@ const THEME = {
 };
 
 const SWEETS = [
-  { id: "chocolate", emoji: "🍫", label: "Шоколад", desc: "Шоколад, трюфели, батончики" },
-  { id: "candies",   emoji: "🍬", label: "Конфеты",  desc: "Конфетное ассорти" },
-  { id: "jelly",     emoji: "🍭", label: "Мармелад", desc: "Мармелад, желе, жевачки" },
-  { id: "mix",       emoji: "🎁", label: "Микс",     desc: "Сладкий подарочный микс" },
+  { id: "chocolate", emoji: "🍫", label: "Шоколад", desc: "Шоколад, трюфели, батончики", img: basketChocolate },
+  { id: "candies",   emoji: "🍬", label: "Конфеты",  desc: "Конфетное ассорти",          img: basketCandies },
+  { id: "jelly",     emoji: "🍭", label: "Мармелад", desc: "Мармелад, желе, жевачки",    img: basketJelly },
+  { id: "mix",       emoji: "🎁", label: "Микс",     desc: "Сладкий подарочный микс",    img: basketMix },
 ];
 
 const SETS = [
@@ -77,32 +84,55 @@ function SetMockup({ setId, sweetId }: { setId: string; sweetId: string }) {
       >
         {/* Sweet / digital row */}
         {!isDigital ? (
-          <div className="bg-background rounded-2xl p-4 shadow-sm border border-border flex items-center gap-4">
-            <span className="text-3xl">{setId === "premium" ? "📦" : sweet.emoji}</span>
-            <div>
+          <div
+            className="rounded-2xl p-4 shadow-sm border border-border flex items-center gap-4 relative overflow-hidden"
+            style={{ background: `linear-gradient(135deg, #ffffff 0%, ${THEME.from}10 100%)` }}
+          >
+            <div className="w-20 h-20 shrink-0 rounded-xl flex items-center justify-center" style={{ background: `radial-gradient(circle at 50% 60%, ${THEME.from}18, transparent 70%)` }}>
+              <img
+                src={setId === "premium" ? boxPremium : sweet.img}
+                alt={setId === "premium" ? "Фирменная коробка" : sweet.label}
+                loading="lazy"
+                className="w-full h-full object-contain drop-shadow-md"
+              />
+            </div>
+            <div className="min-w-0">
               <p className="font-heading font-bold text-sm text-foreground">
                 {setId === "premium" ? "Фирменная коробка" : sweet.label}
               </p>
               <p className="text-xs text-muted-foreground">
-                {setId === "premium" ? "Шоколад, конфеты, сладости" : sweet.desc}
+                {setId === "premium" ? "Шоколад, конфеты, сладости в брендированной упаковке" : sweet.desc}
               </p>
             </div>
           </div>
         ) : (
-          <div className="bg-background rounded-2xl p-4 shadow-sm border border-border flex items-center gap-4">
-            <span className="text-3xl">📲</span>
-            <div>
+          <div
+            className="rounded-2xl p-4 shadow-sm border border-border flex items-center gap-4 relative overflow-hidden"
+            style={{ background: `linear-gradient(135deg, #ffffff 0%, ${THEME.from}10 100%)` }}
+          >
+            <div className="w-20 h-20 shrink-0 flex items-center justify-center">
+              <img src={digitalEmail} alt="Цифровая доставка" loading="lazy" className="w-full h-full object-contain drop-shadow-md" />
+            </div>
+            <div className="min-w-0">
               <p className="font-heading font-bold text-sm text-foreground">Email-доставка</p>
-              <p className="text-xs text-muted-foreground">Мгновенно на почту сотрудника</p>
+              <p className="text-xs text-muted-foreground">Мгновенно на почту сотрудника, праздничный email-дизайн</p>
             </div>
           </div>
         )}
 
         {/* Card mockup */}
         <div
-          className="rounded-2xl p-4 shadow-md relative overflow-hidden"
+          className="rounded-2xl p-4 shadow-md relative overflow-hidden h-[120px]"
           style={{ background: `linear-gradient(135deg, ${THEME.from}, ${THEME.to})` }}
         >
+          <img
+            src={artDefault}
+            alt=""
+            aria-hidden
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-cover opacity-55 mix-blend-screen"
+          />
+          <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${THEME.from}cc 0%, ${THEME.to}99 60%, transparent 100%)` }} />
           <div className="relative z-10 flex items-start justify-between mb-4">
             <div>
               <p className="text-white/60 text-[9px] font-heading font-bold uppercase tracking-widest">Мультикарта</p>
