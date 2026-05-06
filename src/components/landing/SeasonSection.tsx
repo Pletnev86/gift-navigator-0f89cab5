@@ -45,7 +45,7 @@ const SeasonSection = () => {
               <img
                 src={placeholderSchool}
                 alt="Школьные сборы — замените на свой креатив"
-                className="w-full h-auto object-cover scale-[1.3] origin-center"
+                className="w-full h-auto object-cover"
                 loading="lazy"
                 width={800}
                 height={600}
