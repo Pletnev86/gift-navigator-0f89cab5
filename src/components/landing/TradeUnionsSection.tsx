@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import plasticCardGift from "@/assets/plastic-card-gift.png";
+import plasticCardGift from "@/assets/plastic-card-gift-new.png";
 
 const TradeUnionsSection = () => {
   const ref = useRef(null);
